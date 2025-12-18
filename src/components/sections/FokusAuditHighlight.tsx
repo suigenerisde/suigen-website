@@ -15,7 +15,7 @@ export function FokusAuditHighlight() {
             Das Fokus-Audit
           </h2>
           <p className="text-2xl md:text-3xl text-[var(--accent)] font-bold mb-6 text-glow">
-            3 Stunden Klarheit statt 6 Monate Chaos.
+            In 3 Stunden weißt Du, worauf Du Dich fokussieren musst.
           </p>
           <p className="body-text mb-10 max-w-2xl mx-auto">
             In einem 3-stündigen Workshop analysieren wir Deine Situation,
