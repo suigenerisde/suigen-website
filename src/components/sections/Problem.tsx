@@ -1,16 +1,16 @@
 export function Problem() {
   const problems = [
     {
-      title: 'Im Hamsterrad gefangen',
-      description: '60+ Stunden pro Woche. Und trotzdem das Gefühl, nichts zu schaffen.',
+      title: 'Du kannst nicht Nein sagen',
+      description: 'Jede Anfrage ist dringend. Jede Idee wird angefangen. Für Dich bleibt nichts übrig.',
     },
     {
-      title: 'Zu viele Baustellen',
-      description: 'Alles ist wichtig. Also ist nichts wichtig.',
+      title: 'Du entscheidest nicht',
+      description: 'Wer keine Priorität setzt, macht alles – und nichts richtig.',
     },
     {
-      title: 'Tools probiert, nichts hält',
-      description: '20 Subscriptions, 50 Tabs. Und immer noch alles im Kopf.',
+      title: 'Du suchst die Lösung im falschen Ort',
+      description: 'Kein Tool ersetzt Klarheit. Keins.',
     },
   ];
 
