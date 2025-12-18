@@ -151,15 +151,11 @@ export default function FokusAuditPage() {
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <span className="text-[var(--accent)] mr-3 text-lg">&#10003;</span>
-                    <span className="text-[var(--text-muted)]">Du Geschäftsführer oder Unternehmer bist</span>
+                    <span className="text-[var(--text-muted)]">Du Unternehmer bist, kein Verwalter</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-[var(--accent)] mr-3 text-lg">&#10003;</span>
-                    <span className="text-[var(--text-muted)]">Du 1-50 Mitarbeiter hast</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[var(--accent)] mr-3 text-lg">&#10003;</span>
-                    <span className="text-[var(--text-muted)]">Du im Hamsterrad steckst</span>
+                    <span className="text-[var(--text-muted)]">Du gezielter wachsen willst, nicht länger arbeiten</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-[var(--accent)] mr-3 text-lg">&#10003;</span>
