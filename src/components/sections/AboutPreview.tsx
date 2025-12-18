@@ -21,6 +21,7 @@ export function AboutPreview() {
             </h2>
             <p className="text-lg text-[var(--text-muted)] mb-6">
               Gründer von SUI GENERIS. MBA (LSE). 6 Jahre Vorstand.
+              <br />
               AI-Erfahrung seit 2014.
             </p>
             <p className="text-[var(--text-light)] mb-8 text-lg leading-relaxed">
