@@ -45,7 +45,7 @@ export default function KontaktPage() {
         <section className="bg-[var(--bg-dark)] py-24 md:py-32">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="headline-section text-[var(--text-light)] mb-12">
-              Oder kontaktiere mich direkt
+              Oder kontaktiere uns direkt
             </h2>
             <div className="grid md:grid-cols-2 gap-6 md:gap-8">
               <div className="card text-center">
@@ -60,10 +60,10 @@ export default function KontaktPage() {
               <div className="card text-center">
                 <h3 className="font-bold text-[var(--text-light)] mb-4 uppercase">E-Mail</h3>
                 <a
-                  href="mailto:thilo@suigeneris.de"
+                  href="mailto:info@suigeneris.de"
                   className="text-2xl text-[var(--accent)] hover:text-[var(--accent-light)] transition-colors"
                 >
-                  thilo@suigeneris.de
+                  info@suigeneris.de
                 </a>
               </div>
             </div>
