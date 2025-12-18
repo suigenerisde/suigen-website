@@ -38,7 +38,7 @@ export function TwoColumns() {
               </li>
               <li className="flex items-start">
                 <span className="text-[var(--accent)] mr-3 text-lg">&#10003;</span>
-                <span className="text-[var(--text-muted)]">Dein Team zieht an einem Strang</span>
+                <span className="text-[var(--text-muted)]">Dein Team hat Klarheit</span>
               </li>
               <li className="flex items-start">
                 <span className="text-[var(--accent)] mr-3 text-lg">&#10003;</span>
