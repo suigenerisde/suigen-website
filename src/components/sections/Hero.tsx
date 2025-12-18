@@ -23,9 +23,7 @@ export function Hero() {
 
         {/* Description */}
         <p className="body-text max-w-2xl mx-auto mt-8 animate-slide-up delay-2">
-          3 Stunden Klarheit statt 6 Monate Chaos.
-          <br className="hidden sm:block" />
-          Für Unternehmer, die im Hamsterrad stecken.
+          Dein nächstes Tool bringt nichts – solange Dir der Fokus fehlt.
         </p>
 
         {/* CTA Buttons */}
