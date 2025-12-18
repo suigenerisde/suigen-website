@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
+import { JsonLd } from '@/components/seo/JsonLd';
 import './globals.css';
 
 const inter = Inter({
@@ -14,41 +15,93 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://suigen.suimation.de';
+
 export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
   title: {
-    default: 'SUIGEN - Fokus. Human-First. System.',
+    default: 'SUIGEN - Fokus-Experte & AI-Pionier seit 2014 | Thilo Pfeil',
     template: '%s | SUIGEN',
   },
   description:
-    '3 Stunden Klarheit statt 6 Monate Chaos. FOKUS: Human-First und FOKUS: System fuer Unternehmer, die im Hamsterrad stecken.',
+    'Erst fokussieren, dann automatisieren. 3 Stunden Klarheit statt 6 Monate Chaos. FOKUS: Human-First und FOKUS: System fuer Unternehmer. AI-Erfahrung seit 2014.',
   keywords: [
     'fokus',
-    'unternehmer',
-    'geschaeftsfuehrer',
-    'klarheit',
-    'skalierung',
-    'automatisierung',
+    'fokus coaching',
+    'unternehmer coaching',
+    'geschaeftsfuehrer beratung',
+    'produktivitaet steigern',
+    'automatisierung unternehmen',
+    'ai beratung',
+    'ki experte',
+    'thilo pfeil',
+    'sui generis',
+    'human first',
+    'deep work',
+    'zeitmanagement fuehrungskraefte',
+    'skalierung mittelstand',
   ],
-  authors: [{ name: 'Thilo Pfeil' }],
+  authors: [{ name: 'Thilo Pfeil', url: 'https://www.linkedin.com/in/sui-generis/' }],
   creator: 'SUI GENERIS GmbH',
+  publisher: 'SUI GENERIS GmbH',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     type: 'website',
     locale: 'de_DE',
-    url: 'https://suigen.de',
+    url: baseUrl,
     siteName: 'SUIGEN',
-    title: 'SUIGEN - Fokus. Human-First. System.',
+    title: 'SUIGEN - Fokus-Experte & AI-Pionier seit 2014',
     description:
-      '3 Stunden Klarheit statt 6 Monate Chaos. FOKUS: Human-First und FOKUS: System fuer Unternehmer.',
+      'Erst fokussieren, dann automatisieren. 3 Stunden Klarheit statt 6 Monate Chaos. Von Thilo Pfeil - MBA (LSE), AI-Erfahrung seit 2014.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'SUIGEN - Fokus. Human-First. System.',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SUIGEN - Fokus. Human-First. System.',
-    description: '3 Stunden Klarheit statt 6 Monate Chaos.',
+    title: 'SUIGEN - Fokus-Experte & AI-Pionier seit 2014',
+    description: 'Erst fokussieren, dann automatisieren. 3 Stunden Klarheit statt 6 Monate Chaos.',
+    images: ['/og-image.png'],
   },
+  // TEMPORAER: noindex bis Website final ist
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
+  /* AKTIVIEREN WENN FERTIG:
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
+  */
+  alternates: {
+    canonical: baseUrl,
+  },
+  verification: {
+    // Google Search Console - spaeter hinzufuegen
+    // google: 'verification-code',
+  },
+  category: 'business',
 };
 
 export default function RootLayout({
@@ -58,6 +111,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
+      <head>
+        <JsonLd />
+      </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}>
         {children}
       </body>

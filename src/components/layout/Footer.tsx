@@ -96,7 +96,7 @@ export function Footer() {
               </li>
               <li className="pt-2">
                 <a
-                  href="https://www.linkedin.com/in/thilopfeil/"
+                  href="https://www.linkedin.com/in/sui-generis/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[var(--accent)] transition-colors"

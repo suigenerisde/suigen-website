@@ -69,7 +69,7 @@ export default function KontaktPage() {
             </div>
             <div className="mt-12">
               <a
-                href="https://www.linkedin.com/in/thilopfeil/"
+                href="https://www.linkedin.com/in/sui-generis/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
