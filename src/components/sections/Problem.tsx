@@ -9,7 +9,7 @@ export function Problem() {
       description: 'Wer keine Priorität setzt, macht alles – und nichts richtig.',
     },
     {
-      title: 'Du suchst die Lösung im falschen Ort',
+      title: 'Du suchst die Lösung am falschen Ort',
       description: 'Kein Tool ersetzt Klarheit. Keins.',
     },
   ];
