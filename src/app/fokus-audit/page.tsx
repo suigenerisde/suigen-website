@@ -23,10 +23,15 @@ export default function FokusAuditPage() {
                 Der Startpunkt für alles
               </span>
               <h1 className="headline-hero text-[var(--text-light)] mb-6">
-                3 Stunden Klarheit
+                Dein Engpass.
                 <br />
-                <span className="text-[var(--accent)] text-glow">statt 6 Monate Chaos.</span>
+                Deine Priorität.
+                <br />
+                Deine Roadmap.
               </h1>
+              <p className="text-3xl md:text-4xl text-[var(--accent)] font-bold mb-6 text-glow uppercase">
+                In 3 Stunden.
+              </p>
               <p className="body-text mb-10 max-w-2xl">
                 Das Fokus-Audit ist der erste Schritt. In einem 3-stündigen Workshop
                 analysieren wir Deine Situation und entwickeln eine konkrete Roadmap.
