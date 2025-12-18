@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
@@ -25,19 +26,18 @@ export default function KontaktPage() {
           </div>
         </section>
 
-        {/* Calendly Placeholder */}
-        <section className="bg-[var(--bg-dark-lighter)] py-24 md:py-32">
+        {/* Calendly Widget */}
+        <section className="bg-[var(--bg-dark-lighter)] py-12 md:py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="card min-h-[500px] flex items-center justify-center !p-8 md:!p-12">
-              <div className="text-center">
-                <p className="text-[var(--text-muted)] mb-4">
-                  Calendly-Widget wird hier eingebunden
-                </p>
-                <p className="text-sm text-[var(--text-muted)]">
-                  (Calendly-Embed-Code hier einfügen)
-                </p>
-              </div>
-            </div>
+            <div
+              className="calendly-inline-widget"
+              data-url="https://calendly.com/thilopfeil/fokussiertes-ergestpraech?hide_event_type_details=1&hide_gdpr_banner=1&background_color=3a5861&text_color=ffffff&primary_color=00b8c4"
+              style={{ minWidth: '320px', height: '700px' }}
+            />
+            <Script
+              src="https://assets.calendly.com/assets/external/widget.js"
+              strategy="lazyOnload"
+            />
           </div>
         </section>
 
