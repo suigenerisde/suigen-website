@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { CalBooker } from '@/components/booking/CalBooker';
 
 export const metadata: Metadata = {
   title: 'Kontakt',
@@ -26,18 +26,10 @@ export default function KontaktPage() {
           </div>
         </section>
 
-        {/* Calendly Widget */}
+        {/* Cal.com Booking Widget */}
         <section className="bg-[var(--bg-dark-lighter)] py-12 md:py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div
-              className="calendly-inline-widget"
-              data-url="https://calendly.com/thilopfeil/fokussiertes-ergestpraech?hide_event_type_details=1&hide_gdpr_banner=1&background_color=3a5861&text_color=ffffff&primary_color=00b8c4"
-              style={{ minWidth: '320px', height: '700px' }}
-            />
-            <Script
-              src="https://assets.calendly.com/assets/external/widget.js"
-              strategy="lazyOnload"
-            />
+            <CalBooker />
           </div>
         </section>
 
