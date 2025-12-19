@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import { JsonLd } from '@/components/seo/JsonLd';
 import './globals.css';
@@ -113,6 +114,11 @@ export default function RootLayout({
     <html lang="de">
       <head>
         <JsonLd />
+        <Script
+          src="https://umami.suimation.de/script.js"
+          data-website-id="9e923068-f849-44da-81b0-04cc772cac14"
+          strategy="lazyOnload"
+        />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}>
         {children}
