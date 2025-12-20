@@ -1,5 +1,5 @@
 export function JsonLd() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://suigen.suimation.de';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://suigen.de';
 
   const organizationSchema = {
     '@context': 'https://schema.org',

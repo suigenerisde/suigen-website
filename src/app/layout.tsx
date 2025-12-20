@@ -16,7 +16,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://suigen.suimation.de';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://suigen.de';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -75,16 +75,6 @@ export const metadata: Metadata = {
     description: 'Du weisst, was zu tun ist. Du tust es nur nicht. SUIGEN hilft Unternehmern, Fokus zu finden.',
     images: ['/og-image.png'],
   },
-  // TEMPORAER: noindex bis Website final ist
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-    },
-  },
-  /* AKTIVIEREN WENN FERTIG:
   robots: {
     index: true,
     follow: true,
@@ -96,7 +86,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  */
   alternates: {
     canonical: baseUrl,
   },
