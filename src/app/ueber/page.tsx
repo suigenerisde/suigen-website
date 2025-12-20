@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/Button';
@@ -21,10 +22,13 @@ export default function UeberPage() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               {/* Image */}
               <div>
-                <img
+                <Image
                   src="/thilo-pfeil.jpg"
                   alt="Thilo Pfeil - Gründer von SUI GENERIS"
+                  width={600}
+                  height={600}
                   className="w-full aspect-square object-cover object-top rounded-lg"
+                  priority
                 />
               </div>
 

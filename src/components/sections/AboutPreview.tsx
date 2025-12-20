@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 
 export function AboutPreview() {
@@ -7,9 +8,11 @@ export function AboutPreview() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Image */}
           <div className="order-2 md:order-1">
-            <img
+            <Image
               src="/thilo-pfeil.jpg"
               alt="Thilo Pfeil - Gründer von SUI GENERIS"
+              width={600}
+              height={600}
               className="w-full aspect-square object-cover object-top rounded-lg"
             />
           </div>

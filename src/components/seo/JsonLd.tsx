@@ -66,7 +66,7 @@ export function JsonLd() {
       name: 'SUI GENERIS GmbH',
     },
     description:
-      '3 Stunden Klarheit statt 6 Monate Chaos. Der Einstieg in radikalen Fokus fuer Unternehmer.',
+      'Du weisst, was zu tun ist - du tust es nur nicht. Das Fokus-Audit bringt Klarheit fuer Unternehmer.',
     url: `${baseUrl}/fokus-audit`,
     serviceType: 'Business Consulting',
     areaServed: {

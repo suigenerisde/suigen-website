@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: '%s | SUIGEN',
   },
   description:
-    'Erst fokussieren, dann automatisieren. 3 Stunden Klarheit statt 6 Monate Chaos. FOKUS: Human-First und FOKUS: System fuer Unternehmer. AI-Erfahrung seit 2014.',
+    'Du weisst, was zu tun ist - du tust es nur nicht. SUIGEN hilft Unternehmern, Fokus zu finden, bevor sie automatisieren. AI-Erfahrung seit 2014.',
   keywords: [
     'fokus',
     'fokus coaching',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     siteName: 'SUIGEN',
     title: 'SUIGEN - Fokus-Experte & AI-Pionier seit 2014',
     description:
-      'Erst fokussieren, dann automatisieren. 3 Stunden Klarheit statt 6 Monate Chaos. Von Thilo Pfeil - MBA (LSE), AI-Erfahrung seit 2014.',
+      'Du weisst, was zu tun ist - du tust es nur nicht. SUIGEN hilft Unternehmern, Fokus zu finden. Von Thilo Pfeil - MBA (LSE), AI-Erfahrung seit 2014.',
     images: [
       {
         url: '/og-image.png',
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'SUIGEN - Fokus-Experte & AI-Pionier seit 2014',
-    description: 'Erst fokussieren, dann automatisieren. 3 Stunden Klarheit statt 6 Monate Chaos.',
+    description: 'Du weisst, was zu tun ist. Du tust es nur nicht. Fokus-Coaching fuer Unternehmer.',
     images: ['/og-image.png'],
   },
   // TEMPORAER: noindex bis Website final ist

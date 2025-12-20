@@ -7,7 +7,7 @@ import { CTA } from '@/components/sections/CTA';
 export const metadata: Metadata = {
   title: 'Fokus-Audit',
   description:
-    '3 Stunden Klarheit statt 6 Monate Chaos. Das Fokus-Audit ist der Startpunkt für alles.',
+    'Du weisst, was zu tun ist - du tust es nur nicht. Das Fokus-Audit bringt Klarheit in 3 Stunden.',
 };
 
 export default function FokusAuditPage() {

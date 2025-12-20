@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 
@@ -36,10 +37,13 @@ export function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <img
+            <Image
               src="/sui-generis-logo.png"
               alt="SUI GENERIS"
+              width={160}
+              height={40}
               className="h-8 md:h-10 w-auto"
+              priority
             />
           </Link>
 
