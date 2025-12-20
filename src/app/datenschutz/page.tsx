@@ -101,25 +101,25 @@ export default function DatenschutzPage() {
 
             <div>
               <h2 className="text-xl font-bold text-[var(--text-light)] mb-4 uppercase">
-                5. Terminbuchung (Calendly)
+                5. Terminbuchung (Cal.com)
               </h2>
               <p>
-                Für die Terminbuchung nutzen wir den Dienst Calendly. Wenn Sie
-                einen Termin buchen, werden die von Ihnen eingegebenen Daten
-                (Name, E-Mail, ggf. Telefonnummer) an Calendly übermittelt und
-                dort verarbeitet.
+                Für die Terminbuchung nutzen wir eine selbst gehostete Instanz
+                von Cal.com. Wenn Sie einen Termin buchen, werden die von Ihnen
+                eingegebenen Daten (Name, E-Mail, ggf. Telefonnummer) auf
+                unseren eigenen Servern verarbeitet und gespeichert.
               </p>
               <p className="mt-4">
-                Weitere Informationen finden Sie in der Datenschutzerklärung von
-                Calendly:
+                Cal.com ist eine Open-Source-Software. Weitere Informationen
+                finden Sie unter:
                 <br />
                 <a
-                  href="https://calendly.com/privacy"
+                  href="https://cal.com/privacy"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[var(--accent)] hover:text-[var(--accent-light)] transition-colors"
                 >
-                  https://calendly.com/privacy
+                  https://cal.com/privacy
                 </a>
               </p>
             </div>
