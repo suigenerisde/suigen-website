@@ -9,29 +9,44 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: 'Ich habe keine Zeit dafür.',
+    question: 'Wie kann ich als Unternehmer mehr Zeit gewinnen?',
     answer:
-      '3 Stunden. Das ist alles, was Du für das Fokus-Audit brauchst. Danach weißt Du genau, worauf Du Dich fokussieren musst - und sparst Dir Monate des Herumtastens.',
+      'Durch Klarheit über Deine echten Prioritäten. Das Fokus-Audit zeigt Dir in 3 Stunden, welche Aufgaben Du delegieren, eliminieren oder systematisieren kannst. Typisches Ergebnis: 10-15 Stunden pro Woche zurückgewinnen.',
   },
   {
-    question: 'Was bringt mir das konkret?',
+    question: 'Was ist ein Fokus-Audit und wie läuft es ab?',
     answer:
-      'Klarheit über Deine echten Engpässe. Eine konkrete Roadmap für 90 Tage. Und die Entscheidung, ob und wie es weitergeht - ohne Verpflichtung.',
+      'Ein 3-stündiger Workshop, in dem wir Deine aktuelle Situation analysieren, die echten Engpässe identifizieren und eine konkrete 90-Tage-Roadmap entwickeln. Du bekommst sofort Klarheit - ohne langfristige Verpflichtung.',
   },
   {
-    question: 'Ist das wieder so ein Coaching?',
+    question: 'Wie komme ich aus dem Hamsterrad als Geschäftsführer?',
     answer:
-      'Nein. FOKUS: Human-First ist keine Therapiesitzung. Es geht um konkrete Ergebnisse: Systeme, die funktionieren. Prozesse, die laufen. Zeit, die Du gewinnst.',
+      'Indem Du aufhörst, alles selbst zu machen. FOKUS: Human-First hilft Dir, Systeme aufzubauen, die ohne Dich funktionieren. Der erste Schritt: Verstehen, was Dich wirklich aufhält.',
   },
   {
     question: 'Wie schnell sehe ich Ergebnisse?',
     answer:
-      'Das Fokus-Audit gibt Dir sofort Klarheit. Bei FOKUS: Human-First siehst Du typischerweise nach 4-6 Wochen erste messbare Ergebnisse.',
+      'Das Fokus-Audit gibt Dir sofort Klarheit über Deine nächsten Schritte. Bei FOKUS: Human-First siehst Du typischerweise nach 4-6 Wochen erste messbare Ergebnisse - weniger Arbeitszeit bei gleichem oder besserem Output.',
   },
   {
-    question: 'Für wen ist das geeignet?',
+    question: 'Für wen ist SUIGEN geeignet?',
     answer:
-      'Für Geschäftsführer und Unternehmer mit 1-50 Mitarbeitern, die im Hamsterrad stecken und bereit sind, etwas zu ändern. Nicht für alle - nur für die, die wirklich wollen.',
+      'Für Unternehmer mit Ambition, die Marktführer werden oder bleiben wollen. Nicht für alle - nur für die, die wirklich bereit sind, etwas zu verändern.',
+  },
+  {
+    question: 'Was unterscheidet SUIGEN von anderen Beratern?',
+    answer:
+      'Drei Dinge: Erstens, AI-Erfahrung seit 2014 (nicht erst seit ChatGPT). Zweitens, der Human-First-Ansatz - erst Klarheit für Dich, dann Systeme. Drittens, Umsetzung statt Theorie.',
+  },
+  {
+    question: 'Kann ich mein Unternehmen skalieren ohne mehr zu arbeiten?',
+    answer:
+      'Ja. FOKUS: System baut individuelle Fokus-Systeme für Dein Unternehmen. Automatisierung wiederkehrender Prozesse, klare Verantwortlichkeiten, messbare Ergebnisse. Das Ziel: Wachstum ohne Mehrarbeit.',
+  },
+  {
+    question: 'Was kostet das Fokus-Audit?',
+    answer:
+      'Das klären wir im kostenlosen Erstgespräch. Der Preis hängt von Deiner Situation ab. Wichtiger: Der ROI. Die meisten Teilnehmer gewinnen die investierte Zeit innerhalb von 4 Wochen mehrfach zurück.',
   },
 ];
 
