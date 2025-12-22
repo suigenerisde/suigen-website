@@ -36,8 +36,8 @@ export async function POST(request: NextRequest) {
       })
     );
 
-    // PDF als Response zurückgeben
-    return new NextResponse(pdfBuffer, {
+    // PDF als Response zurückgeben (Buffer zu Uint8Array konvertieren)
+    return new NextResponse(new Uint8Array(pdfBuffer), {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
