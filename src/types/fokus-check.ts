@@ -93,7 +93,14 @@ export type EventType =
   | 'cta_clicked';
 
 // Quiz State
-export type QuizStep = 'intro' | 'name' | 'questions' | 'painpoint' | 'email' | 'result';
+export type QuizStep = 'invite-code' | 'access-request' | 'intro' | 'name' | 'questions' | 'painpoint' | 'email' | 'result';
+
+// Access Request Data (für Zugangsanfragen)
+export interface AccessRequestData {
+  name: string;
+  email: string;
+  phone: string;
+}
 
 export interface QuizState {
   step: QuizStep;

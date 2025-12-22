@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import type { Answer, QuizStep, FokusCheckResult, DeliveryData, FollowUpAnswer } from '@/types/fokus-check';
+import type { Answer, QuizStep, FokusCheckResult, DeliveryData, FollowUpAnswer, AccessRequestData } from '@/types/fokus-check';
 import { questions, MAX_SCORE, getResultCategory } from './questions-data';
 import { ProgressIndicator } from './ProgressIndicator';
 import { QuestionCard } from './QuestionCard';
@@ -12,6 +12,8 @@ import { ExitIntentPopup } from './ExitIntentPopup';
 import { FollowUpQuestion } from './FollowUpQuestion';
 import { PainPointQuestion } from './PainPointQuestion';
 import { ContinueQuizPrompt } from './ContinueQuizPrompt';
+import { InviteCodeCapture } from './InviteCodeCapture';
+import { AccessRequestForm } from './AccessRequestForm';
 import { useQuizPersistence } from './useQuizPersistence';
 import { Button } from '@/components/ui/Button';
 import {
@@ -25,8 +27,11 @@ import {
   triggerPdfAndWhatsApp,
 } from '@/lib/tracking/events';
 
+// Webhook URL für Zugangsanfragen
+const ACCESS_REQUEST_WEBHOOK = 'https://n8n.suimation.de/webhook/fokus-check-access-request';
+
 export function FokusCheckQuiz() {
-  const [step, setStep] = useState<QuizStep>('intro');
+  const [step, setStep] = useState<QuizStep>('invite-code');
   const [userName, setUserName] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Answer[]>([]);
@@ -90,6 +95,42 @@ export function FokusCheckQuiz() {
     setCurrentQuestion(0);
     setAnswers([]);
   }, [clearProgress, dismissRestoredState]);
+
+  // Handle valid invite code
+  const handleValidCode = useCallback(() => {
+    setStep('intro');
+  }, []);
+
+  // Handle request access (show form)
+  const handleRequestAccess = useCallback(() => {
+    setStep('access-request');
+  }, []);
+
+  // Handle back to invite code
+  const handleBackToInviteCode = useCallback(() => {
+    setStep('invite-code');
+  }, []);
+
+  // Handle access request submission
+  const handleAccessRequestSubmit = useCallback(async (data: AccessRequestData) => {
+    // Trigger n8n webhook für WhatsApp-Benachrichtigung
+    const response = await fetch(ACCESS_REQUEST_WEBHOOK, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        requestedAt: new Date().toISOString(),
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to submit access request');
+    }
+  }, []);
 
   const handleStart = useCallback(() => {
     trackCheckStarted();
@@ -272,6 +313,22 @@ export function FokusCheckQuiz() {
 
   return (
     <div className="w-full max-w-xl mx-auto">
+      {/* Invite Code */}
+      {step === 'invite-code' && (
+        <InviteCodeCapture
+          onValidCode={handleValidCode}
+          onRequestAccess={handleRequestAccess}
+        />
+      )}
+
+      {/* Access Request Form */}
+      {step === 'access-request' && (
+        <AccessRequestForm
+          onSubmit={handleAccessRequestSubmit}
+          onBack={handleBackToInviteCode}
+        />
+      )}
+
       {/* Intro */}
       {step === 'intro' && (
         <div className="animate-fade-in">
