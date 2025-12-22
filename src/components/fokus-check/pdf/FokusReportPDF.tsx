@@ -601,7 +601,7 @@ export function FokusReportPDF({ result, answers, userName, painPoint, createdAt
               const scoreColor = getScoreColor(answer.value, 5);
               const isLast = index === answers.length - 1;
               return (
-                <View key={answer.questionId} style={[styles.tableRow, isLast && styles.tableRowLast]}>
+                <View key={answer.questionId} style={isLast ? [styles.tableRow, styles.tableRowLast] : styles.tableRow}>
                   <View style={styles.tableColBereich}>
                     <Text style={styles.tableCellBereich}>{fokusBereiche[answer.questionId]}</Text>
                   </View>
