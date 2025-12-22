@@ -4,9 +4,11 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 
+import type { QuizStep } from '@/types/fokus-check';
+
 interface ExitIntentPopupProps {
   onContinue: () => void;
-  currentStep: 'intro' | 'name' | 'questions' | 'email' | 'result';
+  currentStep: QuizStep;
   questionNumber?: number;
   onSaveAndLeave?: () => void; // Callback to save progress before leaving
 }
