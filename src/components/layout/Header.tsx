@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 
 const navItems = [
+  { label: 'Fokus-Check', href: '/fokus-check' },
   { label: 'Fokus-Audit', href: '/fokus-audit' },
   { label: 'Human-First', href: '/fokus-human' },
   { label: 'System', href: '/fokus-system' },

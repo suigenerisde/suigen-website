@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 const footerLinks = {
   angebot: [
+    { label: 'Fokus-Check', href: '/fokus-check' },
     { label: 'Fokus-Audit', href: '/fokus-audit' },
     { label: 'FOKUS: Human-First', href: '/fokus-human' },
     { label: 'FOKUS: System', href: '/fokus-system' },
