@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1584 396">
+  <defs>
+    <!-- Background gradient - darker variation -->
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3238"/>
+      <stop offset="50%" stop-color="#2e474f"/>
+      <stop offset="100%" stop-color="#3a5861"/>
+    </linearGradient>
+    <!-- Accent gradient -->
+    <linearGradient id="accent2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00b8c4"/>
+      <stop offset="100%" stop-color="#00d4e0"/>
+    </linearGradient>
+    <!-- Node glow -->
+    <filter id="nodeGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1584" height="396" fill="url(#bg2)"/>
+
+  <!-- Network connections - representing Human-First approach -->
+  <g stroke="#00d4e0" stroke-width="1" opacity="0.3">
+    <!-- Connection lines -->
+    <line x1="900" y1="100" x2="1100" y2="180"/>
+    <line x1="1100" y1="180" x2="1300" y2="120"/>
+    <line x1="1100" y1="180" x2="1050" y2="300"/>
+    <line x1="1050" y1="300" x2="1200" y2="320"/>
+    <line x1="1300" y1="120" x2="1400" y2="200"/>
+    <line x1="1400" y1="200" x2="1200" y2="320"/>
+    <line x1="900" y1="100" x2="800" y2="200"/>
+    <line x1="800" y1="200" x2="1050" y2="300"/>
+    <line x1="1400" y1="200" x2="1500" y2="150"/>
+    <line x1="1500" y1="150" x2="1550" y2="250"/>
+  </g>
+
+  <!-- Network nodes - people/connections -->
+  <g filter="url(#nodeGlow)">
+    <!-- Primary node (center person) -->
+    <circle cx="1100" cy="180" r="20" fill="url(#accent2)"/>
+    <!-- Secondary nodes -->
+    <circle cx="900" cy="100" r="12" fill="#00d4e0" opacity="0.8"/>
+    <circle cx="1300" cy="120" r="14" fill="#00d4e0" opacity="0.9"/>
+    <circle cx="1050" cy="300" r="16" fill="#00d4e0" opacity="0.85"/>
+    <circle cx="1200" cy="320" r="10" fill="#00d4e0" opacity="0.7"/>
+    <circle cx="1400" cy="200" r="12" fill="#00d4e0" opacity="0.8"/>
+    <circle cx="800" cy="200" r="10" fill="#00d4e0" opacity="0.6"/>
+    <circle cx="1500" cy="150" r="8" fill="#00d4e0" opacity="0.5"/>
+    <circle cx="1550" cy="250" r="6" fill="#00d4e0" opacity="0.4"/>
+  </g>
+
+  <!-- Floating particles -->
+  <g fill="#00d4e0">
+    <circle cx="950" cy="50" r="2" opacity="0.3"/>
+    <circle cx="1150" cy="350" r="2" opacity="0.3"/>
+    <circle cx="1350" cy="280" r="1.5" opacity="0.25"/>
+    <circle cx="750" cy="150" r="1.5" opacity="0.2"/>
+    <circle cx="1450" cy="80" r="2" opacity="0.25"/>
+  </g>
+
+  <!-- Brand text - left aligned -->
+  <text x="100" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="700" fill="#ffffff" letter-spacing="3">THILO PFEIL</text>
+  <text x="100" y="220" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="400" fill="#00d4e0" letter-spacing="1">Fokus-Experte | AI-Pionier seit 2014</text>
+
+  <!-- Tagline -->
+  <text x="100" y="290" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="300" fill="#ffffff" opacity="0.7" letter-spacing="1">Erst fokussieren, dann automatisieren.</text>
+
+  <!-- Decorative accent bar -->
+  <rect x="100" y="310" width="80" height="3" fill="url(#accent2)" rx="1.5"/>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1584 396">
+  <defs>
+    <linearGradient id="bgH3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3238"/>
+      <stop offset="50%" stop-color="#2e474f"/>
+      <stop offset="100%" stop-color="#3a5861"/>
+    </linearGradient>
+    <linearGradient id="accentH3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00b8c4"/>
+      <stop offset="100%" stop-color="#00d4e0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1584" height="396" fill="url(#bgH3)"/>
+
+  <!-- Focus rings - large, prominent, right side -->
+  <g transform="translate(1300, 198)" opacity="0.15">
+    <circle cx="0" cy="0" r="320" fill="none" stroke="#00d4e0" stroke-width="2"/>
+    <circle cx="0" cy="0" r="240" fill="none" stroke="#00d4e0" stroke-width="2"/>
+    <circle cx="0" cy="0" r="160" fill="none" stroke="#00d4e0" stroke-width="2"/>
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#00d4e0" stroke-width="2"/>
+    <circle cx="0" cy="0" r="30" fill="#00d4e0" opacity="0.4"/>
+  </g>
+
+  <!-- HOOK - contrasting benefit -->
+  <text x="400" y="145" font-family="system-ui, -apple-system, sans-serif" font-size="60" font-weight="700" fill="#ffffff" letter-spacing="1">Weniger arbeiten.</text>
+  <text x="400" y="220" font-family="system-ui, -apple-system, sans-serif" font-size="60" font-weight="700" fill="#00d4e0" letter-spacing="1">Mehr erreichen.</text>
+
+  <!-- Supporting hook -->
+  <text x="400" y="285" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="400" fill="#ffffff" opacity="0.7">Kein Hustle-Mindset. Kein Bullshit. Nur Fokus.</text>
+
+  <!-- CTA with prominent down arrow - same line -->
+  <text x="400" y="335" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#00d4e0">Fokus-Audit buchen</text>
+  <path d="M 555 323 L 555 343 M 547 335 L 555 343 L 563 335" fill="none" stroke="#00d4e0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

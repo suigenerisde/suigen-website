@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1584 396">
+  <defs>
+    <!-- Smooth background gradient -->
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2e474f"/>
+      <stop offset="100%" stop-color="#3a5861"/>
+    </linearGradient>
+    <!-- Accent -->
+    <linearGradient id="accent3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00b8c4"/>
+      <stop offset="100%" stop-color="#00d4e0"/>
+    </linearGradient>
+    <!-- Soft glow -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1584" height="396" fill="url(#bg3)"/>
+
+  <!-- Large decorative focus ring - far right, partially visible -->
+  <g transform="translate(1450, 198)" opacity="0.15">
+    <circle cx="0" cy="0" r="300" fill="none" stroke="#00d4e0" stroke-width="2"/>
+    <circle cx="0" cy="0" r="220" fill="none" stroke="#00d4e0" stroke-width="2"/>
+    <circle cx="0" cy="0" r="140" fill="none" stroke="#00d4e0" stroke-width="2"/>
+  </g>
+
+  <!-- Glowing orb - top right -->
+  <circle cx="1400" cy="80" r="60" fill="#00d4e0" opacity="0.08" filter="url(#softGlow)"/>
+
+  <!-- Small focus symbol - accent element -->
+  <g transform="translate(580, 198)">
+    <circle cx="0" cy="0" r="40" fill="none" stroke="url(#accent3)" stroke-width="3" opacity="0.6"/>
+    <circle cx="0" cy="0" r="24" fill="none" stroke="url(#accent3)" stroke-width="4" opacity="0.8"/>
+    <circle cx="0" cy="0" r="8" fill="#00d4e0"/>
+  </g>
+
+  <!-- Main content -->
+  <g>
+    <!-- Name -->
+    <text x="680" y="175" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="700" fill="#ffffff" letter-spacing="2">Thilo Pfeil</text>
+
+    <!-- Role with accent color -->
+    <text x="680" y="230" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="500" fill="#00d4e0" letter-spacing="1">SUI GENERIS GmbH</text>
+
+    <!-- Subtle tagline -->
+    <text x="680" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="300" fill="#ffffff" opacity="0.6" letter-spacing="0.5">Human-First Fokus | AI &amp; Automatisierung</text>
+  </g>
+
+  <!-- Decorative horizontal line -->
+  <line x1="680" y1="300" x2="900" y2="300" stroke="url(#accent3)" stroke-width="1" opacity="0.4"/>
+
+  <!-- Subtle corner accents -->
+  <path d="M 0 50 L 0 0 L 50 0" fill="none" stroke="#00d4e0" stroke-width="2" opacity="0.3"/>
+  <path d="M 1584 50 L 1584 0 L 1534 0" fill="none" stroke="#00d4e0" stroke-width="2" opacity="0.3"/>
+  <path d="M 0 346 L 0 396 L 50 396" fill="none" stroke="#00d4e0" stroke-width="2" opacity="0.3"/>
+  <path d="M 1584 346 L 1584 396 L 1534 396" fill="none" stroke="#00d4e0" stroke-width="2" opacity="0.3"/>
+</svg>
