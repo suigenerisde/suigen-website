@@ -42,7 +42,7 @@ export default function UeberPage() {
                 </p>
                 <p className="body-text mb-8">
                   MBA (London School of Economics). 6 Jahre Vorstand.
-                  AI-Erfahrung seit 2014. Vater von einer Tochter.
+                  AI-Erfahrung seit 2014. Vater einer einzigartigen Tochter.
                 </p>
                 <Button href="/kontakt" variant="primary">
                   Lass uns kennenlernen
