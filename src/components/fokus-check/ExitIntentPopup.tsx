@@ -37,35 +37,60 @@ export function ExitIntentPopup({
   const shouldBlockNavigation =
     currentStep === 'name' || currentStep === 'questions' || currentStep === 'email';
 
-  // Handle mouse exit intent
-  const handleExitIntent = useCallback(
+  // Show exit intent popup
+  const showExitIntent = useCallback(() => {
+    // Don't show on intro, result, invite-code, or access-request steps
+    // Also don't show on 'name' step (too early, user just started)
+    if (
+      hasShownExitIntent ||
+      currentStep === 'result' ||
+      currentStep === 'intro' ||
+      currentStep === 'invite-code' ||
+      currentStep === 'access-request' ||
+      currentStep === 'name'
+    ) {
+      return;
+    }
+
+    setTriggerType('exit');
+    setIsVisible(true);
+    setHasShownExitIntent(true);
+    sessionStorage.setItem('fokus-check-exit-shown', 'true');
+
+    // Track exit intent event
+    if (
+      typeof window !== 'undefined' &&
+      (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag
+    ) {
+      (window as unknown as { gtag: (...args: unknown[]) => void }).gtag(
+        'event',
+        'exit_intent_triggered',
+        {
+          event_category: 'fokus_check',
+          event_label: currentStep,
+          value: questionNumber || 0,
+        }
+      );
+    }
+  }, [hasShownExitIntent, currentStep, questionNumber]);
+
+  // Handle mouse leaving the window (better than mouseout)
+  const handleMouseLeave = useCallback(
     (e: MouseEvent) => {
       // Only trigger when mouse leaves through the top of the viewport
-      if (e.clientY <= 0 && !hasShownExitIntent && currentStep !== 'result') {
-        setTriggerType('exit');
-        setIsVisible(true);
-        setHasShownExitIntent(true);
-        sessionStorage.setItem('fokus-check-exit-shown', 'true');
-
-        // Track exit intent event
-        if (
-          typeof window !== 'undefined' &&
-          (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag
-        ) {
-          (window as unknown as { gtag: (...args: unknown[]) => void }).gtag(
-            'event',
-            'exit_intent_triggered',
-            {
-              event_category: 'fokus_check',
-              event_label: currentStep,
-              value: questionNumber || 0,
-            }
-          );
-        }
+      if (e.clientY <= 0) {
+        showExitIntent();
       }
     },
-    [hasShownExitIntent, currentStep, questionNumber]
+    [showExitIntent]
   );
+
+  // Handle visibility change (tab switching)
+  const handleVisibilityChange = useCallback(() => {
+    if (document.visibilityState === 'hidden') {
+      showExitIntent();
+    }
+  }, [showExitIntent]);
 
   // Handle beforeunload (browser close/refresh)
   useEffect(() => {
@@ -134,11 +159,18 @@ export function ExitIntentPopup({
     return () => document.removeEventListener('click', handleLinkClick, true);
   }, [shouldBlockNavigation, questionNumber]);
 
-  // Handle mouse exit
+  // Handle mouse leaving window and visibility change
   useEffect(() => {
-    document.addEventListener('mouseout', handleExitIntent);
-    return () => document.removeEventListener('mouseout', handleExitIntent);
-  }, [handleExitIntent]);
+    // mouseleave on document - fires when mouse leaves the browser window
+    document.addEventListener('mouseleave', handleMouseLeave);
+    // visibilitychange - fires when user switches tabs
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [handleMouseLeave, handleVisibilityChange]);
 
   const handleClose = () => {
     setIsVisible(false);

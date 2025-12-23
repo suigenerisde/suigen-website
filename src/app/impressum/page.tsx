@@ -25,9 +25,9 @@ export default function ImpressumPage() {
               <p>
                 SUI GENERIS GmbH
                 <br />
-                [Straße und Hausnummer]
+                Hollerberg 1
                 <br />
-                [PLZ und Ort]
+                61440 Oberursel
               </p>
             </div>
 
@@ -56,9 +56,9 @@ export default function ImpressumPage() {
               <p>
                 Eintragung im Handelsregister.
                 <br />
-                Registergericht: [Amtsgericht]
+                Registergericht: Amtsgericht Bad Homburg v. d. Höhe
                 <br />
-                Registernummer: HRB [Nummer]
+                Registernummer: HRB 16650
               </p>
             </div>
 
@@ -70,7 +70,7 @@ export default function ImpressumPage() {
                 Umsatzsteuer-Identifikationsnummer gemäß § 27 a
                 Umsatzsteuergesetz:
                 <br />
-                DE [Nummer]
+                DE370289430
               </p>
             </div>
 
@@ -81,9 +81,9 @@ export default function ImpressumPage() {
               <p>
                 Thilo Pfeil
                 <br />
-                [Straße und Hausnummer]
+                Hollerberg 1
                 <br />
-                [PLZ und Ort]
+                61440 Oberursel
               </p>
             </div>
 

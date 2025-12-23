@@ -25,7 +25,12 @@ import {
   trackCtaClicked,
   saveUserAndScore,
   triggerPdfAndWhatsApp,
+  saveProgressAndSendLink,
+  loadProgress,
+  deleteProgress,
 } from '@/lib/tracking/events';
+import { ContinueLaterModal } from './ContinueLaterModal';
+import { useSearchParams } from 'next/navigation';
 
 // Webhook URL für Zugangsanfragen
 const ACCESS_REQUEST_WEBHOOK = 'https://n8n.suimation.de/webhook/fokus-check-access-request';
@@ -42,6 +47,37 @@ export function FokusCheckQuiz() {
   const [pendingAnswer, setPendingAnswer] = useState<Answer | null>(null);
   const [showContinuePrompt, setShowContinuePrompt] = useState(false);
   const [painPoint, setPainPoint] = useState('');
+  const [showContinueLaterModal, setShowContinueLaterModal] = useState(false);
+  const [continueToken, setContinueToken] = useState<string | null>(null);
+
+  // URL Parameter für Magic Link
+  const searchParams = useSearchParams();
+  const [isLoadingFromToken, setIsLoadingFromToken] = useState(false);
+
+  // Check for continue token in URL on mount
+  useEffect(() => {
+    const token = searchParams.get('continue');
+    if (token) {
+      setContinueToken(token);
+      setIsLoadingFromToken(true);
+
+      loadProgress(token).then(({ success, state }) => {
+        if (success && state) {
+          // Restore state from Supabase
+          setStep(state.step);
+          setUserName(state.userName);
+          setCurrentQuestion(state.currentQuestion);
+          setAnswers(state.answers);
+          // Don't show localStorage continue prompt
+          setShowContinuePrompt(false);
+        }
+        setIsLoadingFromToken(false);
+      }).catch((err) => {
+        console.error('Error loading progress from token:', err);
+        setIsLoadingFromToken(false);
+      });
+    }
+  }, [searchParams]);
 
   // Persistence hook
   const { restoredState, saveProgress, clearProgress, dismissRestoredState } = useQuizPersistence();
@@ -269,6 +305,10 @@ export function FokusCheckQuiz() {
 
         // Clear saved progress on completion
         clearProgress();
+        // Also delete server-side progress if continued from token
+        if (continueToken) {
+          deleteProgress(continueToken);
+        }
         setStep('result');
       } catch (error) {
         console.error('Error saving user:', error);
@@ -286,15 +326,54 @@ export function FokusCheckQuiz() {
     trackCtaClicked('erstgespraech', '/kontakt');
   }, []);
 
-  // Save and leave callback for ExitIntentPopup
+  // Save and leave callback for ExitIntentPopup - now opens modal instead
   const handleSaveAndLeave = useCallback(() => {
-    saveProgress({
-      step,
-      userName,
-      currentQuestion,
-      answers,
-    });
-  }, [saveProgress, step, userName, currentQuestion, answers]);
+    // Show the continue later modal instead of just saving to localStorage
+    setShowContinueLaterModal(true);
+  }, []);
+
+  // Handler for ContinueLaterModal submission
+  const handleContinueLaterSubmit = useCallback(async (data: { email?: string; phone?: string }) => {
+    const { success, token } = await saveProgressAndSendLink(
+      { step, userName, currentQuestion, answers },
+      data
+    );
+
+    if (!success) {
+      throw new Error('Failed to save progress');
+    }
+
+    // Also save to localStorage as backup
+    saveProgress({ step, userName, currentQuestion, answers });
+
+    return;
+  }, [step, userName, currentQuestion, answers, saveProgress]);
+
+  // Handler to close ContinueLaterModal
+  const handleCloseContinueLaterModal = useCallback(() => {
+    setShowContinueLaterModal(false);
+  }, []);
+
+  // Show loading state when loading from continue token
+  if (isLoadingFromToken) {
+    return (
+      <div className="w-full max-w-xl mx-auto">
+        <div className="animate-fade-in text-center py-16">
+          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[var(--accent)]/10 flex items-center justify-center animate-pulse">
+            <svg className="w-8 h-8 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-bold text-[var(--text-light)] mb-2">
+            Deinen Fortschritt laden...
+          </h2>
+          <p className="text-[var(--text-muted)]">
+            Einen Moment bitte.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   // Show continue prompt if saved progress exists
   if (showContinuePrompt && restoredState) {
@@ -518,6 +597,16 @@ export function FokusCheckQuiz() {
         currentStep={step}
         questionNumber={currentQuestion + 1}
         onSaveAndLeave={handleSaveAndLeave}
+      />
+
+      {/* Continue Later Modal */}
+      <ContinueLaterModal
+        isOpen={showContinueLaterModal}
+        onClose={handleCloseContinueLaterModal}
+        onSubmit={handleContinueLaterSubmit}
+        userName={userName}
+        questionNumber={currentQuestion + 1}
+        totalQuestions={questions.length}
       />
     </div>
   );

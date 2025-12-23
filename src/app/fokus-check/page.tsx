@@ -1,7 +1,20 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { FokusCheckQuiz } from '@/components/fokus-check/FokusCheckQuiz';
+
+// Loading fallback for the quiz component
+function QuizLoadingFallback() {
+  return (
+    <div className="w-full max-w-xl mx-auto animate-pulse">
+      <div className="h-8 bg-[var(--accent)]/10 rounded w-1/3 mb-8" />
+      <div className="h-16 bg-[var(--bg-dark-card)] rounded-lg mb-6" />
+      <div className="h-24 bg-[var(--bg-dark-card)] rounded-lg mb-8" />
+      <div className="h-12 bg-[var(--accent)]/20 rounded-lg w-2/3" />
+    </div>
+  );
+}
 
 export const metadata: Metadata = {
   title: 'Fokus-Check | Wie fokussiert bist Du wirklich? | SUIGEN',
@@ -23,7 +36,9 @@ export default function FokusCheckPage() {
         {/* Hero Section with Quiz */}
         <section className="min-h-screen flex items-center bg-gradient-radial py-24 md:py-32">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <FokusCheckQuiz />
+            <Suspense fallback={<QuizLoadingFallback />}>
+              <FokusCheckQuiz />
+            </Suspense>
           </div>
         </section>
 

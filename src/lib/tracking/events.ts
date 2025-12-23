@@ -1,8 +1,9 @@
 import { supabase, isSupabaseConfigured } from '../supabase/client';
-import type { EventType, Answer, FokusCheckResult } from '@/types/fokus-check';
+import type { EventType, Answer, FokusCheckResult, QuizStep } from '@/types/fokus-check';
 
-// n8n Webhook URL für PDF + WhatsApp Versand
+// n8n Webhook URLs
 const N8N_WEBHOOK_URL = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL;
+const N8N_CONTINUE_LATER_WEBHOOK = 'https://n8n.suimation.de/webhook/fokus-check-continue-later';
 
 // Session ID generieren (bleibt für die gesamte Session)
 const generateSessionId = (): string => {
@@ -235,5 +236,143 @@ export const triggerPdfAndWhatsApp = async (
   } catch (err) {
     console.error('n8n Webhook failed:', err);
     return false;
+  }
+};
+
+// Progress State für "Später weitermachen"
+interface ProgressState {
+  step: QuizStep;
+  userName: string;
+  currentQuestion: number;
+  answers: Answer[];
+}
+
+// Fortschritt in Supabase speichern und Magic Link senden
+export const saveProgressAndSendLink = async (
+  state: ProgressState,
+  contact: { email?: string; phone?: string }
+): Promise<{ success: boolean; token?: string }> => {
+  if (!isSupabaseConfigured()) {
+    console.log('[Supabase disabled] Would save progress:', state, contact);
+    return { success: false };
+  }
+
+  try {
+    // Generiere eindeutigen Token
+    const token = crypto.randomUUID();
+
+    // State für Supabase vorbereiten (Dates zu Strings)
+    const stateForDb = {
+      step: state.step,
+      userName: state.userName,
+      currentQuestion: state.currentQuestion,
+      answers: state.answers.map((a) => ({
+        questionId: a.questionId,
+        value: a.value,
+        timeSpent: a.timeSpent,
+        answeredAt: a.answeredAt instanceof Date ? a.answeredAt.toISOString() : a.answeredAt,
+        followUp: a.followUp,
+      })),
+    };
+
+    // In Supabase speichern
+    const { error } = await supabase!.from('fokus_check_progress').insert({
+      token,
+      state: stateForDb,
+      email: contact.email || null,
+      phone: contact.phone || null,
+      expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 Tage
+    });
+
+    if (error) {
+      console.error('Save progress error:', error);
+      return { success: false };
+    }
+
+    // n8n Webhook für Link-Versand triggern
+    try {
+      const response = await fetch(N8N_CONTINUE_LATER_WEBHOOK, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          token,
+          email: contact.email || null,
+          phone: contact.phone || null,
+          userName: state.userName,
+          currentQuestion: state.currentQuestion + 1,
+          totalQuestions: 8,
+          continueUrl: `https://suigen.de/fokus-check?continue=${token}`,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      if (!response.ok) {
+        console.error('Continue-later webhook error:', response.status);
+      }
+    } catch (webhookErr) {
+      console.error('Continue-later webhook failed:', webhookErr);
+      // Nicht als Fehler behandeln - der Link ist trotzdem gespeichert
+    }
+
+    return { success: true, token };
+  } catch (err) {
+    console.error('Save progress failed:', err);
+    return { success: false };
+  }
+};
+
+// Fortschritt aus Supabase laden
+export const loadProgress = async (
+  token: string
+): Promise<{ success: boolean; state?: ProgressState }> => {
+  if (!isSupabaseConfigured()) {
+    console.log('[Supabase disabled] Would load progress for token:', token);
+    return { success: false };
+  }
+
+  try {
+    const { data, error } = await supabase!
+      .from('fokus_check_progress')
+      .select('state, expires_at')
+      .eq('token', token)
+      .single();
+
+    if (error || !data) {
+      console.error('Load progress error:', error);
+      return { success: false };
+    }
+
+    // Prüfen ob abgelaufen
+    if (new Date(data.expires_at) < new Date()) {
+      console.log('Progress token expired');
+      return { success: false };
+    }
+
+    // State rekonstruieren
+    const state = data.state as ProgressState;
+
+    // Dates zurück konvertieren
+    state.answers = state.answers.map((a) => ({
+      ...a,
+      answeredAt: new Date(a.answeredAt as unknown as string),
+    }));
+
+    return { success: true, state };
+  } catch (err) {
+    console.error('Load progress failed:', err);
+    return { success: false };
+  }
+};
+
+// Fortschritt löschen (nach erfolgreichem Abschluss)
+export const deleteProgress = async (token: string): Promise<void> => {
+  if (!isSupabaseConfigured()) return;
+
+  try {
+    await supabase!.from('fokus_check_progress').delete().eq('token', token);
+  } catch (err) {
+    console.error('Delete progress failed:', err);
   }
 };
