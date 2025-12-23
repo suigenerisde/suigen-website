@@ -40,14 +40,12 @@ export function ExitIntentPopup({
   // Show exit intent popup
   const showExitIntent = useCallback(() => {
     // Don't show on intro, result, invite-code, or access-request steps
-    // Also don't show on 'name' step (too early, user just started)
     if (
       hasShownExitIntent ||
       currentStep === 'result' ||
       currentStep === 'intro' ||
       currentStep === 'invite-code' ||
-      currentStep === 'access-request' ||
-      currentStep === 'name'
+      currentStep === 'access-request'
     ) {
       return;
     }
@@ -74,13 +72,11 @@ export function ExitIntentPopup({
     }
   }, [hasShownExitIntent, currentStep, questionNumber]);
 
-  // Handle mouse leaving the window (better than mouseout)
+  // Handle mouse leaving the window (triggers on any edge)
   const handleMouseLeave = useCallback(
-    (e: MouseEvent) => {
-      // Only trigger when mouse leaves through the top of the viewport
-      if (e.clientY <= 0) {
-        showExitIntent();
-      }
+    (_e: MouseEvent) => {
+      // Trigger when mouse leaves the browser window (any direction)
+      showExitIntent();
     },
     [showExitIntent]
   );
