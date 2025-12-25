@@ -87,7 +87,7 @@ export default function FokusAuditPage() {
                 'Analyse der aktuellen Unternehmenssituation',
                 'Identifikation der echten Engpässe (nicht nur Symptome)',
                 'Konkrete Roadmap mit priorisierten Maßnahmen',
-                'Typisches Ergebnis: 10-15 Stunden pro Woche zurückgewinnen',
+                'Typisches Ergebnis: 8-12 Stunden pro Woche zurückgewinnen',
               ]}
             />
           </div>

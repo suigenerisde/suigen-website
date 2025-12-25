@@ -10,7 +10,7 @@ const fokusHumanFAQs = [
   {
     question: 'Was ist FOKUS: Human-First?',
     answer:
-      'FOKUS: Human-First ist ein Coaching-Programm für Unternehmer, das den Menschen in den Mittelpunkt stellt. Bevor wir automatisieren, schaffen wir Klarheit über Deine Engpässe, Prioritäten und Systeme. Das Ergebnis: 10-15 Stunden pro Woche zurückgewinnen.',
+      'FOKUS: Human-First ist ein Coaching-Programm für Unternehmer, das den Menschen in den Mittelpunkt stellt. Bevor wir automatisieren, schaffen wir Klarheit über Deine Engpässe, Prioritäten und Systeme. Das Ergebnis: 8-12 Stunden pro Woche zurückgewinnen.',
   },
   {
     question: 'Was unterscheidet Human-First von anderen Coaching-Programmen?',
@@ -25,7 +25,7 @@ const fokusHumanFAQs = [
   {
     question: 'Wie schnell sehe ich Ergebnisse bei FOKUS: Human-First?',
     answer:
-      'Typischerweise nach 4-6 Wochen erste messbare Ergebnisse. Die meisten Teilnehmer berichten von deutlich weniger Arbeitszeit bei gleichem oder besserem Output. Das Fokus-Audit zu Beginn gibt Dir sofort Klarheit.',
+      'Typischerweise nach 3 Wochen erste messbare Ergebnisse. Die meisten Teilnehmer berichten von deutlich weniger Arbeitszeit bei gleichen oder besseren Ergebnissen. Das Fokus-Audit zu Beginn gibt Dir sofort Klarheit.',
   },
   {
     question: 'Brauche ich vorher ein Fokus-Audit?',
@@ -86,7 +86,7 @@ export default function FokusHumanPage() {
               definition="FOKUS: Human-First ist ein Coaching-Programm von SUIGEN, das Unternehmer in den Mittelpunkt stellt. Das Prinzip: Erst Klarheit für den Menschen, dann Systeme und Automatisierung."
               bulletPoints={[
                 'Drei Stufen: BASIS (Du), STANDARD (Du + Team), MASTER (Unternehmen)',
-                '10-15 Stunden pro Woche zurückgewinnen',
+                '8-12 Stunden pro Woche zurückgewinnen',
                 'Vom Macher zum Unternehmer - das Unternehmen läuft ohne Dich',
                 'Inklusive Fokus-Audit als Startpunkt',
               ]}
@@ -103,7 +103,7 @@ export default function FokusHumanPage() {
             <div className="grid md:grid-cols-3 gap-6 md:gap-8">
               <div className="card">
                 <h3 className="text-3xl font-black text-[var(--accent)] mb-2">
-                  10-15h
+                  8-12h
                 </h3>
                 <p className="text-xl font-bold text-[var(--text-light)] mb-3 uppercase">
                   pro Woche gewonnen
