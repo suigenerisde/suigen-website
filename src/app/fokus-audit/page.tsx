@@ -25,7 +25,7 @@ const fokusAuditFAQs = [
   {
     question: 'Was kostet ein Fokus-Audit?',
     answer:
-      'Die Investition klären wir im kostenlosen Erstgespräch, da sie von Deiner individuellen Situation abhängt. Wichtiger als der Preis ist der ROI: Die meisten Teilnehmer gewinnen 10-15 Stunden pro Woche zurück - innerhalb von 4 Wochen.',
+      'Die Investition klären wir im kostenlosen Erstgespräch. Wichtiger als der Preis ist der ROI: Die meisten Teilnehmer gewinnen 8-12 Stunden pro Woche zurück - innerhalb von 4 Wochen.',
   },
   {
     question: 'Was passiert nach dem Fokus-Audit?',

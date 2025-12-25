@@ -11,7 +11,7 @@ const faqs: FAQItem[] = [
   {
     question: 'Wie kann ich als Unternehmer mehr Zeit gewinnen?',
     answer:
-      'Durch Klarheit über Deine echten Prioritäten. Das Fokus-Audit zeigt Dir in 3 Stunden, welche Aufgaben Du delegieren, eliminieren oder systematisieren kannst. Typisches Ergebnis: 10-15 Stunden pro Woche zurückgewinnen.',
+      'Durch Klarheit über Deine echten Prioritäten. Das Fokus-Audit zeigt Dir in 3 Stunden, welche Aufgaben Du delegieren, eliminieren oder systematisieren kannst. Typisches Ergebnis: 8-12 Stunden pro Woche zurückgewinnen.',
   },
   {
     question: 'Was ist ein Fokus-Audit und wie läuft es ab?',
@@ -26,7 +26,7 @@ const faqs: FAQItem[] = [
   {
     question: 'Wie schnell sehe ich Ergebnisse?',
     answer:
-      'Das Fokus-Audit gibt Dir sofort Klarheit über Deine nächsten Schritte. Bei FOKUS: Human-First siehst Du typischerweise nach 4-6 Wochen erste messbare Ergebnisse - weniger Arbeitszeit bei gleichem oder besserem Output.',
+      'Das Fokus-Audit gibt Dir sofort Klarheit über Deine nächsten Schritte. Bei FOKUS: Human-First siehst Du typischerweise nach 3 Wochen erste messbare Ergebnisse - weniger Arbeitszeit bei gleichen oder besseren Ergebnissen.',
   },
   {
     question: 'Für wen ist SUIGEN geeignet?',
@@ -46,7 +46,7 @@ const faqs: FAQItem[] = [
   {
     question: 'Was kostet das Fokus-Audit?',
     answer:
-      'Das klären wir im kostenlosen Erstgespräch. Der Preis hängt von Deiner Situation ab. Wichtiger: Der ROI. Die meisten Teilnehmer gewinnen die investierte Zeit innerhalb von 4 Wochen mehrfach zurück.',
+      'Das klären wir im kostenlosen Erstgespräch. Wichtig: Der ROI. Die meisten Teilnehmer gewinnen ihren Invest innerhalb von 4 Wochen mehrfach zurück.',
   },
 ];
 
