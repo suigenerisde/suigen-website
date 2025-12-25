@@ -76,13 +76,36 @@ export function JsonLd() {
         name: 'Switzerland',
       },
     ],
-    serviceType: [
-      'Fokus-Beratung',
-      'Business Coaching',
-      'Unternehmerberatung',
-      'AI-Beratung',
-      'Prozessoptimierung',
-    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Fokus-Beratung Services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Fokus-Audit',
+            description: '3-stuendiger Workshop fuer Klarheit und eine 90-Tage-Roadmap',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'FOKUS: Human-First',
+            description: 'Begleitung fuer Unternehmer, um Systeme aufzubauen die ohne sie funktionieren',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'FOKUS: System',
+            description: 'Individuelle Fokus-Systeme und Automatisierung fuer Unternehmen',
+          },
+        },
+      ],
+    },
     knowsLanguage: ['de', 'en'],
     founder: {
       '@type': 'Person',
