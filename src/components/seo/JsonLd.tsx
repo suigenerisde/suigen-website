@@ -25,8 +25,70 @@ export function JsonLd() {
     sameAs: ['https://www.linkedin.com/in/sui-generis/'],
     address: {
       '@type': 'PostalAddress',
+      streetAddress: 'Hollerberg 1',
+      postalCode: '61440',
+      addressLocality: 'Oberursel',
+      addressRegion: 'Hessen',
       addressCountry: 'DE',
     },
+  };
+
+  const localBusinessSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    '@id': `${baseUrl}/#localbusiness`,
+    name: 'SUI GENERIS GmbH',
+    alternateName: 'SUIGEN',
+    description:
+      'Fokus-Beratung fuer Unternehmer und Geschaeftsfuehrer. Erst fokussieren, dann automatisieren. AI-Erfahrung seit 2014.',
+    url: baseUrl,
+    telephone: '+49-171-2647010',
+    email: 'thilo@suigeneris.de',
+    image: `${baseUrl}/og-image.png`,
+    logo: `${baseUrl}/sui-generis-logo.png`,
+    priceRange: '$$$$',
+    currenciesAccepted: 'EUR',
+    paymentAccepted: 'Rechnung, Ueberweisung',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Hollerberg 1',
+      postalCode: '61440',
+      addressLocality: 'Oberursel',
+      addressRegion: 'Hessen',
+      addressCountry: 'DE',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: '50.2019',
+      longitude: '8.5728',
+    },
+    areaServed: [
+      {
+        '@type': 'Country',
+        name: 'Germany',
+      },
+      {
+        '@type': 'Country',
+        name: 'Austria',
+      },
+      {
+        '@type': 'Country',
+        name: 'Switzerland',
+      },
+    ],
+    serviceType: [
+      'Fokus-Beratung',
+      'Business Coaching',
+      'Unternehmerberatung',
+      'AI-Beratung',
+      'Prozessoptimierung',
+    ],
+    knowsLanguage: ['de', 'en'],
+    founder: {
+      '@type': 'Person',
+      name: 'Thilo Pfeil',
+    },
+    sameAs: ['https://www.linkedin.com/in/sui-generis/'],
   };
 
   const personSchema = {
@@ -170,6 +232,10 @@ export function JsonLd() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
       <script
         type="application/ld+json"
