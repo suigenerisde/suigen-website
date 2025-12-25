@@ -3,11 +3,50 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/Button';
 import { CTA } from '@/components/sections/CTA';
+import { DefinitionBox } from '@/components/seo/DefinitionBox';
+import { ServiceFAQ } from '@/components/seo/ServiceFAQ';
+
+const fokusAuditFAQs = [
+  {
+    question: 'Was ist ein Fokus-Audit?',
+    answer:
+      'Ein Fokus-Audit ist ein 3-stündiger strategischer Workshop für Unternehmer. In dieser Zeit analysieren wir Deine aktuelle Situation, identifizieren die echten Engpässe in Deinem Unternehmen und entwickeln eine konkrete 90-Tage-Roadmap mit priorisierten Maßnahmen.',
+  },
+  {
+    question: 'Wie läuft ein Fokus-Audit ab?',
+    answer:
+      'Das Fokus-Audit besteht aus drei Phasen: Zuerst analysieren wir Deine aktuelle Situation und Prozesse. Dann identifizieren wir die echten Engpässe - nicht die Symptome, sondern die Ursachen. Abschließend entwickeln wir eine klare Empfehlung mit konkreten nächsten Schritten.',
+  },
+  {
+    question: 'Für wen ist das Fokus-Audit geeignet?',
+    answer:
+      'Das Fokus-Audit ist für Unternehmer und Geschäftsführer, die mehr Zeit gewinnen wollen, ohne mehr zu arbeiten. Es eignet sich besonders für Führungskräfte, die im Hamsterrad feststecken und Klarheit über ihre echten Prioritäten brauchen.',
+  },
+  {
+    question: 'Was kostet ein Fokus-Audit?',
+    answer:
+      'Die Investition klären wir im kostenlosen Erstgespräch, da sie von Deiner individuellen Situation abhängt. Wichtiger als der Preis ist der ROI: Die meisten Teilnehmer gewinnen 10-15 Stunden pro Woche zurück - innerhalb von 4 Wochen.',
+  },
+  {
+    question: 'Was passiert nach dem Fokus-Audit?',
+    answer:
+      'Nach dem Fokus-Audit hast Du eine klare Roadmap für die nächsten 90 Tage. Du entscheidest selbst, ob Du die Maßnahmen eigenständig umsetzt oder mit FOKUS: Human-First oder FOKUS: System weiterarbeitest. Es gibt keine Verpflichtung.',
+  },
+];
 
 export const metadata: Metadata = {
-  title: 'Fokus-Audit',
+  title: 'Fokus-Audit - 3-Stunden-Workshop für Unternehmer | SUIGEN',
   description:
-    'Du weisst, was zu tun ist - du tust es nur nicht. Das Fokus-Audit bringt Klarheit in 3 Stunden.',
+    'Das Fokus-Audit ist ein 3-stündiger Workshop für Unternehmer. Analysiere Deine Situation, identifiziere Engpässe und erhalte eine 90-Tage-Roadmap. Klarheit statt Theorie.',
+  keywords: [
+    'fokus audit',
+    'unternehmer workshop',
+    'geschäftsführer coaching',
+    'prioritäten setzen',
+    'zeitmanagement unternehmer',
+    '90 tage roadmap',
+    'business analyse',
+  ],
 };
 
 export default function FokusAuditPage() {
@@ -35,6 +74,22 @@ export default function FokusAuditPage() {
                 Erstgespräch buchen
               </Button>
             </div>
+          </div>
+        </section>
+
+        {/* Definition Box für AI Overviews */}
+        <section className="bg-[var(--bg-dark-lighter)] py-12 md:py-16">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <DefinitionBox
+              term="ein Fokus-Audit"
+              definition="Ein Fokus-Audit ist ein 3-stündiger strategischer Workshop für Unternehmer und Geschäftsführer. Das Ziel: Klarheit über die echten Prioritäten und eine konkrete 90-Tage-Roadmap."
+              bulletPoints={[
+                'Analyse der aktuellen Unternehmenssituation',
+                'Identifikation der echten Engpässe (nicht nur Symptome)',
+                'Konkrete Roadmap mit priorisierten Maßnahmen',
+                'Typisches Ergebnis: 10-15 Stunden pro Woche zurückgewinnen',
+              ]}
+            />
           </div>
         </section>
 
@@ -185,6 +240,13 @@ export default function FokusAuditPage() {
             </div>
           </div>
         </section>
+
+        {/* Service-spezifische FAQ mit Schema */}
+        <ServiceFAQ
+          title="Häufige Fragen zum Fokus-Audit"
+          faqs={fokusAuditFAQs}
+          serviceName="das Fokus-Audit"
+        />
 
         <CTA />
       </main>

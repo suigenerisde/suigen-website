@@ -3,11 +3,50 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/Button';
 import { CTA } from '@/components/sections/CTA';
+import { DefinitionBox } from '@/components/seo/DefinitionBox';
+import { ServiceFAQ } from '@/components/seo/ServiceFAQ';
+
+const fokusSystemFAQs = [
+  {
+    question: 'Was ist FOKUS: System?',
+    answer:
+      'FOKUS: System ist ein Programm von SUIGEN, das individuelle Fokus-Systeme für Unternehmen entwickelt. Das Ziel: Skalierung ohne Mehrarbeit. Wir bauen keine Tools von der Stange, sondern maßgeschneiderte Lösungen für Dein Unternehmen.',
+  },
+  {
+    question: 'Was wird bei FOKUS: System automatisiert?',
+    answer:
+      'Wiederkehrende Prozesse und Workflows, die zuverlässig funktionieren sollen - Tag für Tag, ohne dass Du eingreifen musst. Von einzelnen Prozessen bis zur kompletten Plattform, je nach Bedarf Deines Unternehmens.',
+  },
+  {
+    question: 'Brauche ich vorher FOKUS: Human-First?',
+    answer:
+      'Empfohlen, aber nicht zwingend. Das Prinzip "Erst fokussieren, dann automatisieren" stellt sicher, dass wir die richtigen Dinge automatisieren. Wenn Du bereits Klarheit hast, können wir direkt mit FOKUS: System starten.',
+  },
+  {
+    question: 'Was unterscheidet FOKUS: System von Standard-Software?',
+    answer:
+      'Wir bauen keine Tools von der Stange. Jedes Fokus-System ist individuell auf Dein Unternehmen zugeschnitten. Das bedeutet: Es passt zu Deinen Prozessen, nicht umgekehrt.',
+  },
+  {
+    question: 'Wie sieht ein typisches Ergebnis aus?',
+    answer:
+      'Ein Beispiel: Bei Crea Factory wurde die Arbeitszeit von 80 auf 40 Stunden pro Woche reduziert. Mit CreaVersum wurde eine komplette Plattform gebaut, die Prozesse skalierbar macht. Mehr Zeit für Kreativarbeit, weniger für Verwaltung.',
+  },
+];
 
 export const metadata: Metadata = {
-  title: 'FOKUS: System',
+  title: 'FOKUS: System - Automatisierung für Unternehmen | SUIGEN',
   description:
-    'Skalierung für Dein Unternehmen. Dein Unternehmen wächst, ohne dass Du mehr arbeitest.',
+    'FOKUS: System entwickelt individuelle Fokus-Systeme für Unternehmen. Automatisierte Workflows, wiederkehrende Prozesse auf Autopilot. Skalierung ohne Mehrarbeit.',
+  keywords: [
+    'unternehmens automatisierung',
+    'prozess automatisierung',
+    'workflow automatisierung',
+    'skalierung unternehmen',
+    'business systeme',
+    'individuelle software',
+    'fokus system',
+  ],
 };
 
 export default function FokusSystemPage() {
@@ -38,6 +77,22 @@ export default function FokusSystemPage() {
                 Erstgespräch buchen
               </Button>
             </div>
+          </div>
+        </section>
+
+        {/* Definition Box für AI Overviews */}
+        <section className="bg-[var(--bg-dark-lighter)] py-12 md:py-16">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <DefinitionBox
+              term="FOKUS: System"
+              definition="FOKUS: System ist ein Programm von SUIGEN, das individuelle Automatisierungslösungen für Unternehmen entwickelt. Das Prinzip: Erst fokussieren, dann automatisieren."
+              bulletPoints={[
+                'Wiederkehrende Prozesse laufen automatisch',
+                'Maßgeschneiderte Lösungen statt Standard-Software',
+                'Von einzelnen Workflows bis zur kompletten Plattform',
+                'Skalierung ohne Mehrarbeit',
+              ]}
+            />
           </div>
         </section>
 
@@ -177,6 +232,13 @@ export default function FokusSystemPage() {
             </div>
           </div>
         </section>
+
+        {/* Service-spezifische FAQ mit Schema */}
+        <ServiceFAQ
+          title="Häufige Fragen zu FOKUS: System"
+          faqs={fokusSystemFAQs}
+          serviceName="FOKUS: System"
+        />
 
         <CTA />
       </main>

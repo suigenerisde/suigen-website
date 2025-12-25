@@ -3,11 +3,50 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/Button';
 import { CTA } from '@/components/sections/CTA';
+import { DefinitionBox } from '@/components/seo/DefinitionBox';
+import { ServiceFAQ } from '@/components/seo/ServiceFAQ';
+
+const fokusHumanFAQs = [
+  {
+    question: 'Was ist FOKUS: Human-First?',
+    answer:
+      'FOKUS: Human-First ist ein Coaching-Programm für Unternehmer, das den Menschen in den Mittelpunkt stellt. Bevor wir automatisieren, schaffen wir Klarheit über Deine Engpässe, Prioritäten und Systeme. Das Ergebnis: 10-15 Stunden pro Woche zurückgewinnen.',
+  },
+  {
+    question: 'Was unterscheidet Human-First von anderen Coaching-Programmen?',
+    answer:
+      'Der Ansatz "Erst der Mensch, dann die Maschine". Viele Programme starten mit Tools und Automatisierung. Wir starten mit Dir: Was hält Dich wirklich auf? Welche Systeme brauchst Du? Erst dann folgt die Umsetzung.',
+  },
+  {
+    question: 'Welche Stufen gibt es bei FOKUS: Human-First?',
+    answer:
+      'Es gibt drei Stufen: BASIS (Du hast ein System - persönliche Klarheit), STANDARD (Du + Team - gemeinsame Strukturen) und MASTER (Unternehmen läuft ohne Dich - volle Transformation vom Macher zum Unternehmer).',
+  },
+  {
+    question: 'Wie schnell sehe ich Ergebnisse bei FOKUS: Human-First?',
+    answer:
+      'Typischerweise nach 4-6 Wochen erste messbare Ergebnisse. Die meisten Teilnehmer berichten von deutlich weniger Arbeitszeit bei gleichem oder besserem Output. Das Fokus-Audit zu Beginn gibt Dir sofort Klarheit.',
+  },
+  {
+    question: 'Brauche ich vorher ein Fokus-Audit?',
+    answer:
+      'Ja, alle Stufen beinhalten das Fokus-Audit als Startpunkt. Es schafft die Grundlage für alles Weitere und stellt sicher, dass wir an den richtigen Themen arbeiten.',
+  },
+];
 
 export const metadata: Metadata = {
-  title: 'FOKUS: Human-First',
+  title: 'FOKUS: Human-First - Coaching für Unternehmer | SUIGEN',
   description:
-    'Klarheit für DICH. Der Mensch im Zentrum. 10-15 Stunden pro Woche gewonnen.',
+    'FOKUS: Human-First ist Coaching für Unternehmer mit dem Prinzip "Erst der Mensch, dann das System". Gewinne 10-15 Stunden pro Woche. Drei Stufen: BASIS, STANDARD, MASTER.',
+  keywords: [
+    'unternehmer coaching',
+    'geschäftsführer entlastung',
+    'human first ansatz',
+    'work life balance unternehmer',
+    'delegation lernen',
+    'vom macher zum unternehmer',
+    'team führung',
+  ],
 };
 
 export default function FokusHumanPage() {
@@ -36,6 +75,22 @@ export default function FokusHumanPage() {
                 Erstgespräch buchen
               </Button>
             </div>
+          </div>
+        </section>
+
+        {/* Definition Box für AI Overviews */}
+        <section className="bg-[var(--bg-dark-lighter)] py-12 md:py-16">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <DefinitionBox
+              term="FOKUS: Human-First"
+              definition="FOKUS: Human-First ist ein Coaching-Programm von SUIGEN, das Unternehmer in den Mittelpunkt stellt. Das Prinzip: Erst Klarheit für den Menschen, dann Systeme und Automatisierung."
+              bulletPoints={[
+                'Drei Stufen: BASIS (Du), STANDARD (Du + Team), MASTER (Unternehmen)',
+                '10-15 Stunden pro Woche zurückgewinnen',
+                'Vom Macher zum Unternehmer - das Unternehmen läuft ohne Dich',
+                'Inklusive Fokus-Audit als Startpunkt',
+              ]}
+            />
           </div>
         </section>
 
@@ -160,6 +215,13 @@ export default function FokusHumanPage() {
             </Button>
           </div>
         </section>
+
+        {/* Service-spezifische FAQ mit Schema */}
+        <ServiceFAQ
+          title="Häufige Fragen zu FOKUS: Human-First"
+          faqs={fokusHumanFAQs}
+          serviceName="FOKUS: Human-First"
+        />
 
         <CTA />
       </main>
