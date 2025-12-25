@@ -53,8 +53,27 @@ const faqs: FAQItem[] = [
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+  // FAQPage Schema für die Homepage
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    name: 'FAQ: SUIGEN - Fokus für Unternehmer',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <section className="bg-[var(--bg-dark)] py-24 md:py-32">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="headline-section text-[var(--text-light)]">

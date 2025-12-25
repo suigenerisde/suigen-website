@@ -179,76 +179,8 @@ export function JsonLd() {
     inLanguage: 'de-DE',
   };
 
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'Wie kann ich als Unternehmer mehr Zeit gewinnen?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Durch Klarheit über Deine echten Prioritäten. Das Fokus-Audit zeigt Dir in 3 Stunden, welche Aufgaben Du delegieren, eliminieren oder systematisieren kannst. Typisches Ergebnis: 10-15 Stunden pro Woche zurückgewinnen.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Was ist ein Fokus-Audit und wie läuft es ab?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Ein 3-stündiger Workshop, in dem wir Deine aktuelle Situation analysieren, die echten Engpässe identifizieren und eine konkrete 90-Tage-Roadmap entwickeln. Du bekommst sofort Klarheit - ohne langfristige Verpflichtung.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Wie komme ich aus dem Hamsterrad als Geschäftsführer?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Indem Du aufhörst, alles selbst zu machen. FOKUS: Human-First hilft Dir, Systeme aufzubauen, die ohne Dich funktionieren. Der erste Schritt: Verstehen, was Dich wirklich aufhält.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Wie schnell sehe ich Ergebnisse?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Das Fokus-Audit gibt Dir sofort Klarheit über Deine nächsten Schritte. Bei FOKUS: Human-First siehst Du typischerweise nach 4-6 Wochen erste messbare Ergebnisse.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Für wen ist SUIGEN geeignet?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Für Unternehmer mit Ambition, die Marktführer werden oder bleiben wollen. Nicht für alle - nur für die, die wirklich bereit sind, etwas zu verändern.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Was unterscheidet SUIGEN von anderen Beratern?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Drei Dinge: Erstens, AI-Erfahrung seit 2014 (nicht erst seit ChatGPT). Zweitens, der Human-First-Ansatz - erst Klarheit für Dich, dann Systeme. Drittens, Umsetzung statt Theorie.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Kann ich mein Unternehmen skalieren ohne mehr zu arbeiten?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Ja. FOKUS: System baut individuelle Fokus-Systeme für Dein Unternehmen. Automatisierung wiederkehrender Prozesse, klare Verantwortlichkeiten, messbare Ergebnisse.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Was kostet das Fokus-Audit?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Das klären wir im kostenlosen Erstgespräch. Der Preis hängt von Deiner Situation ab. Die meisten Teilnehmer gewinnen die investierte Zeit innerhalb von 4 Wochen mehrfach zurück.',
-        },
-      },
-    ],
-  };
+  // FAQPage Schema wurde entfernt - jede Seite hat jetzt ihr eigenes FAQ Schema
+  // via ServiceFAQ Komponente oder HomepageFAQ
 
   return (
     <>
@@ -271,10 +203,6 @@ export function JsonLd() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
     </>
   );
