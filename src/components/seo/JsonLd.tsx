@@ -9,7 +9,7 @@ export function JsonLd() {
     url: baseUrl,
     logo: `${baseUrl}/sui-generis-logo.png`,
     description:
-      'Beratung fuer Unternehmer: Erst fokussieren, dann automatisieren. FOKUS: Human-First und FOKUS: System.',
+      'Beratung für Unternehmer: Erst fokussieren, dann automatisieren. FOKUS: Human-First und FOKUS: System.',
     foundingDate: '2024',
     founder: {
       '@type': 'Person',
@@ -40,7 +40,7 @@ export function JsonLd() {
     name: 'SUI GENERIS GmbH',
     alternateName: 'SUIGEN',
     description:
-      'Fokus-Beratung fuer Unternehmer und Geschaeftsfuehrer. Erst fokussieren, dann automatisieren. AI-Erfahrung seit 2014.',
+      'Fokus-Beratung für Unternehmer und Geschäftsführer. Erst fokussieren, dann automatisieren. AI-Erfahrung seit 2014.',
     url: baseUrl,
     telephone: '+49-171-2647010',
     email: 'thilo@suigeneris.de',
@@ -48,7 +48,7 @@ export function JsonLd() {
     logo: `${baseUrl}/sui-generis-logo.png`,
     priceRange: '$$$$',
     currenciesAccepted: 'EUR',
-    paymentAccepted: 'Rechnung, Ueberweisung',
+    paymentAccepted: 'Rechnung, Überweisung',
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Hollerberg 1',
@@ -85,7 +85,7 @@ export function JsonLd() {
           itemOffered: {
             '@type': 'Service',
             name: 'Fokus-Audit',
-            description: '3-stuendiger Workshop fuer Klarheit und eine 90-Tage-Roadmap',
+            description: '3-stündiger Workshop für Klarheit und eine 90-Tage-Roadmap',
           },
         },
         {
@@ -93,7 +93,7 @@ export function JsonLd() {
           itemOffered: {
             '@type': 'Service',
             name: 'FOKUS: Human-First',
-            description: 'Begleitung fuer Unternehmer, um Systeme aufzubauen die ohne sie funktionieren',
+            description: 'Begleitung für Unternehmer, um Systeme aufzubauen die ohne sie funktionieren',
           },
         },
         {
@@ -101,7 +101,7 @@ export function JsonLd() {
           itemOffered: {
             '@type': 'Service',
             name: 'FOKUS: System',
-            description: 'Individuelle Fokus-Systeme und Automatisierung fuer Unternehmen',
+            description: 'Individuelle Fokus-Systeme und Automatisierung für Unternehmen',
           },
         },
       ],
@@ -118,7 +118,7 @@ export function JsonLd() {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Thilo Pfeil',
-    jobTitle: 'Gruender & Fokus-Experte',
+    jobTitle: 'Gründer & Fokus-Experte',
     description:
       'Fokus-Experte und AI-Pionier seit 2014. MBA (London School of Economics). 6 Jahre Vorstandserfahrung.',
     url: `${baseUrl}/ueber`,
@@ -130,11 +130,11 @@ export function JsonLd() {
     },
     knowsAbout: [
       'Fokus-Training',
-      'Unternehmensfuehrung',
+      'Unternehmensführung',
       'AI und Automatisierung',
-      'Produktivitaet',
+      'Produktivität',
       'Deep Work',
-      'Geschaeftsprozessoptimierung',
+      'Geschäftsprozessoptimierung',
     ],
     worksFor: {
       '@type': 'Organization',
@@ -151,7 +151,7 @@ export function JsonLd() {
       name: 'SUI GENERIS GmbH',
     },
     description:
-      'Du weisst, was zu tun ist - du tust es nur nicht. Das Fokus-Audit bringt Klarheit fuer Unternehmer.',
+      'Du weißt, was zu tun ist - du tust es nur nicht. Das Fokus-Audit bringt Klarheit für Unternehmer.',
     url: `${baseUrl}/fokus-audit`,
     serviceType: 'Business Consulting',
     areaServed: {
@@ -171,7 +171,7 @@ export function JsonLd() {
     name: 'SUIGEN',
     url: baseUrl,
     description:
-      'Erst fokussieren, dann automatisieren. FOKUS: Human-First und FOKUS: System fuer Unternehmer.',
+      'Erst fokussieren, dann automatisieren. FOKUS: Human-First und FOKUS: System für Unternehmer.',
     publisher: {
       '@type': 'Organization',
       name: 'SUI GENERIS GmbH',
@@ -188,23 +188,23 @@ export function JsonLd() {
         name: 'Wie kann ich als Unternehmer mehr Zeit gewinnen?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Durch Klarheit ueber Deine echten Prioritaeten. Das Fokus-Audit zeigt Dir in 3 Stunden, welche Aufgaben Du delegieren, eliminieren oder systematisieren kannst. Typisches Ergebnis: 10-15 Stunden pro Woche zurueckgewinnen.',
+          text: 'Durch Klarheit über Deine echten Prioritäten. Das Fokus-Audit zeigt Dir in 3 Stunden, welche Aufgaben Du delegieren, eliminieren oder systematisieren kannst. Typisches Ergebnis: 10-15 Stunden pro Woche zurückgewinnen.',
         },
       },
       {
         '@type': 'Question',
-        name: 'Was ist ein Fokus-Audit und wie laeuft es ab?',
+        name: 'Was ist ein Fokus-Audit und wie läuft es ab?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Ein 3-stuendiger Workshop, in dem wir Deine aktuelle Situation analysieren, die echten Engpaesse identifizieren und eine konkrete 90-Tage-Roadmap entwickeln. Du bekommst sofort Klarheit - ohne langfristige Verpflichtung.',
+          text: 'Ein 3-stündiger Workshop, in dem wir Deine aktuelle Situation analysieren, die echten Engpässe identifizieren und eine konkrete 90-Tage-Roadmap entwickeln. Du bekommst sofort Klarheit - ohne langfristige Verpflichtung.',
         },
       },
       {
         '@type': 'Question',
-        name: 'Wie komme ich aus dem Hamsterrad als Geschaeftsfuehrer?',
+        name: 'Wie komme ich aus dem Hamsterrad als Geschäftsführer?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Indem Du aufhoerst, alles selbst zu machen. FOKUS: Human-First hilft Dir, Systeme aufzubauen, die ohne Dich funktionieren. Der erste Schritt: Verstehen, was Dich wirklich aufhaelt.',
+          text: 'Indem Du aufhörst, alles selbst zu machen. FOKUS: Human-First hilft Dir, Systeme aufzubauen, die ohne Dich funktionieren. Der erste Schritt: Verstehen, was Dich wirklich aufhält.',
         },
       },
       {
@@ -212,15 +212,15 @@ export function JsonLd() {
         name: 'Wie schnell sehe ich Ergebnisse?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Das Fokus-Audit gibt Dir sofort Klarheit ueber Deine naechsten Schritte. Bei FOKUS: Human-First siehst Du typischerweise nach 4-6 Wochen erste messbare Ergebnisse.',
+          text: 'Das Fokus-Audit gibt Dir sofort Klarheit über Deine nächsten Schritte. Bei FOKUS: Human-First siehst Du typischerweise nach 4-6 Wochen erste messbare Ergebnisse.',
         },
       },
       {
         '@type': 'Question',
-        name: 'Fuer wen ist SUIGEN geeignet?',
+        name: 'Für wen ist SUIGEN geeignet?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Fuer Unternehmer mit Ambition, die Marktfuehrer werden oder bleiben wollen. Nicht fuer alle - nur fuer die, die wirklich bereit sind, etwas zu veraendern.',
+          text: 'Für Unternehmer mit Ambition, die Marktführer werden oder bleiben wollen. Nicht für alle - nur für die, die wirklich bereit sind, etwas zu verändern.',
         },
       },
       {
@@ -228,7 +228,7 @@ export function JsonLd() {
         name: 'Was unterscheidet SUIGEN von anderen Beratern?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Drei Dinge: Erstens, AI-Erfahrung seit 2014 (nicht erst seit ChatGPT). Zweitens, der Human-First-Ansatz - erst Klarheit fuer Dich, dann Systeme. Drittens, Umsetzung statt Theorie.',
+          text: 'Drei Dinge: Erstens, AI-Erfahrung seit 2014 (nicht erst seit ChatGPT). Zweitens, der Human-First-Ansatz - erst Klarheit für Dich, dann Systeme. Drittens, Umsetzung statt Theorie.',
         },
       },
       {
@@ -236,7 +236,7 @@ export function JsonLd() {
         name: 'Kann ich mein Unternehmen skalieren ohne mehr zu arbeiten?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Ja. FOKUS: System baut individuelle Fokus-Systeme fuer Dein Unternehmen. Automatisierung wiederkehrender Prozesse, klare Verantwortlichkeiten, messbare Ergebnisse.',
+          text: 'Ja. FOKUS: System baut individuelle Fokus-Systeme für Dein Unternehmen. Automatisierung wiederkehrender Prozesse, klare Verantwortlichkeiten, messbare Ergebnisse.',
         },
       },
       {
@@ -244,7 +244,7 @@ export function JsonLd() {
         name: 'Was kostet das Fokus-Audit?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Das klaeren wir im kostenlosen Erstgespraech. Der Preis haengt von Deiner Situation ab. Die meisten Teilnehmer gewinnen die investierte Zeit innerhalb von 4 Wochen mehrfach zurueck.',
+          text: 'Das klären wir im kostenlosen Erstgespräch. Der Preis hängt von Deiner Situation ab. Die meisten Teilnehmer gewinnen die investierte Zeit innerhalb von 4 Wochen mehrfach zurück.',
         },
       },
     ],
