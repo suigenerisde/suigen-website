@@ -38,16 +38,18 @@
   },
   "last_updated": "2025-12-27T21:32:43.699114+00:00",
   "qa_signoff": {
-    "status": "rejected",
+    "status": "fixes_applied",
     "qa_session": 1,
-    "issues_found": [
+    "fix_session": 1,
+    "issues_fixed": [
       {
-        "description": "Fabricated claim \"1.247+ Unternehmer\" still exists in ResultDisplay.tsx:329-335. The spec notes this should be considered for removal."
+        "title": "Removed fabricated social proof from ResultDisplay.tsx",
+        "fix_commit": "0a9127d"
       }
     ],
     "tests_passed": {},
-    "timestamp": "2025-12-27T21:32:43.699105+00:00",
-    "ready_for_qa_revalidation": false
+    "timestamp": "2025-12-27T21:40:00.000000+00:00",
+    "ready_for_qa_revalidation": true
   },
   "status": "human_review",
   "planStatus": "review",
