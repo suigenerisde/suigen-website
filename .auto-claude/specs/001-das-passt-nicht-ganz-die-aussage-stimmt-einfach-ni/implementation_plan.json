@@ -1,0 +1,54 @@
+{
+  "feature": "remove-fabricated-social-proof",
+  "spec_name": "remove-fabricated-social-proof",
+  "workflow_type": "simple",
+  "total_phases": 1,
+  "recommended_workers": 1,
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Implementation",
+      "description": "Remove fabricated social proof banner from Fokus-Check quiz",
+      "depends_on": [],
+      "subtasks": [
+        {
+          "id": "subtask-1-1",
+          "description": "Remove the social proof div (lines 429-438) containing false claims about '1.247+ Unternehmer' and '+37% Produktivit\u00e4tssteigerung' from FokusCheckQuiz.tsx",
+          "service": "frontend",
+          "status": "completed",
+          "files_to_create": [],
+          "files_to_modify": [
+            "src/components/fokus-check/FokusCheckQuiz.tsx"
+          ],
+          "patterns_from": [],
+          "verification": {
+            "type": "manual",
+            "run": "Open http://localhost:3000/fokus-check and verify banner is removed and page displays correctly"
+          },
+          "notes": "Already completed in commit a5e0725. Removed the social proof div containing false claims about '1.247+ Unternehmer' and '+37% Produktivit\u00e4tssteigerung' from FokusCheckQuiz.tsx.",
+          "updated_at": "2025-12-27T21:29:26.709017+00:00"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "created_at": "2025-12-27T20:30:00Z",
+    "complexity": "simple",
+    "estimated_sessions": 1
+  },
+  "last_updated": "2025-12-27T21:32:43.699114+00:00",
+  "qa_signoff": {
+    "status": "rejected",
+    "qa_session": 1,
+    "issues_found": [
+      {
+        "description": "Fabricated claim \"1.247+ Unternehmer\" still exists in ResultDisplay.tsx:329-335. The spec notes this should be considered for removal."
+      }
+    ],
+    "tests_passed": {},
+    "timestamp": "2025-12-27T21:32:43.699105+00:00",
+    "ready_for_qa_revalidation": false
+  },
+  "status": "human_review",
+  "planStatus": "review"
+}
