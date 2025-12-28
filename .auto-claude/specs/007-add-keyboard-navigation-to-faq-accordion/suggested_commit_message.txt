@@ -1,3 +1,0 @@
-feat(faq): add keyboard navigation to FAQ accordion
-
-Add keyboard navigation support with arrow keys for navigating between FAQ items and Enter/Space keys for toggling. Improves accessibility and aligns with WCAG guidelines for interactive components.

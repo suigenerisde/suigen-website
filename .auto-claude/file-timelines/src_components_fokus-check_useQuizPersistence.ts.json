@@ -1,0 +1,25 @@
+{
+  "file_path": "src/components/fokus-check/useQuizPersistence.ts",
+  "main_branch_history": [],
+  "task_views": {
+    "011-remove-or-conditionally-disable-console-logging-in": {
+      "task_id": "011-remove-or-conditionally-disable-console-logging-in",
+      "branch_point": {
+        "commit_hash": "e327d25e2edeee628d7c36f91d94a613ea200851",
+        "content": "'use client';\n\nimport { useState, useEffect, useCallback } from 'react';\nimport type { Answer, QuizStep } from '@/types/fokus-check';\n\nconst STORAGE_KEY = 'fokus-check-progress';\nconst EXPIRY_HOURS = 24; // Progress expires after 24 hours\n\ninterface PersistedState {\n  step: QuizStep;\n  userName: string;\n  currentQuestion: number;\n  answers: Answer[];\n  savedAt: number; // timestamp\n}\n\ninterface UseQuizPersistenceReturn {\n  // Restored state (null if no valid saved state)\n  restoredState: PersistedState | null;\n  // Save current progress\n  saveProgress: (state: Omit<PersistedState, 'savedAt'>) => void;\n  // Clear saved progress\n  clearProgress: () => void;\n  // Check if there's saved progress\n  hasSavedProgress: boolean;\n  // Dismiss restored state (user chose not to continue)\n  dismissRestoredState: () => void;\n}\n\nexport function useQuizPersistence(): UseQuizPersistenceReturn {\n  const [restoredState, setRestoredState] = useState<PersistedState | null>(null);\n  const [hasSavedProgress, setHasSavedProgress] = useState(false);\n\n  // Load saved progress on mount\n  useEffect(() => {\n    try {\n      const saved = localStorage.getItem(STORAGE_KEY);\n      if (saved) {\n        const parsed: PersistedState = JSON.parse(saved);\n\n        // Check if expired\n        const hoursOld = (Date.now() - parsed.savedAt) / (1000 * 60 * 60);\n        if (hoursOld < EXPIRY_HOURS && parsed.step !== 'result') {\n          // Convert date strings back to Date objects\n          parsed.answers = parsed.answers.map(a => ({\n            ...a,\n            answeredAt: new Date(a.answeredAt),\n          }));\n          setRestoredState(parsed);\n          setHasSavedProgress(true);\n        } else {\n          // Expired or completed - clear it\n          localStorage.removeItem(STORAGE_KEY);\n        }\n      }\n    } catch (e) {\n      console.error('Failed to load quiz progress:', e);\n      localStorage.removeItem(STORAGE_KEY);\n    }\n  }, []);\n\n  const saveProgress = useCallback((state: Omit<PersistedState, 'savedAt'>) => {\n    try {\n      // Don't save if completed or at intro\n      if (state.step === 'result' || state.step === 'intro') {\n        return;\n      }\n\n      const toSave: PersistedState = {\n        ...state,\n        savedAt: Date.now(),\n      };\n      localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));\n      setHasSavedProgress(true);\n    } catch (e) {\n      console.error('Failed to save quiz progress:', e);\n    }\n  }, []);\n\n  const clearProgress = useCallback(() => {\n    try {\n      localStorage.removeItem(STORAGE_KEY);\n      setHasSavedProgress(false);\n      setRestoredState(null);\n    } catch (e) {\n      console.error('Failed to clear quiz progress:', e);\n    }\n  }, []);\n\n  const dismissRestoredState = useCallback(() => {\n    setRestoredState(null);\n    // Keep the saved progress in localStorage in case they want to continue later\n  }, []);\n\n  return {\n    restoredState,\n    saveProgress,\n    clearProgress,\n    hasSavedProgress,\n    dismissRestoredState,\n  };\n}\n",
+        "timestamp": "2025-12-28T13:46:12.464327"
+      },
+      "worktree_state": null,
+      "task_intent": {
+        "title": "011-remove-or-conditionally-disable-console-logging-in",
+        "description": "Create a centralized logging utility that conditionally disables console output in production, replace all 31 console.log/error/warn statements across 7 source files with the logger utility.",
+        "from_plan": true
+      },
+      "commits_behind_main": 0,
+      "status": "active",
+      "merged_at": null
+    }
+  },
+  "created_at": "2025-12-28T13:38:23.878929",
+  "last_updated": "2025-12-28T13:46:12.533795"
+}

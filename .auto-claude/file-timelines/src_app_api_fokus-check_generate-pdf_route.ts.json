@@ -21,8 +21,25 @@
       "commits_behind_main": 0,
       "status": "active",
       "merged_at": null
+    },
+    "011-remove-or-conditionally-disable-console-logging-in": {
+      "task_id": "011-remove-or-conditionally-disable-console-logging-in",
+      "branch_point": {
+        "commit_hash": "e327d25e2edeee628d7c36f91d94a613ea200851",
+        "content": "import { NextRequest, NextResponse } from 'next/server';\nimport { renderToBuffer } from '@react-pdf/renderer';\nimport { FokusReportPDF } from '@/components/fokus-check/pdf/FokusReportPDF';\nimport type { GeneratePDFRequest } from '@/types/fokus-check';\n\n/**\n * Generates a PDF report for the Fokus-Check assessment.\n *\n * This endpoint accepts the user's quiz results and answers, then returns a\n * professionally formatted PDF document containing the assessment analysis.\n *\n * @route POST /api/fokus-check/generate-pdf\n *\n * @param request - The incoming request containing the JSON body with result and answers\n *\n * @returns {Promise<NextResponse>} The response containing either:\n *   - **200 OK**: Binary PDF data with `Content-Type: application/pdf` and\n *     `Content-Disposition: attachment; filename=\"fokus-report.pdf\"`\n *   - **400 Bad Request**: JSON error `{ error: \"Missing required fields: result and answers\" }`\n *     when required fields are not provided\n *   - **500 Internal Server Error**: JSON error `{ error: \"Failed to generate PDF\" }`\n *     when PDF generation fails (check server logs for details)\n *\n * @example\n * // Request body structure\n * {\n *   \"result\": {\n *     \"score\": 35,\n *     \"maxScore\": 50,\n *     \"category\": \"good\",\n *     \"title\": \"Gut aufgestellt\",\n *     \"description\": \"Du hast bereits einen guten Fokus auf dein Gesch\u00e4ft.\"\n *   },\n *   \"answers\": [\n *     { \"questionId\": 1, \"value\": 4, \"answeredAt\": \"2024-01-15T10:30:00.000Z\", \"timeSpent\": 8 }\n *   ],\n *   \"userName\": \"Max Mustermann\",\n *   \"painPoint\": \"Zeitmanagement ist meine gr\u00f6\u00dfte Herausforderung\"\n * }\n *\n * @see {@link file://./docs/api/fokus-check-generate-pdf.md} for complete API documentation\n * @see {@link GeneratePDFRequest} for the request body interface\n * @see {@link FokusCheckResult} for the result object structure\n * @see {@link Answer} for the answer object structure\n */\nexport async function POST(request: NextRequest): Promise<NextResponse> {\n  try {\n    const body: GeneratePDFRequest = await request.json();\n\n    // Validierung\n    if (!body.result || !body.answers) {\n      return NextResponse.json(\n        { error: 'Missing required fields: result and answers' },\n        { status: 400 }\n      );\n    }\n\n    // PDF generieren\n    const pdfBuffer = await renderToBuffer(\n      FokusReportPDF({\n        result: body.result,\n        answers: body.answers.map((a) => ({\n          ...a,\n          answeredAt: new Date(a.answeredAt),\n        })),\n        userName: body.userName,\n        painPoint: body.painPoint,\n        createdAt: new Date(),\n      })\n    );\n\n    // PDF als Response zur\u00fcckgeben (Buffer zu Uint8Array konvertieren)\n    return new NextResponse(new Uint8Array(pdfBuffer), {\n      status: 200,\n      headers: {\n        'Content-Type': 'application/pdf',\n        'Content-Disposition': 'attachment; filename=\"fokus-report.pdf\"',\n      },\n    });\n  } catch (error) {\n    console.error('PDF generation error:', error);\n    return NextResponse.json(\n      { error: 'Failed to generate PDF' },\n      { status: 500 }\n    );\n  }\n}\n",
+        "timestamp": "2025-12-28T13:46:12.464327"
+      },
+      "worktree_state": null,
+      "task_intent": {
+        "title": "011-remove-or-conditionally-disable-console-logging-in",
+        "description": "Create a centralized logging utility that conditionally disables console output in production, replace all 31 console.log/error/warn statements across 7 source files with the logger utility.",
+        "from_plan": true
+      },
+      "commits_behind_main": 0,
+      "status": "active",
+      "merged_at": null
     }
   },
   "created_at": "2025-12-28T11:56:24.861426",
-  "last_updated": "2025-12-28T11:56:42.221856"
+  "last_updated": "2025-12-28T13:46:12.481530"
 }

@@ -1,0 +1,25 @@
+{
+  "file_path": "src/lib/logger.ts",
+  "main_branch_history": [],
+  "task_views": {
+    "011-remove-or-conditionally-disable-console-logging-in": {
+      "task_id": "011-remove-or-conditionally-disable-console-logging-in",
+      "branch_point": {
+        "commit_hash": "e327d25e2edeee628d7c36f91d94a613ea200851",
+        "content": "",
+        "timestamp": "2025-12-28T13:46:12.464327"
+      },
+      "worktree_state": null,
+      "task_intent": {
+        "title": "011-remove-or-conditionally-disable-console-logging-in",
+        "description": "Create a centralized logging utility that conditionally disables console output in production, replace all 31 console.log/error/warn statements across 7 source files with the logger utility.",
+        "from_plan": true
+      },
+      "commits_behind_main": 0,
+      "status": "active",
+      "merged_at": null
+    }
+  },
+  "created_at": "2025-12-28T13:38:23.837192",
+  "last_updated": "2025-12-28T13:46:12.599174"
+}

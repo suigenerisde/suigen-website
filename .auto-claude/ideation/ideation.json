@@ -28,8 +28,7 @@
       "proposedContent": "Add: 1) Project overview explaining Fokus-Check quiz for productivity assessment, 2) Tech stack overview (Next.js, TypeScript, Supabase, n8n, React-PDF), 3) Environment variable setup (.env.local with SUPABASE_URL, SUPABASE_ANON_KEY, N8N_WEBHOOK_URL), 4) Local development instructions, 5) Deployment notes, 6) Project structure overview",
       "priority": "high",
       "estimatedEffort": "medium",
-      "status": "archived",
-      "linked_task_id": "002-replace-default-readme-with-project-specific-docum"
+      "status": "archived"
     },
     {
       "id": "doc-002",
@@ -270,8 +269,7 @@
       ],
       "implementation_approach": "1. Add tabIndex={0} to FAQ item buttons. 2. Add onKeyDown handler to check for Enter/Space (toggle) and ArrowUp/ArrowDown (navigate). 3. Track focused index state. 4. Add focus styling using existing focus:ring pattern from Button component. 5. Add aria-expanded and aria-controls attributes for screen readers.",
       "status": "archived",
-      "created_at": "2025-12-28T00:30:00.000Z",
-      "linked_task_id": "007-add-keyboard-navigation-to-faq-accordion"
+      "created_at": "2025-12-28T00:30:00.000Z"
     },
     {
       "id": "ci-004",
@@ -512,7 +510,9 @@
       "compliance": [
         "GDPR",
         "SOC2"
-      ]
+      ],
+      "status": "dismissed",
+      "linked_task_id": "011-remove-or-conditionally-disable-console-logging-in"
     },
     {
       "id": "sec-005",
@@ -702,5 +702,5 @@
     }
   },
   "generated_at": "2025-12-27T22:28:28.740915",
-  "updated_at": "2025-12-28T11:26:42.799Z"
+  "updated_at": "2025-12-28T12:26:59.428Z"
 }
