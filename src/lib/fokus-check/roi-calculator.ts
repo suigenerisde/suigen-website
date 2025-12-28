@@ -56,7 +56,7 @@ export interface ROICalculation {
  * Berechnet den ROI-Verlust basierend auf den Quiz-Antworten.
  *
  * Logik:
- * - Nur Antworten mit Score ≤ 2 werden als "schwache Bereiche" gewertet
+ * - Nur Antworten mit Score ≤ 3 werden als "schwache Bereiche" gewertet
  * - Jede schwache Antwort hat einen definierten Stundenverlust pro Woche
  * - Kosten werden konservativ mit €150/h kalkuliert
  *
@@ -67,8 +67,8 @@ export function calculateROI(answers: Answer[]): ROICalculation {
   const breakdown: ROIBreakdown[] = [];
   let totalHoursLostPerWeek = 0;
 
-  // Nur schwache Bereiche (Score ≤ 2) berücksichtigen
-  const weaknesses = answers.filter((a) => a.value <= 2);
+  // Nur schwache Bereiche (Score ≤ 3) berücksichtigen
+  const weaknesses = answers.filter((a) => a.value <= 3);
 
   for (const answer of weaknesses) {
     const hoursLost = HOUR_LOSS_PER_QUESTION[answer.questionId] || 0;
