@@ -4,6 +4,7 @@ import {
   Text,
   View,
   StyleSheet,
+  Link,
 } from '@react-pdf/renderer';
 import type { Answer, FokusCheckResult } from '@/types/fokus-check';
 import { questions, MAX_SCORE } from '../questions-data';
@@ -1016,25 +1017,36 @@ export function FokusReportPDF({ result, answers, userName, painPoint, createdAt
 
       {/* ========== SEITE 4: BEREIT FÜR DAS NÄCHSTE LEVEL? ========== */}
       <Page size="A4" style={styles.page}>
-        {/* CTA Section */}
+        {/* CTA Section - Ultra-fokussiert */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>BEREIT FÜR DAS NÄCHSTE LEVEL?</Text>
+          <Text style={styles.sectionTitle}>BEREIT FÜR DEN NÄCHSTEN SCHRITT?</Text>
           <View style={styles.ctaBox}>
-            <Text style={styles.ctaTitle}>DIE WICHTIGSTEN 3 STUNDEN</Text>
-            <Text style={styles.ctaAccent}>DEINES JAHRES.</Text>
-            <Text style={styles.ctaDescription}>
-              Im Fokus-Audit analysieren wir gemeinsam Deine Situation und entwickeln eine konkrete Roadmap.
+            <Text style={[styles.categoryDescription, { marginBottom: 16, fontSize: 11 }]}>
+              Im Erstgespräch (30 Min):
             </Text>
-            <View style={styles.ctaButton}>
-              <Text style={styles.ctaButtonText}>ERSTGESPRÄCH BUCHEN</Text>
+            <View style={{ marginBottom: 12 }}>
+              <Text style={[styles.painPointText, { marginBottom: 8 }]}>
+                → Dein Fokus-Killer (die EINE Sache, die Dich bremst)
+              </Text>
+              <Text style={styles.painPointText}>
+                → Deine 72h-Massnahme (was Du diese Woche startest)
+              </Text>
             </View>
-            <Text style={styles.ctaDescription}>suigen.de/kontakt</Text>
+            <Text style={[styles.categoryDescription, { marginBottom: 20, marginTop: 16, fontStyle: 'italic' }]}>
+              Buche nur, wenn Du bereit bist, etwas zu ändern.
+            </Text>
+            <Link src="https://calendly.com/thilopfeil/fokussiertes-ergestpraech" style={{ textDecoration: 'none' }}>
+              <View style={styles.ctaButton}>
+                <Text style={styles.ctaButtonText}>TERMIN SICHERN</Text>
+              </View>
+            </Link>
+            <Text style={[styles.categoryDescription, { marginTop: 12, fontSize: 9 }]}>
+              calendly.com/thilopfeil/fokussiertes-ergestpraech
+            </Text>
             <View style={styles.ctaFeatures}>
               <Text style={styles.ctaFeature}>30 Minuten</Text>
               <Text style={styles.ctaFeature}>•</Text>
               <Text style={styles.ctaFeature}>Kostenlos</Text>
-              <Text style={styles.ctaFeature}>•</Text>
-              <Text style={styles.ctaFeature}>Unverbindlich</Text>
             </View>
           </View>
         </View>
