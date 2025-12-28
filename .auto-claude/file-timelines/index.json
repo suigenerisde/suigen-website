@@ -3,7 +3,27 @@
     "src/components/fokus-check/pdf/FokusReportPDF.tsx",
     "src/components/fokus-check/pdf/RadarChart.tsx",
     "src/app/api/fokus-check/generate-pdf/route.ts",
-    "next.config.ts"
+    "next.config.ts",
+    ".auto-claude-status",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/build-progress.txt",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/implementation_plan.json",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/memory/attempt_history.json",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/memory/build_commits.json",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/memory/codebase_map.json",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/memory/gotchas.md",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/memory/session_insights/session_001.json",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/memory/session_insights/session_002.json",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/memory/session_insights/session_003.json",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/memory/session_insights/session_004.json",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/memory/session_insights/session_005.json",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/memory/session_insights/session_006.json",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/memory/session_insights/session_007.json",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/spec.md",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/task_logs.json",
+    ".auto-claude/specs/004-dynamic-import-react-pdf-renderer-to-reduce-client/task_metadata.json",
+    ".claude_settings.json",
+    "package-lock.json",
+    "package.json"
   ],
-  "last_updated": "2025-12-28T11:56:43.212355"
+  "last_updated": "2025-12-28T12:48:50.921780"
 }

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Button } from '../ui/Button';
 
 export function Hero() {
   return (
@@ -26,12 +26,12 @@ export function Hero() {
 
         {/* CTA Buttons */}
         <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center animate-slide-up delay-3">
-          <Link href="/kontakt" className="btn btn-primary">
+          <Button href="/kontakt" variant="primary">
             Erstgespräch buchen
-          </Link>
-          <Link href="/fokus-audit" className="btn btn-secondary">
+          </Button>
+          <Button href="/fokus-audit" variant="secondary">
             Fokus-Audit entdecken
-          </Link>
+          </Button>
         </div>
       </div>
 

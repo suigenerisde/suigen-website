@@ -74,11 +74,16 @@ export function ServiceFAQ({ title = 'Häufige Fragen', faqs, serviceName }: Ser
                   />
                 </svg>
               </button>
-              {openIndex === index && (
-                <div className="px-6 pb-5 border-t border-[var(--border-subtle)]">
-                  <p className="text-[var(--text-muted)] pt-4">{faq.answer}</p>
+              <div
+                className="accordion-grid"
+                data-state={openIndex === index ? 'open' : 'closed'}
+              >
+                <div className="accordion-content">
+                  <div className="px-6 pb-5 border-t border-[var(--border-subtle)]">
+                    <p className="text-[var(--text-muted)] pt-4">{faq.answer}</p>
+                  </div>
                 </div>
-              )}
+              </div>
             </article>
           ))}
         </div>

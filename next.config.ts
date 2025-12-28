@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Treat @react-pdf/renderer as server-external to avoid bundling issues
+  // This package is only used in server-side API routes
+  serverExternalPackages: ['@react-pdf/renderer'],
+
   // Bildoptimierung
   images: {
     formats: ['image/avif', 'image/webp'],

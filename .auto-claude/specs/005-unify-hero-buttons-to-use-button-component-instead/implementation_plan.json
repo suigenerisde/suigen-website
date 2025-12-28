@@ -2,11 +2,14 @@
   "feature": "Unify Hero buttons to use Button component instead of .btn class",
   "description": "Replace direct .btn/.btn-primary/.btn-secondary CSS classes in Hero component with the existing Button component from ui/Button.tsx for consistent styling, maintenance, and accessibility.",
   "created_at": "2025-12-28T10:48:57.900Z",
-  "updated_at": "2025-12-28T11:58:00.000Z",
-  "status": "in_progress",
-  "planStatus": "ready",
+  "updated_at": "2025-12-28T11:48:44.644Z",
+  "status": "done",
+  "planStatus": "completed",
   "workflow_type": "development",
-  "services_involved": ["src/components/sections/Hero.tsx", "src/components/ui/Button.tsx"],
+  "services_involved": [
+    "src/components/sections/Hero.tsx",
+    "src/components/ui/Button.tsx"
+  ],
   "phases": [
     {
       "phase_id": "phase-1",
@@ -17,33 +20,41 @@
           "subtask_id": "1.1",
           "title": "Import Button component in Hero.tsx",
           "description": "Add import statement for Button component from ui/Button.tsx",
-          "status": "pending",
-          "files": ["src/components/sections/Hero.tsx"],
-          "notes": ""
+          "status": "completed",
+          "files": [
+            "src/components/sections/Hero.tsx"
+          ],
+          "notes": "Import statement added: import { Button } from '../ui/Button'; - Committed as 12ea597"
         },
         {
           "subtask_id": "1.2",
           "title": "Replace primary CTA Link with Button",
           "description": "Replace <Link href=\"/kontakt\" className=\"btn btn-primary\"> with <Button href=\"/kontakt\" variant=\"primary\">",
-          "status": "pending",
-          "files": ["src/components/sections/Hero.tsx"],
-          "notes": ""
+          "status": "completed",
+          "files": [
+            "src/components/sections/Hero.tsx"
+          ],
+          "notes": "Replaced Link with Button component. TypeScript compiles successfully. Committed as b1ec9ea"
         },
         {
           "subtask_id": "1.3",
           "title": "Replace secondary CTA Link with Button",
           "description": "Replace <Link href=\"/fokus-audit\" className=\"btn btn-secondary\"> with <Button href=\"/fokus-audit\" variant=\"secondary\">",
-          "status": "pending",
-          "files": ["src/components/sections/Hero.tsx"],
-          "notes": ""
+          "status": "completed",
+          "files": [
+            "src/components/sections/Hero.tsx"
+          ],
+          "notes": "Replaced Link with Button component for secondary CTA. TypeScript compiles successfully. Committed as 9d85267"
         },
         {
           "subtask_id": "1.4",
           "title": "Remove unused Link import if needed",
           "description": "Check if Link import is still needed and remove if unused",
-          "status": "pending",
-          "files": ["src/components/sections/Hero.tsx"],
-          "notes": ""
+          "status": "completed",
+          "files": [
+            "src/components/sections/Hero.tsx"
+          ],
+          "notes": "Removed unused Link import from Hero.tsx. Button component handles internal linking via its href prop. TypeScript compiles successfully. Committed as 0abee98"
         }
       ]
     },
@@ -56,17 +67,21 @@
           "subtask_id": "2.1",
           "title": "Import Button component in CalBooker.tsx",
           "description": "Add import statement for Button component",
-          "status": "pending",
-          "files": ["src/components/booking/CalBooker.tsx"],
-          "notes": ""
+          "status": "completed",
+          "files": [
+            "src/components/booking/CalBooker.tsx"
+          ],
+          "notes": "Import statement added: import { Button } from '../ui/Button'; - TypeScript compiles successfully. Committed as 9eafa3a"
         },
         {
           "subtask_id": "2.2",
           "title": "Replace button element with Button component",
           "description": "Replace <button className=\"btn btn-primary\"> with <Button variant=\"primary\">, preserving onClick and disabled props",
-          "status": "pending",
-          "files": ["src/components/booking/CalBooker.tsx"],
-          "notes": "Need to ensure children (loading state) render correctly"
+          "status": "completed",
+          "files": [
+            "src/components/booking/CalBooker.tsx"
+          ],
+          "notes": "Replaced <button className=\"btn btn-primary\"> with <Button variant=\"primary\">. onClick and disabled props preserved, loading state children render correctly. TypeScript compiles successfully. Committed as b9298bd"
         }
       ]
     },
@@ -79,25 +94,29 @@
           "subtask_id": "3.1",
           "title": "Verify Hero buttons render correctly",
           "description": "Build the project and verify Hero component buttons work with proper styling and accessibility",
-          "status": "pending",
-          "files": ["src/components/sections/Hero.tsx"],
-          "notes": ""
+          "status": "completed",
+          "files": [
+            "src/components/sections/Hero.tsx"
+          ],
+          "notes": "Verified: TypeScript compiles successfully. Dev server shows both buttons (primary: /kontakt, secondary: /fokus-audit) with proper Button component styling including focus:ring accessibility states and hover effects."
         },
         {
           "subtask_id": "3.2",
           "title": "Verify CalBooker button works correctly",
           "description": "Test CalBooker button functionality including loading state",
-          "status": "pending",
-          "files": ["src/components/booking/CalBooker.tsx"],
-          "notes": ""
+          "status": "completed",
+          "files": [
+            "src/components/booking/CalBooker.tsx"
+          ],
+          "notes": "Verified: TypeScript compiles successfully. ESLint passes for CalBooker and Button components. Dev server shows button with proper Button component styling (primary variant, focus states, hover effects). Button displays 'Kalender öffnen' text correctly with accessibility attributes."
         },
         {
           "subtask_id": "3.3",
           "title": "Check for remaining .btn class usage",
           "description": "Search for any remaining uses of .btn classes that might need migration",
-          "status": "pending",
+          "status": "completed",
           "files": [],
-          "notes": "If no remaining uses, .btn classes in globals.css could be deprecated in a future cleanup"
+          "notes": "Search completed: No remaining .btn class usage found in any TSX/JSX components. Hero.tsx and CalBooker.tsx both now use the Button component. The legacy .btn, .btn-primary, .btn-secondary CSS classes in globals.css (lines 185-220) are now UNUSED and can be safely removed in a future cleanup task."
         }
       ]
     }
@@ -114,9 +133,32 @@
     "Build passes without errors"
   ],
   "qa_signoff": {
-    "status": "pending",
-    "issues": "",
-    "tests_passed": ""
+    "status": "approved",
+    "qa_session": 0,
+    "issues_found": [
+      {
+        "description": "None - all acceptance criteria met"
+      }
+    ],
+    "tests_passed": {},
+    "timestamp": "2025-12-28T11:29:41.723913+00:00",
+    "ready_for_qa_revalidation": false
   },
-  "spec_file": "spec.md"
+  "spec_file": "spec.md",
+  "last_updated": "2025-12-28T11:29:41.723923+00:00",
+  "qa_iteration_history": [
+    {
+      "iteration": 1,
+      "status": "approved",
+      "timestamp": "2025-12-28T11:30:09.115174+00:00",
+      "issues": [],
+      "duration_seconds": 416.61
+    }
+  ],
+  "qa_stats": {
+    "total_iterations": 1,
+    "last_iteration": 1,
+    "last_status": "approved",
+    "issues_by_type": {}
+  }
 }

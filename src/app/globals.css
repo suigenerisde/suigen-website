@@ -166,6 +166,29 @@ h1, h2, h3, h4, h5, h6 {
 .delay-4 { animation-delay: 0.4s; }
 .delay-5 { animation-delay: 0.5s; }
 
+/* Accordion Expand/Collapse Animation (CSS Grid technique) */
+.accordion-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.accordion-grid[data-state="open"] {
+  grid-template-rows: 1fr;
+}
+
+.accordion-content {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .accordion-grid {
+    transition: none;
+  }
+}
+
 /* Card Style */
 .card {
   background: var(--bg-dark-card);

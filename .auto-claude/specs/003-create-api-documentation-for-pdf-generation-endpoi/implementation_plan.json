@@ -2,9 +2,9 @@
   "feature": "Create API documentation for PDF generation endpoint",
   "description": "The API route at /api/fokus-check/generate-pdf handles PDF generation via POST but has no documentation on request/response format, error codes, or integration with the frontend and n8n workflows.",
   "created_at": "2025-12-28T10:36:47.316Z",
-  "updated_at": "2025-12-28T12:00:00.000Z",
-  "status": "human_review",
-  "planStatus": "review",
+  "updated_at": "2025-12-28T11:48:59.438Z",
+  "status": "done",
+  "planStatus": "completed",
   "phases": [
     {
       "id": "phase-1",

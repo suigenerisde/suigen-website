@@ -52,12 +52,81 @@ export interface Answer {
   followUp?: FollowUpAnswer; // Optional: Follow-up Antwort
 }
 
+/**
+ * The calculated result of a Fokus-Check assessment.
+ *
+ * Contains the numerical score, category classification, and localized
+ * title/description for display to the user.
+ */
 export interface FokusCheckResult {
+  /** The achieved score (number of points earned) */
   score: number;
+  /** The maximum possible score */
   maxScore: number;
+  /** Result category based on score percentage */
   category: 'excellent' | 'good' | 'moderate' | 'weak' | 'critical';
+  /** Localized title for the result (e.g., "Gut aufgestellt") */
   title: string;
+  /** Localized description explaining the result */
   description: string;
+}
+
+/**
+ * Request body for the PDF generation API endpoint.
+ *
+ * This interface defines the expected payload for POST requests to
+ * `/api/fokus-check/generate-pdf`. It includes the quiz results and
+ * optional personalization data.
+ *
+ * @example
+ * ```typescript
+ * const request: GeneratePDFRequest = {
+ *   result: {
+ *     score: 35,
+ *     maxScore: 50,
+ *     category: 'good',
+ *     title: 'Gut aufgestellt',
+ *     description: 'Du hast bereits einen guten Fokus...'
+ *   },
+ *   answers: [
+ *     { questionId: 1, value: 4, answeredAt: new Date(), timeSpent: 8 }
+ *   ],
+ *   userName: 'Max Mustermann',  // optional
+ *   painPoint: 'Zeitmanagement'  // optional
+ * };
+ * ```
+ *
+ * @see {@link FokusCheckResult} for the result object structure
+ * @see {@link Answer} for the answer object structure
+ * @see docs/api/fokus-check-generate-pdf.md for full API documentation
+ */
+export interface GeneratePDFRequest {
+  /**
+   * The calculated Fokus-Check result containing score, category, title, and description.
+   * This is required and determines the content and styling of the PDF report.
+   */
+  result: FokusCheckResult;
+
+  /**
+   * Array of user answers to all quiz questions.
+   * Each answer includes the question ID, selected value, timestamp, and time spent.
+   * Optional follow-up answers are included when triggered by specific responses.
+   */
+  answers: Answer[];
+
+  /**
+   * Optional user name for personalization in the PDF report.
+   * When provided, the PDF will include a personalized greeting.
+   * @optional
+   */
+  userName?: string;
+
+  /**
+   * Optional pain point or challenge text entered by the user.
+   * This free-text field captures what the user identified as their main challenge.
+   * @optional
+   */
+  painPoint?: string;
 }
 
 export interface FokusCheckUser {

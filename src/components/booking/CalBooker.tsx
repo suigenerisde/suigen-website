@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from '../ui/Button';
 
 export function CalBooker() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -43,10 +44,10 @@ export function CalBooker() {
           <p className="text-[var(--text-muted)] mb-8 max-w-md">
             Wähle einen passenden Termin für Dein kostenloses 30-Minuten Erstgespräch.
           </p>
-          <button
+          <Button
             onClick={handleLoad}
             disabled={isLoading}
-            className="btn btn-primary"
+            variant="primary"
           >
             {isLoading ? (
               <>
@@ -74,7 +75,7 @@ export function CalBooker() {
             ) : (
               'Kalender öffnen'
             )}
-          </button>
+          </Button>
           <p className="text-sm text-[var(--text-muted)] mt-6 opacity-60">
             Powered by Cal.com
           </p>
