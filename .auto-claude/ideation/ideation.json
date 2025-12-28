@@ -1,0 +1,706 @@
+{
+  "id": "ideation-20251227-222828",
+  "project_id": "/Users/thilopfeil/Documents/SUI-GENERIS/suigen/website",
+  "config": {
+    "enabled_types": [
+      "code_improvements",
+      "ui_ux_improvements",
+      "security_hardening",
+      "code_quality"
+    ],
+    "include_roadmap_context": true,
+    "include_kanban_context": true,
+    "max_ideas_per_type": 5
+  },
+  "ideas": [
+    {
+      "id": "doc-001",
+      "type": "documentation_gaps",
+      "title": "Replace default README with project-specific documentation",
+      "description": "The README.md is still the default Next.js template. It contains no information about SUI-GENERIS or the Fokus-Check application, missing critical project overview, business context, and project-specific setup instructions.",
+      "rationale": "The README is the first file developers see. A generic template provides no value for onboarding team members or understanding the Fokus-Check system. New developers must reverse-engineer the codebase to understand its purpose.",
+      "category": "readme",
+      "targetAudience": "contributors",
+      "affectedAreas": [
+        "README.md"
+      ],
+      "currentDocumentation": "Default create-next-app template with generic Next.js instructions",
+      "proposedContent": "Add: 1) Project overview explaining Fokus-Check quiz for productivity assessment, 2) Tech stack overview (Next.js, TypeScript, Supabase, n8n, React-PDF), 3) Environment variable setup (.env.local with SUPABASE_URL, SUPABASE_ANON_KEY, N8N_WEBHOOK_URL), 4) Local development instructions, 5) Deployment notes, 6) Project structure overview",
+      "priority": "high",
+      "estimatedEffort": "medium",
+      "status": "archived",
+      "linked_task_id": "002-replace-default-readme-with-project-specific-docum"
+    },
+    {
+      "id": "doc-002",
+      "type": "documentation_gaps",
+      "title": "Add JSDoc documentation to tracking/events.ts exports",
+      "description": "The tracking module exports 12 public functions (trackEvent, trackCheckStarted, trackQuestionViewed, trackQuestionAnswered, etc., plus saveUserAndScore, triggerPdfAndWhatsApp, saveProgressAndSendLink, loadProgress, deleteProgress) but none have JSDoc documentation explaining parameters, return values, or usage.",
+      "rationale": "This is a critical module handling user tracking, Supabase persistence, and n8n webhook integration. Developers need to understand event schemas, when to call each function, and what data is expected/returned without reading the implementation.",
+      "category": "api_docs",
+      "targetAudience": "developers",
+      "affectedAreas": [
+        "src/lib/tracking/events.ts"
+      ],
+      "currentDocumentation": "Only brief inline comments in German, no function-level documentation",
+      "proposedContent": "Add JSDoc for all exported functions including: @description explaining purpose, @param with types and descriptions, @returns explaining return values and null cases, @example showing usage patterns, @throws documenting potential errors",
+      "priority": "high",
+      "estimatedEffort": "medium"
+    },
+    {
+      "id": "doc-003",
+      "type": "documentation_gaps",
+      "title": "Document Fokus-Check scoring algorithm and question flow logic",
+      "description": "The questions-data.ts file contains quiz scoring logic (MAX_SCORE=40, 5-level categories from 'excellent' to 'critical') and getResultCategory() but lacks explanation of scoring methodology. Follow-up question triggers and dual-slider configurations are undocumented.",
+      "rationale": "Business logic around scoring and categorization is critical for understanding how user results are determined. Without documentation, modifying thresholds or adding questions risks breaking the scoring system.",
+      "category": "inline_comments",
+      "targetAudience": "developers",
+      "affectedAreas": [
+        "src/components/fokus-check/questions-data.ts",
+        "src/types/fokus-check.ts"
+      ],
+      "currentDocumentation": "Only scattered German comments, no algorithm documentation",
+      "proposedContent": "Add: 1) Header comment explaining 8 questions × 5 max points = 40 total scoring system, 2) Document category thresholds (85%+, 67-84%, 50-66%, 32-49%, <32%), 3) Explain follow-up trigger logic, 4) Document question types (single, slider, dual-slider) and their value ranges",
+      "priority": "medium",
+      "estimatedEffort": "low"
+    },
+    {
+      "id": "doc-004",
+      "type": "documentation_gaps",
+      "title": "Create API documentation for PDF generation endpoint",
+      "description": "The API route at /api/fokus-check/generate-pdf handles PDF generation via POST but has no documentation on request/response format, error codes, or integration with the frontend and n8n workflows.",
+      "rationale": "This endpoint is called both from the frontend and potentially from n8n workflows. External integrators and future developers need to understand the expected payload structure and possible responses without reading source code.",
+      "category": "api_docs",
+      "targetAudience": "developers",
+      "affectedAreas": [
+        "src/app/api/fokus-check/generate-pdf/route.ts"
+      ],
+      "currentDocumentation": "Only a TypeScript interface for the request body, no endpoint documentation",
+      "proposedContent": "Add JSDoc with: @route POST /api/fokus-check/generate-pdf, @body describing GeneratePDFRequest schema (result, answers, userName?, painPoint?), @returns 200 with PDF binary, 400 for validation errors, 500 for generation failures, @example showing curl or fetch usage",
+      "priority": "medium",
+      "estimatedEffort": "low",
+      "status": "archived",
+      "linked_task_id": "003-create-api-documentation-for-pdf-generation-endpoi"
+    },
+    {
+      "id": "doc-005",
+      "type": "documentation_gaps",
+      "title": "Document environment variables and external service dependencies",
+      "description": "The application depends on three environment variables (NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, NEXT_PUBLIC_N8N_WEBHOOK_URL) plus hardcoded webhook URLs. No documentation exists on required Supabase tables, n8n workflow expectations, or graceful degradation behavior.",
+      "rationale": "Setting up the development environment requires knowledge of external dependencies. The code shows fallback behavior when Supabase is unconfigured, but this isn't documented. New developers waste time troubleshooting missing configuration.",
+      "category": "troubleshooting",
+      "targetAudience": "contributors",
+      "affectedAreas": [
+        "src/lib/supabase/client.ts",
+        "src/lib/tracking/events.ts",
+        ".env.local.example"
+      ],
+      "currentDocumentation": "No .env.example file exists, no documentation of required Supabase schema",
+      "proposedContent": "Create .env.example with documented variables, add section to README explaining: 1) Supabase tables required (fokus_check_events, fokus_check_users, fokus_check_progress), 2) n8n webhook endpoints and expected payloads, 3) How tracking degrades gracefully when services are unavailable",
+      "priority": "medium",
+      "estimatedEffort": "medium"
+    },
+    {
+      "id": "perf-001",
+      "type": "performance_optimizations",
+      "title": "Dynamic import @react-pdf/renderer to reduce client bundle",
+      "description": "The @react-pdf/renderer package (~400KB) is currently bundled with client-side code even though it's only used in the server-side API route. Using dynamic imports would ensure this heavy package is only loaded when needed on the server.",
+      "rationale": "@react-pdf/renderer is one of the largest dependencies in the project but is only used in the /api/fokus-check/generate-pdf route. The current import pattern may cause Next.js to include parts of this package in client bundles, increasing initial load time.",
+      "category": "bundle_size",
+      "impact": "high",
+      "affectedAreas": [
+        "src/app/api/fokus-check/generate-pdf/route.ts",
+        "src/components/fokus-check/pdf/FokusReportPDF.tsx"
+      ],
+      "currentMetric": "@react-pdf/renderer adds ~400KB+ to dependency tree",
+      "expectedImprovement": "~300-400KB reduction in client bundle, ~15-20% faster initial page load",
+      "implementation": "1. Use dynamic import in API route: const { renderToBuffer } = await import('@react-pdf/renderer')\n2. Move FokusReportPDF to be only server-importable\n3. Verify with bundle analyzer that package is excluded from client chunks",
+      "tradeoffs": "Slightly increased cold-start time for PDF generation API route, but this is negligible for serverless functions",
+      "estimatedEffort": "small",
+      "status": "archived",
+      "linked_task_id": "004-dynamic-import-react-pdf-renderer-to-reduce-client"
+    },
+    {
+      "id": "perf-002",
+      "type": "performance_optimizations",
+      "title": "Batch tracking events to reduce Supabase API calls",
+      "description": "The tracking system fires individual Supabase insert calls for each event (trackCheckStarted, trackQuestionViewed, trackQuestionAnswered, etc.). Batching these events and sending them in bulk would reduce network requests and improve quiz responsiveness.",
+      "rationale": "During a typical quiz session, 15+ individual tracking events are fired. Each triggers a separate Supabase API call, adding network latency and potential blocking time. The 'question_viewed' event fires on every question transition, creating unnecessary network churn.",
+      "category": "network",
+      "impact": "medium",
+      "affectedAreas": [
+        "src/lib/tracking/events.ts",
+        "src/components/fokus-check/FokusCheckQuiz.tsx"
+      ],
+      "currentMetric": "~15+ individual Supabase API calls per quiz session",
+      "expectedImprovement": "Reduce to 2-3 batched calls (start, during, completion), ~80% fewer network requests, improved quiz interaction responsiveness",
+      "implementation": "1. Create event queue in tracking/events.ts\n2. Use requestIdleCallback or setTimeout to batch flush events every 5-10 seconds\n3. Flush queue on page unload (navigator.sendBeacon for reliability)\n4. Add immediate flush on trackCheckCompleted for critical events",
+      "tradeoffs": "Events have slight delay before reaching database, potential event loss on browser crash (mitigated by beforeunload flush)",
+      "estimatedEffort": "medium"
+    },
+    {
+      "id": "perf-003",
+      "type": "performance_optimizations",
+      "title": "Memoize FokusCheckQuiz child components to prevent re-renders",
+      "description": "The FokusCheckQuiz component has 15+ state variables that change frequently. Child components like QuestionCard, ProgressIndicator, and NameCapture are re-rendered on every state change even when their props haven't changed.",
+      "rationale": "React DevTools would show frequent re-renders of child components during quiz progression. While useCallback is used for handlers, the child components themselves aren't memoized, causing unnecessary React reconciliation work.",
+      "category": "rendering",
+      "impact": "medium",
+      "affectedAreas": [
+        "src/components/fokus-check/QuestionCard.tsx",
+        "src/components/fokus-check/ProgressIndicator.tsx",
+        "src/components/fokus-check/NameCapture.tsx",
+        "src/components/fokus-check/DeliveryChoice.tsx",
+        "src/components/fokus-check/ResultDisplay.tsx"
+      ],
+      "currentMetric": "Child components re-render on every parent state change",
+      "expectedImprovement": "~50% fewer component re-renders during quiz, smoother animations, better performance on low-end devices",
+      "implementation": "1. Wrap QuestionCard with React.memo()\n2. Wrap ProgressIndicator with React.memo()\n3. Wrap other child components with React.memo()\n4. Ensure prop references are stable (already using useCallback for handlers)\n5. Add React DevTools Profiler verification",
+      "tradeoffs": "Small memory overhead for memoization, negligible for this component count",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "perf-004",
+      "type": "performance_optimizations",
+      "title": "Lazy load Supabase client to reduce initial bundle",
+      "description": "The Supabase client (@supabase/supabase-js ~50KB) is initialized at module load time in lib/supabase/client.ts. This means the entire Supabase SDK is included in the initial client bundle even for visitors who never interact with tracking features.",
+      "rationale": "Most landing page visitors don't need the Supabase client immediately - it's only used when they start the Fokus-Check quiz. Lazy loading would defer this dependency until it's actually needed.",
+      "category": "bundle_size",
+      "impact": "medium",
+      "affectedAreas": [
+        "src/lib/supabase/client.ts",
+        "src/lib/tracking/events.ts"
+      ],
+      "currentMetric": "@supabase/supabase-js adds ~50KB to initial bundle",
+      "expectedImprovement": "~50KB reduction in initial JavaScript, faster Time to Interactive for landing page visitors who don't use the quiz",
+      "implementation": "1. Convert supabase client to lazy initialization: let client: SupabaseClient | null = null; export const getSupabase = async () => { if (!client) client = createClient(...); return client; }\n2. Update tracking functions to await getSupabase()\n3. Consider Next.js dynamic import for tracking module",
+      "tradeoffs": "Slight delay on first tracking call (~50ms for import), but this happens in background and doesn't block user interaction",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "perf-005",
+      "type": "performance_optimizations",
+      "title": "Use Next.js dynamic import for FokusCheckQuiz component",
+      "description": "The FokusCheckQuiz component is a large client component (~600+ lines) with many sub-components and dependencies. It's loaded on the /fokus-check page which could benefit from code splitting.",
+      "rationale": "The quiz component and all its sub-components (InviteCodeCapture, AccessRequestForm, QuestionCard, etc.) are bundled together. Using next/dynamic with loading state would improve the perceived performance of the fokus-check page.",
+      "category": "bundle_size",
+      "impact": "medium",
+      "affectedAreas": [
+        "src/app/fokus-check/page.tsx",
+        "src/components/fokus-check/FokusCheckQuiz.tsx"
+      ],
+      "currentMetric": "FokusCheckQuiz bundle includes ~10+ sub-components loaded upfront",
+      "expectedImprovement": "Separate chunk for quiz components (~100KB), faster initial render of fokus-check page shell, better Core Web Vitals (LCP)",
+      "implementation": "1. In fokus-check/page.tsx: const FokusCheckQuiz = dynamic(() => import('@/components/fokus-check/FokusCheckQuiz').then(m => m.FokusCheckQuiz), { loading: () => <QuizSkeleton />, ssr: false })\n2. Create simple skeleton component for loading state\n3. Add Suspense boundary for better UX",
+      "tradeoffs": "Slight flash of loading state before quiz appears, but with good skeleton this improves perceived performance",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "ci-001",
+      "type": "code_improvements",
+      "title": "Extract Reusable Modal Component",
+      "description": "Create a generic Modal component that can be reused across the application. Both ContinueLaterModal and ExitIntentPopup share the same modal structure: backdrop with blur, centered content card, close button, and animation. Extracting this pattern would reduce code duplication and ensure consistent modal behavior.",
+      "rationale": "The code reveals two modal implementations (ContinueLaterModal.tsx and ExitIntentPopup.tsx) with nearly identical modal structure: fixed positioning, backdrop overlay with blur, rounded card styling, close button placement, and animate-fade-in animation. This is a clear pattern that can be consolidated.",
+      "builds_upon": [
+        "ContinueLaterModal component",
+        "ExitIntentPopup component",
+        "Button component"
+      ],
+      "estimated_effort": "small",
+      "affected_files": [
+        "src/components/ui/Modal.tsx",
+        "src/components/fokus-check/ContinueLaterModal.tsx",
+        "src/components/fokus-check/ExitIntentPopup.tsx"
+      ],
+      "existing_patterns": [
+        "Modal backdrop: bg-black/70 backdrop-blur-sm",
+        "Modal card: bg-[var(--bg-dark-card)] rounded-3xl border border-[var(--accent)]/30",
+        "Close button positioning: absolute top-4 right-4",
+        "Animation: animate-fade-in"
+      ],
+      "implementation_approach": "1. Create new Modal.tsx in src/components/ui/ with props for isOpen, onClose, size, and children. 2. Copy the shared modal structure (backdrop, card, close button) from existing modals. 3. Refactor ContinueLaterModal to use Modal as wrapper, keeping only the form content. 4. Refactor ExitIntentPopup to use Modal as wrapper, keeping only the dynamic content logic.",
+      "status": "draft",
+      "created_at": "2025-12-28T00:30:00.000Z"
+    },
+    {
+      "id": "ci-002",
+      "type": "code_improvements",
+      "title": "Add Loading State to Button Component",
+      "description": "Enhance the Button component with a built-in loading state that displays a spinner and disables interaction. Currently, loading states are handled inline in components like DeliveryChoice with 'Wird gesendet...' text. A standardized loading prop would ensure consistent loading UX across all buttons.",
+      "rationale": "The Button component already has a disabled state with styling (opacity-50 cursor-not-allowed). Multiple components (DeliveryChoice, ContinueLaterModal, AccessRequestForm) implement loading states manually. The infrastructure for disabled states exists and can be extended to loading states.",
+      "builds_upon": [
+        "Button component",
+        "Existing disabled state pattern"
+      ],
+      "estimated_effort": "trivial",
+      "affected_files": [
+        "src/components/ui/Button.tsx",
+        "src/components/fokus-check/DeliveryChoice.tsx",
+        "src/components/fokus-check/ContinueLaterModal.tsx",
+        "src/components/fokus-check/AccessRequestForm.tsx"
+      ],
+      "existing_patterns": [
+        "Button disabled styling: opacity-50 cursor-not-allowed",
+        "Inline loading text: isSubmitting ? 'Wird gesendet...' : 'Link senden'",
+        "SVG icons already used in buttons for checkmarks"
+      ],
+      "implementation_approach": "1. Add 'loading' and 'loadingText' props to ButtonProps interface. 2. When loading=true, render a spinner SVG before children (similar to existing checkmark SVGs). 3. Apply disabled styling automatically when loading. 4. Optionally show loadingText instead of children. 5. Update DeliveryChoice, ContinueLaterModal, AccessRequestForm to use loading prop instead of inline handling.",
+      "status": "archived",
+      "created_at": "2025-12-28T00:30:00.000Z",
+      "linked_task_id": "009-add-loading-state-to-button-component"
+    },
+    {
+      "id": "ci-003",
+      "type": "code_improvements",
+      "title": "Add Keyboard Navigation to FAQ Accordion",
+      "description": "Enhance the FAQ component with keyboard navigation support. Users should be able to navigate between FAQ items using arrow keys and toggle items with Enter/Space. This follows accessibility best practices for accordion components.",
+      "rationale": "The FAQ component has onClick handlers for toggling items but lacks keyboard support. The pattern for handling keyboard events exists in other components (e.g., form inputs). Adding keyboard navigation would improve accessibility without significant code changes.",
+      "builds_upon": [
+        "FAQ component",
+        "Existing onClick handler pattern"
+      ],
+      "estimated_effort": "trivial",
+      "affected_files": [
+        "src/components/sections/FAQ.tsx"
+      ],
+      "existing_patterns": [
+        "FAQ accordion toggle: onClick={() => setOpenIndex(openIndex === index ? null : index)}",
+        "Button element with hover transitions",
+        "Focus ring styling exists in Button component"
+      ],
+      "implementation_approach": "1. Add tabIndex={0} to FAQ item buttons. 2. Add onKeyDown handler to check for Enter/Space (toggle) and ArrowUp/ArrowDown (navigate). 3. Track focused index state. 4. Add focus styling using existing focus:ring pattern from Button component. 5. Add aria-expanded and aria-controls attributes for screen readers.",
+      "status": "archived",
+      "created_at": "2025-12-28T00:30:00.000Z",
+      "linked_task_id": "007-add-keyboard-navigation-to-faq-accordion"
+    },
+    {
+      "id": "ci-004",
+      "type": "code_improvements",
+      "title": "Extend Analytics Tracking to All Pages",
+      "description": "Extend the existing Supabase tracking system to track page views and CTA clicks across all pages, not just the fokus-check quiz. This would provide valuable analytics about user journey through the website.",
+      "rationale": "The events.ts module has a comprehensive tracking system (trackEvent, session management, Supabase integration) that currently only tracks fokus-check events. The infrastructure is ready to track additional event types. The EventType union and trackEvent function can easily be extended.",
+      "builds_upon": [
+        "events.ts tracking system",
+        "Supabase client",
+        "Session management"
+      ],
+      "estimated_effort": "small",
+      "affected_files": [
+        "src/lib/tracking/events.ts",
+        "src/types/fokus-check.ts",
+        "src/app/layout.tsx",
+        "src/components/sections/CTA.tsx",
+        "src/components/layout/Header.tsx"
+      ],
+      "existing_patterns": [
+        "trackEvent function with eventType and eventData",
+        "Session ID management via sessionStorage",
+        "Supabase configuration check: isSupabaseConfigured()",
+        "trackCtaClicked function exists but is quiz-specific"
+      ],
+      "implementation_approach": "1. Add new EventTypes: 'page_viewed', 'cta_clicked_global', 'nav_clicked'. 2. Create trackPageView(pathname) function following trackCheckStarted pattern. 3. Create usePageTracking hook that calls trackPageView on route change. 4. Add hook to layout.tsx. 5. Update CTA and Header components to track clicks using trackCtaClicked pattern.",
+      "status": "draft",
+      "created_at": "2025-12-28T00:30:00.000Z"
+    },
+    {
+      "id": "ci-005",
+      "type": "code_improvements",
+      "title": "Add Skip-to-Content Link for Accessibility",
+      "description": "Add a visually hidden skip-to-content link at the beginning of the Header component that becomes visible on focus. This allows keyboard users to skip navigation and jump directly to main content, following WCAG accessibility guidelines.",
+      "rationale": "The Header component has comprehensive navigation with multiple links. Keyboard users must tab through all nav items to reach main content. Skip links are a standard accessibility pattern that can be implemented with the existing Tailwind CSS utilities already used in the project.",
+      "builds_upon": [
+        "Header component",
+        "Existing CSS transition patterns"
+      ],
+      "estimated_effort": "trivial",
+      "affected_files": [
+        "src/components/layout/Header.tsx",
+        "src/app/layout.tsx"
+      ],
+      "existing_patterns": [
+        "Header fixed positioning and z-index handling",
+        "Tailwind transition classes: transition-all duration-300",
+        "Focus ring styling: focus:ring-2 focus:ring-offset-2",
+        "sr-only utility for screen reader text"
+      ],
+      "implementation_approach": "1. Add a visually hidden anchor link as first child of Header. 2. Style with sr-only class by default, visible on focus. 3. Link to #main-content anchor. 4. Add id='main-content' to main element in layout.tsx or page components. 5. Add focus styling to make skip link visible when tabbed to.",
+      "status": "archived",
+      "created_at": "2025-12-28T00:30:00.000Z",
+      "linked_task_id": "008-add-skip-to-content-link-for-accessibility"
+    },
+    {
+      "id": "uiux-001",
+      "type": "ui_ux_improvements",
+      "title": "Add aria-expanded to FAQ accordion for accessibility",
+      "description": "The FAQ component (FAQ.tsx) is missing aria-expanded attribute on accordion buttons, unlike the ServiceFAQ component which implements it correctly. This is an accessibility issue for screen reader users.",
+      "rationale": "Screen reader users need aria-expanded to understand the state of expandable content. This is a WCAG 2.1 AA requirement for accessible interactive disclosure widgets.",
+      "category": "accessibility",
+      "affected_components": [
+        "src/components/sections/FAQ.tsx"
+      ],
+      "screenshots": [],
+      "current_state": "FAQ accordion buttons have no aria-expanded attribute. The button at line 89-91 only toggles openIndex state but doesn't communicate expansion state to assistive technologies.",
+      "proposed_change": "Add aria-expanded={openIndex === index} to the FAQ accordion button element. Also add aria-controls pointing to the content panel id, similar to the pattern in ServiceFAQ.tsx at line 57.",
+      "user_benefit": "Screen reader users will know whether each FAQ item is expanded or collapsed, improving navigation and understanding of the page structure.",
+      "status": "draft",
+      "created_at": "2025-12-28T00:25:00.000Z"
+    },
+    {
+      "id": "uiux-002",
+      "type": "ui_ux_improvements",
+      "title": "Add smooth height transition to FAQ accordion content",
+      "description": "The FAQ accordion content currently appears/disappears abruptly with no animation. Adding a smooth height transition would improve perceived quality and reduce cognitive load.",
+      "rationale": "Smooth animations help users understand state changes and reduce jarring visual shifts. The codebase already uses animations extensively (animate-fade-in, animate-slide-up) showing this pattern is expected.",
+      "category": "interaction",
+      "affected_components": [
+        "src/components/sections/FAQ.tsx"
+      ],
+      "screenshots": [],
+      "current_state": "FAQ content at lines 110-114 uses conditional rendering with no transition: {openIndex === index && (<div>...</div>)}. Content appears/disappears instantly.",
+      "proposed_change": "Implement CSS grid animation pattern: wrap content in container with grid-template-rows: 0fr transitioning to 1fr, or use a height transition with overflow-hidden. Add animate-fade-in class to content panel for smooth entry.",
+      "user_benefit": "Smoother, more polished interaction that feels premium and helps users track visual changes without jarring jumps.",
+      "status": "archived",
+      "created_at": "2025-12-28T00:25:00.000Z",
+      "linked_task_id": "006-add-smooth-height-transition-to-faq-accordion-cont"
+    },
+    {
+      "id": "uiux-003",
+      "type": "ui_ux_improvements",
+      "title": "Connect form labels to inputs with htmlFor/id attributes",
+      "description": "Form inputs in DeliveryChoice.tsx and other form components have visible labels but they are not programmatically connected to their inputs via htmlFor/id, which breaks accessibility.",
+      "rationale": "Proper label-input association is a fundamental accessibility requirement. Clicking the label should focus the input, and screen readers need this connection to announce input purposes correctly.",
+      "category": "accessibility",
+      "affected_components": [
+        "src/components/fokus-check/DeliveryChoice.tsx",
+        "src/components/fokus-check/EmailCapture.tsx",
+        "src/components/fokus-check/NameCapture.tsx"
+      ],
+      "screenshots": [],
+      "current_state": "DeliveryChoice.tsx has label elements (lines 85, 103) but they use no htmlFor attribute. The inputs have no id attribute. Example: <label>E-Mail-Adresse *</label> followed by <input type='email'...>",
+      "proposed_change": "Add id attributes to inputs (e.g., id='email-input', id='phone-input') and corresponding htmlFor attributes to labels (e.g., htmlFor='email-input'). Apply same pattern to EmailCapture.tsx and NameCapture.tsx.",
+      "user_benefit": "Improved accessibility for screen reader users and better UX for all users since clicking the label will focus the corresponding input field.",
+      "status": "draft",
+      "created_at": "2025-12-28T00:25:00.000Z"
+    },
+    {
+      "id": "uiux-004",
+      "type": "ui_ux_improvements",
+      "title": "Unify Hero buttons to use Button component instead of .btn class",
+      "description": "The Hero component uses direct className .btn and .btn-primary for CTAs, while the rest of the application uses the <Button> component from ui/Button.tsx. This creates inconsistency.",
+      "rationale": "Using a single Button component ensures consistent styling, easier maintenance, and uniform focus states/accessibility features across the app. The Button component already has proper focus ring styling.",
+      "category": "visual",
+      "affected_components": [
+        "src/components/sections/Hero.tsx",
+        "src/components/ui/Button.tsx"
+      ],
+      "screenshots": [],
+      "current_state": "Hero.tsx at lines 29-34 uses: <Link href='/kontakt' className='btn btn-primary'>. Meanwhile Header.tsx, CTA.tsx, and FokusCheckQuiz.tsx use the <Button> component with variant prop.",
+      "proposed_change": "Replace the Link elements in Hero.tsx with <Button href='/kontakt' variant='primary' size='lg'>Erstgespräch buchen</Button> and <Button href='/fokus-audit' variant='secondary' size='lg'>Fokus-Audit entdecken</Button>.",
+      "user_benefit": "Consistent visual appearance and interaction patterns across the site, with unified focus states for keyboard navigation and a more maintainable codebase.",
+      "status": "archived",
+      "created_at": "2025-12-28T00:25:00.000Z",
+      "linked_task_id": "005-unify-hero-buttons-to-use-button-component-instead"
+    },
+    {
+      "id": "uiux-005",
+      "type": "ui_ux_improvements",
+      "title": "Add screen reader progress context to quiz ProgressIndicator",
+      "description": "The ProgressIndicator component renders visual dots for quiz progress but provides no accessible text for screen reader users to understand their progress.",
+      "rationale": "Users relying on screen readers cannot see visual dots. They need an accessible announcement of progress like 'Question 3 of 8' to understand where they are in the quiz flow.",
+      "category": "accessibility",
+      "affected_components": [
+        "src/components/fokus-check/ProgressIndicator.tsx"
+      ],
+      "screenshots": [],
+      "current_state": "ProgressIndicator.tsx renders only visual div elements with no text content or aria-labels. Screen readers will not announce any progress information.",
+      "proposed_change": "Add a visually hidden (sr-only) span with progress text: <span className='sr-only'>Frage {current + 1} von {total}</span>. Also add role='progressbar' with aria-valuenow, aria-valuemin, and aria-valuemax to the container.",
+      "user_benefit": "Screen reader users will hear their progress through the quiz, providing equal access to the experience and reducing uncertainty about how many questions remain.",
+      "status": "draft",
+      "created_at": "2025-12-28T00:25:00.000Z"
+    },
+    {
+      "id": "sec-001",
+      "type": "security_hardening",
+      "title": "Move invite code validation to server-side",
+      "description": "The invite code 'FOKUS2026' is hardcoded in client-side JavaScript (InviteCodeCapture.tsx line 12). Anyone can view the page source or use browser DevTools to discover valid invite codes, completely bypassing the access control mechanism.",
+      "rationale": "Client-side validation of access codes provides zero security. Attackers can simply read the source code to find valid codes, making the invite-only access feature completely ineffective.",
+      "category": "authorization",
+      "severity": "critical",
+      "affectedFiles": [
+        "src/components/fokus-check/InviteCodeCapture.tsx"
+      ],
+      "vulnerability": "CWE-602: Client-Side Enforcement of Server-Side Security",
+      "currentRisk": "Anyone can access the Fokus-Check by viewing the source code and finding the hardcoded invite code 'FOKUS2026'",
+      "remediation": "Create a server-side API route (/api/validate-invite-code) that validates invite codes against a database. Store codes in Supabase with usage tracking. Remove all valid codes from client-side code. The client should only send the user-entered code to the server for validation.",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/602.html",
+        "https://owasp.org/Top10/A01_2021-Broken_Access_Control/"
+      ],
+      "compliance": [
+        "OWASP Top 10 A01:2021"
+      ]
+    },
+    {
+      "id": "sec-002",
+      "type": "security_hardening",
+      "title": "Add Content-Security-Policy (CSP) header",
+      "description": "The next.config.ts configures security headers (X-Frame-Options, X-Content-Type-Options, etc.) but is missing the Content-Security-Policy header, which is the most important defense against XSS attacks.",
+      "rationale": "Without a CSP header, the application is more vulnerable to XSS attacks. CSP provides a defense-in-depth layer that restricts where scripts, styles, and other resources can be loaded from, significantly reducing the impact of any XSS vulnerabilities.",
+      "category": "configuration",
+      "severity": "high",
+      "affectedFiles": [
+        "next.config.ts"
+      ],
+      "vulnerability": "CWE-693: Protection Mechanism Failure",
+      "currentRisk": "If an XSS vulnerability is introduced, attackers can execute arbitrary JavaScript, steal user data, or perform actions on behalf of users. The dangerouslySetInnerHTML usage in SEO components (9 instances found) increases this risk.",
+      "remediation": "Add a Content-Security-Policy header in next.config.ts. Start with a restrictive policy: \"default-src 'self'; script-src 'self' 'unsafe-inline' https://cal.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://supabase-new.suimation.de https://n8n.suimation.de\". Test thoroughly and refine based on actual resource requirements.",
+      "references": [
+        "https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP",
+        "https://cwe.mitre.org/data/definitions/693.html",
+        "https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy"
+      ],
+      "compliance": [
+        "OWASP Top 10 A05:2021",
+        "SOC2"
+      ]
+    },
+    {
+      "id": "sec-003",
+      "type": "security_hardening",
+      "title": "Implement rate limiting on API routes",
+      "description": "The /api/fokus-check/generate-pdf API route accepts POST requests without any rate limiting. This endpoint performs CPU-intensive PDF generation using @react-pdf/renderer, making it an attractive target for denial of service attacks.",
+      "rationale": "Without rate limiting, an attacker could send thousands of PDF generation requests, exhausting server resources (CPU, memory) and causing service degradation or complete outage for legitimate users.",
+      "category": "configuration",
+      "severity": "medium",
+      "affectedFiles": [
+        "src/app/api/fokus-check/generate-pdf/route.ts"
+      ],
+      "vulnerability": "CWE-770: Allocation of Resources Without Limits or Throttling",
+      "currentRisk": "Attacker can send unlimited PDF generation requests causing resource exhaustion and service denial",
+      "remediation": "Implement rate limiting using a library like 'rate-limiter-flexible' or use Vercel Edge Config for serverless rate limiting. Limit to 5-10 requests per IP per minute. Consider adding request signing/tokens to prevent abuse from automated scripts. Also validate that the request contains legitimate quiz data before processing.",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/770.html",
+        "https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/"
+      ],
+      "compliance": [
+        "OWASP API Security Top 10"
+      ]
+    },
+    {
+      "id": "sec-004",
+      "type": "security_hardening",
+      "title": "Remove or conditionally disable console logging in production",
+      "description": "The codebase contains 25+ console.log/error/warn statements across multiple files (events.ts, FokusCheckQuiz.tsx, AccessRequestForm.tsx, etc.). These logs can expose sensitive information like user data, error details, and application internals in production browser consoles.",
+      "rationale": "Console logs in production can leak implementation details, user data (emails, phone numbers in debug output), error stack traces, and API response data. This information aids attackers in understanding the application's internals and finding vulnerabilities.",
+      "category": "data_protection",
+      "severity": "low",
+      "affectedFiles": [
+        "src/lib/tracking/events.ts",
+        "src/components/fokus-check/FokusCheckQuiz.tsx",
+        "src/components/fokus-check/AccessRequestForm.tsx",
+        "src/components/fokus-check/useQuizPersistence.ts",
+        "src/lib/supabase/client.ts",
+        "src/app/api/fokus-check/generate-pdf/route.ts"
+      ],
+      "vulnerability": "CWE-532: Insertion of Sensitive Information into Log File",
+      "currentRisk": "User emails, phone numbers, error details, and webhook responses are logged and visible in browser DevTools to anyone using the application",
+      "remediation": "1) Create a logging utility that only outputs in development: `const log = process.env.NODE_ENV === 'development' ? console.log : () => {}`. 2) Replace all console.* calls with this utility. 3) For production error tracking, integrate a service like Sentry that sanitizes sensitive data. 4) Never log PII (emails, phones) even in development.",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/532.html",
+        "https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/"
+      ],
+      "compliance": [
+        "GDPR",
+        "SOC2"
+      ]
+    },
+    {
+      "id": "sec-005",
+      "type": "security_hardening",
+      "title": "Add Strict-Transport-Security (HSTS) header",
+      "description": "The next.config.ts security headers configuration is missing the Strict-Transport-Security header. While the site likely uses HTTPS, without HSTS, users could be vulnerable to protocol downgrade attacks or SSL stripping on their first visit.",
+      "rationale": "HSTS ensures browsers always connect via HTTPS, preventing man-in-the-middle attacks that could intercept user data (emails, phone numbers, quiz answers) during form submissions. This is especially important for a site collecting PII.",
+      "category": "configuration",
+      "severity": "medium",
+      "affectedFiles": [
+        "next.config.ts"
+      ],
+      "vulnerability": "CWE-319: Cleartext Transmission of Sensitive Information",
+      "currentRisk": "First-time visitors or those typing the URL without https:// could have their connection intercepted before HTTPS redirect occurs",
+      "remediation": "Add the Strict-Transport-Security header to next.config.ts: { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' }. Start with a shorter max-age (86400) for testing, then increase. Consider submitting to the HSTS preload list at hstspreload.org for maximum protection.",
+      "references": [
+        "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security",
+        "https://hstspreload.org/",
+        "https://cwe.mitre.org/data/definitions/319.html"
+      ],
+      "compliance": [
+        "PCI-DSS",
+        "SOC2"
+      ]
+    },
+    {
+      "id": "cq-001",
+      "type": "code_quality",
+      "title": "Split FokusCheckQuiz.tsx into smaller composable units",
+      "description": "The FokusCheckQuiz.tsx component at 613 lines is managing too many concerns: 20+ state variables, multiple quiz steps, persistence logic, progress tracking, exit intent handling, and modal management. This monolithic structure makes it difficult to test, maintain, and reason about.",
+      "rationale": "Components with too many responsibilities become hard to test in isolation, make debugging difficult, and increase the risk of regressions when making changes. The cognitive load of understanding 20+ state variables and their interactions is high.",
+      "category": "large_files",
+      "severity": "major",
+      "affectedFiles": [
+        "src/components/fokus-check/FokusCheckQuiz.tsx"
+      ],
+      "currentState": "Single 613-line component with 20+ useState hooks, multiple useCallback handlers, and all quiz step logic combined",
+      "proposedChange": "Extract quiz state management into a custom useQuizState hook, move step-specific logic into the step components, and create a QuizOrchestrator that coordinates between steps. Structure: useQuizState.ts (state management), useQuizNavigation.ts (step transitions), useQuizTracking.ts (analytics)",
+      "codeExample": "// Current:\nconst [step, setStep] = useState<QuizStep>('invite-code');\nconst [userName, setUserName] = useState('');\nconst [currentQuestion, setCurrentQuestion] = useState(0);\nconst [answers, setAnswers] = useState<Answer[]>([]);\n// ... 16 more state variables\n\n// Proposed:\nimport { useQuizState, useQuizNavigation, useQuizTracking } from './hooks';\n\nfunction FokusCheckQuiz() {\n  const quiz = useQuizState();\n  const navigation = useQuizNavigation(quiz);\n  useQuizTracking(quiz);\n  \n  return <QuizRenderer quiz={quiz} navigation={navigation} />;\n}",
+      "bestPractice": "Single Responsibility Principle - extract state management into custom hooks, keep components focused on rendering",
+      "metrics": {
+        "lineCount": 613,
+        "complexity": null,
+        "duplicateLines": null,
+        "testCoverage": null
+      },
+      "estimatedEffort": "large",
+      "breakingChange": false,
+      "prerequisites": [
+        "Add unit tests for current quiz logic before refactoring"
+      ]
+    },
+    {
+      "id": "cq-002",
+      "type": "code_quality",
+      "title": "Extract shared fokus-check data and templates into centralized constants",
+      "description": "The same domain data is duplicated across multiple files: 'fokusBereiche' mapping appears in both FokusReportPDF.tsx and ResultDisplay.tsx, killer/quickwin templates in FokusReportPDF.tsx have similar structures to ResultDisplay.tsx, and color schemes are defined separately in each file.",
+      "rationale": "Duplicated data leads to inconsistencies when updates are made in one place but not another. It also increases maintenance burden and makes it harder to ensure business logic consistency across the quiz, results, and PDF report.",
+      "category": "duplication",
+      "severity": "minor",
+      "affectedFiles": [
+        "src/components/fokus-check/pdf/FokusReportPDF.tsx",
+        "src/components/fokus-check/ResultDisplay.tsx"
+      ],
+      "currentState": "'fokusBereiche' defined as Record<number, string> in FokusReportPDF.tsx and as full FokusBereich[] array in ResultDisplay.tsx; color mappings defined separately in each file",
+      "proposedChange": "Create src/components/fokus-check/constants/fokus-data.ts with shared domain data: FOKUS_BEREICHE (full data), KILLER_TEMPLATES, QUICKWIN_TEMPLATES, CATEGORY_COLORS, CATEGORY_CTAS. Both components import from this single source of truth.",
+      "codeExample": "// src/components/fokus-check/constants/fokus-data.ts\nexport const FOKUS_BEREICHE = [\n  { id: 1, name: 'Projekte', shortName: 'Projekte', icon: '📁', ... },\n  // ...\n];\n\nexport const CATEGORY_COLORS = {\n  excellent: { bg: '#22c55e', text: '#22c55e', ... },\n  // ...\n};\n\n// In FokusReportPDF.tsx / ResultDisplay.tsx:\nimport { FOKUS_BEREICHE, CATEGORY_COLORS } from '../constants/fokus-data';",
+      "bestPractice": "DRY (Don't Repeat Yourself) - single source of truth for domain data ensures consistency",
+      "metrics": {
+        "lineCount": null,
+        "complexity": null,
+        "duplicateLines": 120,
+        "testCoverage": null
+      },
+      "estimatedEffort": "small",
+      "breakingChange": false,
+      "prerequisites": null
+    },
+    {
+      "id": "cq-003",
+      "type": "code_quality",
+      "title": "Extract inline SVG icons into reusable Icon components",
+      "description": "There are 45 inline SVG icons across 17 component files. Many of these are duplicates: the checkmark icon appears 10+ times, close (X) icon 5+ times, arrow icons 6+ times. Each duplicates the same path data and styling properties.",
+      "rationale": "Inline SVGs increase bundle size, make style updates tedious (must change every occurrence), and clutter component JSX. Extracting them improves maintainability, enables consistent sizing/styling, and reduces cognitive load when reading components.",
+      "category": "duplication",
+      "severity": "minor",
+      "affectedFiles": [
+        "src/components/fokus-check/FokusCheckQuiz.tsx",
+        "src/components/fokus-check/ExitIntentPopup.tsx",
+        "src/components/fokus-check/AccessRequestForm.tsx",
+        "src/components/fokus-check/DeliveryChoice.tsx",
+        "src/components/fokus-check/ContinueLaterModal.tsx",
+        "src/components/layout/Header.tsx"
+      ],
+      "currentState": "SVG elements duplicated inline with full path data, e.g., checkmark path 'd=\"M16.707 5.293...\"' repeated 10+ times",
+      "proposedChange": "Create src/components/ui/icons/ directory with reusable icon components: CheckIcon, CloseIcon, ArrowRightIcon, etc. Each accepts size, color, className props. Use throughout codebase.",
+      "codeExample": "// Current (repeated 10+ times):\n<svg className=\"w-4 h-4 text-[var(--accent)]\" fill=\"currentColor\" viewBox=\"0 0 20 20\">\n  <path fillRule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clipRule=\"evenodd\" />\n</svg>\n\n// Proposed:\nimport { CheckIcon } from '@/components/ui/icons';\n<CheckIcon className=\"w-4 h-4 text-[var(--accent)]\" />",
+      "bestPractice": "Component abstraction - extract repeated UI elements into reusable components",
+      "metrics": {
+        "lineCount": null,
+        "complexity": null,
+        "duplicateLines": 200,
+        "testCoverage": null
+      },
+      "estimatedEffort": "small",
+      "breakingChange": false,
+      "prerequisites": null
+    },
+    {
+      "id": "cq-004",
+      "type": "code_quality",
+      "title": "Add unit tests for core fokus-check business logic",
+      "description": "The project has no test files (all detected tests are in node_modules). Critical business logic including score calculation (getResultCategory), answer analysis (analyzeWeaknesses, analyzeStrengths), and tracking functions have no test coverage.",
+      "rationale": "Without tests, refactoring is risky, bugs can be introduced without detection, and the confidence to make changes is low. The fokus-check quiz is a core business feature that should have comprehensive test coverage.",
+      "category": "testing",
+      "severity": "major",
+      "affectedFiles": [
+        "src/components/fokus-check/questions-data.ts",
+        "src/components/fokus-check/ResultDisplay.tsx",
+        "src/lib/tracking/events.ts"
+      ],
+      "currentState": "Zero test files in src/; no testing framework configured",
+      "proposedChange": "1) Add Jest + React Testing Library to devDependencies. 2) Create tests for: getResultCategory (all score boundaries), analyzeWeaknesses/analyzeStrengths (edge cases), tracking event functions (mock Supabase). 3) Add npm test script.",
+      "codeExample": "// src/components/fokus-check/__tests__/questions-data.test.ts\nimport { getResultCategory, MAX_SCORE } from '../questions-data';\n\ndescribe('getResultCategory', () => {\n  it('returns excellent for scores >= 34', () => {\n    expect(getResultCategory(34).category).toBe('excellent');\n    expect(getResultCategory(40).category).toBe('excellent');\n  });\n  \n  it('returns critical for scores < 13', () => {\n    expect(getResultCategory(12).category).toBe('critical');\n    expect(getResultCategory(0).category).toBe('critical');\n  });\n  // ... test all boundaries\n});",
+      "bestPractice": "Test-driven quality - critical business logic should have comprehensive unit tests",
+      "metrics": {
+        "lineCount": null,
+        "complexity": null,
+        "duplicateLines": null,
+        "testCoverage": 0
+      },
+      "estimatedEffort": "medium",
+      "breakingChange": false,
+      "prerequisites": [
+        "Install testing dependencies (jest, @testing-library/react)"
+      ]
+    },
+    {
+      "id": "cq-005",
+      "type": "code_quality",
+      "title": "Extract PDF styles from FokusReportPDF.tsx into separate stylesheet",
+      "description": "FokusReportPDF.tsx at 707 lines has ~310 lines dedicated to StyleSheet.create() styles. This makes the component hard to navigate and the styles difficult to maintain. The styles block is larger than the actual component logic.",
+      "rationale": "Mixing large style definitions with component logic increases file size, makes code navigation difficult, and violates separation of concerns. The style definitions could be reused if extracted, and changes to styles would be isolated from component logic changes.",
+      "category": "code_smells",
+      "severity": "minor",
+      "affectedFiles": [
+        "src/components/fokus-check/pdf/FokusReportPDF.tsx"
+      ],
+      "currentState": "707-line file with 310 lines of StyleSheet.create() definitions inline, followed by template data (80 lines), then component code (300 lines)",
+      "proposedChange": "Create src/components/fokus-check/pdf/FokusReportStyles.ts containing all StyleSheet.create() styles and color constants. Create src/components/fokus-check/pdf/FokusReportTemplates.ts for killerTemplates and quickWinTemplates. Import into FokusReportPDF.tsx.",
+      "codeExample": "// src/components/fokus-check/pdf/FokusReportStyles.ts\nimport { StyleSheet } from '@react-pdf/renderer';\n\nexport const colors = {\n  bgDark: '#1a2634',\n  bgCard: '#243242',\n  // ...\n};\n\nexport const styles = StyleSheet.create({\n  page: { backgroundColor: colors.bgDark, padding: 40 },\n  // ... all styles\n});\n\n// FokusReportPDF.tsx:\nimport { styles, colors } from './FokusReportStyles';\nimport { killerTemplates, quickWinTemplates } from './FokusReportTemplates';",
+      "bestPractice": "Separation of Concerns - styles, data, and component logic in separate modules",
+      "metrics": {
+        "lineCount": 707,
+        "complexity": null,
+        "duplicateLines": null,
+        "testCoverage": null
+      },
+      "estimatedEffort": "small",
+      "breakingChange": false,
+      "prerequisites": null
+    }
+  ],
+  "project_context": {
+    "existing_features": [],
+    "tech_stack": [
+      "Next.js",
+      "TypeScript"
+    ],
+    "target_audience": null,
+    "planned_features": [
+      "Quick Spec: Remove Fabricated Social Proof Banner"
+    ]
+  },
+  "summary": {
+    "total_ideas": 30,
+    "by_type": {
+      "documentation_gaps": 5,
+      "performance_optimizations": 5,
+      "code_improvements": 5,
+      "ui_ux_improvements": 5,
+      "security_hardening": 5,
+      "code_quality": 5
+    },
+    "by_status": {
+      "draft": 30
+    }
+  },
+  "generated_at": "2025-12-27T22:28:28.740915",
+  "updated_at": "2025-12-28T11:26:42.799Z"
+}

@@ -1,0 +1,135 @@
+{
+  "security_hardening": [
+    {
+      "id": "sec-001",
+      "type": "security_hardening",
+      "title": "Move invite code validation to server-side",
+      "description": "The invite code 'FOKUS2026' is hardcoded in client-side JavaScript (InviteCodeCapture.tsx line 12). Anyone can view the page source or use browser DevTools to discover valid invite codes, completely bypassing the access control mechanism.",
+      "rationale": "Client-side validation of access codes provides zero security. Attackers can simply read the source code to find valid codes, making the invite-only access feature completely ineffective.",
+      "category": "authorization",
+      "severity": "critical",
+      "affectedFiles": [
+        "src/components/fokus-check/InviteCodeCapture.tsx"
+      ],
+      "vulnerability": "CWE-602: Client-Side Enforcement of Server-Side Security",
+      "currentRisk": "Anyone can access the Fokus-Check by viewing the source code and finding the hardcoded invite code 'FOKUS2026'",
+      "remediation": "Create a server-side API route (/api/validate-invite-code) that validates invite codes against a database. Store codes in Supabase with usage tracking. Remove all valid codes from client-side code. The client should only send the user-entered code to the server for validation.",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/602.html",
+        "https://owasp.org/Top10/A01_2021-Broken_Access_Control/"
+      ],
+      "compliance": [
+        "OWASP Top 10 A01:2021"
+      ]
+    },
+    {
+      "id": "sec-002",
+      "type": "security_hardening",
+      "title": "Add Content-Security-Policy (CSP) header",
+      "description": "The next.config.ts configures security headers (X-Frame-Options, X-Content-Type-Options, etc.) but is missing the Content-Security-Policy header, which is the most important defense against XSS attacks.",
+      "rationale": "Without a CSP header, the application is more vulnerable to XSS attacks. CSP provides a defense-in-depth layer that restricts where scripts, styles, and other resources can be loaded from, significantly reducing the impact of any XSS vulnerabilities.",
+      "category": "configuration",
+      "severity": "high",
+      "affectedFiles": [
+        "next.config.ts"
+      ],
+      "vulnerability": "CWE-693: Protection Mechanism Failure",
+      "currentRisk": "If an XSS vulnerability is introduced, attackers can execute arbitrary JavaScript, steal user data, or perform actions on behalf of users. The dangerouslySetInnerHTML usage in SEO components (9 instances found) increases this risk.",
+      "remediation": "Add a Content-Security-Policy header in next.config.ts. Start with a restrictive policy: \"default-src 'self'; script-src 'self' 'unsafe-inline' https://cal.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://supabase-new.suimation.de https://n8n.suimation.de\". Test thoroughly and refine based on actual resource requirements.",
+      "references": [
+        "https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP",
+        "https://cwe.mitre.org/data/definitions/693.html",
+        "https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy"
+      ],
+      "compliance": [
+        "OWASP Top 10 A05:2021",
+        "SOC2"
+      ]
+    },
+    {
+      "id": "sec-003",
+      "type": "security_hardening",
+      "title": "Implement rate limiting on API routes",
+      "description": "The /api/fokus-check/generate-pdf API route accepts POST requests without any rate limiting. This endpoint performs CPU-intensive PDF generation using @react-pdf/renderer, making it an attractive target for denial of service attacks.",
+      "rationale": "Without rate limiting, an attacker could send thousands of PDF generation requests, exhausting server resources (CPU, memory) and causing service degradation or complete outage for legitimate users.",
+      "category": "configuration",
+      "severity": "medium",
+      "affectedFiles": [
+        "src/app/api/fokus-check/generate-pdf/route.ts"
+      ],
+      "vulnerability": "CWE-770: Allocation of Resources Without Limits or Throttling",
+      "currentRisk": "Attacker can send unlimited PDF generation requests causing resource exhaustion and service denial",
+      "remediation": "Implement rate limiting using a library like 'rate-limiter-flexible' or use Vercel Edge Config for serverless rate limiting. Limit to 5-10 requests per IP per minute. Consider adding request signing/tokens to prevent abuse from automated scripts. Also validate that the request contains legitimate quiz data before processing.",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/770.html",
+        "https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/"
+      ],
+      "compliance": [
+        "OWASP API Security Top 10"
+      ]
+    },
+    {
+      "id": "sec-004",
+      "type": "security_hardening",
+      "title": "Remove or conditionally disable console logging in production",
+      "description": "The codebase contains 25+ console.log/error/warn statements across multiple files (events.ts, FokusCheckQuiz.tsx, AccessRequestForm.tsx, etc.). These logs can expose sensitive information like user data, error details, and application internals in production browser consoles.",
+      "rationale": "Console logs in production can leak implementation details, user data (emails, phone numbers in debug output), error stack traces, and API response data. This information aids attackers in understanding the application's internals and finding vulnerabilities.",
+      "category": "data_protection",
+      "severity": "low",
+      "affectedFiles": [
+        "src/lib/tracking/events.ts",
+        "src/components/fokus-check/FokusCheckQuiz.tsx",
+        "src/components/fokus-check/AccessRequestForm.tsx",
+        "src/components/fokus-check/useQuizPersistence.ts",
+        "src/lib/supabase/client.ts",
+        "src/app/api/fokus-check/generate-pdf/route.ts"
+      ],
+      "vulnerability": "CWE-532: Insertion of Sensitive Information into Log File",
+      "currentRisk": "User emails, phone numbers, error details, and webhook responses are logged and visible in browser DevTools to anyone using the application",
+      "remediation": "1) Create a logging utility that only outputs in development: `const log = process.env.NODE_ENV === 'development' ? console.log : () => {}`. 2) Replace all console.* calls with this utility. 3) For production error tracking, integrate a service like Sentry that sanitizes sensitive data. 4) Never log PII (emails, phones) even in development.",
+      "references": [
+        "https://cwe.mitre.org/data/definitions/532.html",
+        "https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/"
+      ],
+      "compliance": [
+        "GDPR",
+        "SOC2"
+      ]
+    },
+    {
+      "id": "sec-005",
+      "type": "security_hardening",
+      "title": "Add Strict-Transport-Security (HSTS) header",
+      "description": "The next.config.ts security headers configuration is missing the Strict-Transport-Security header. While the site likely uses HTTPS, without HSTS, users could be vulnerable to protocol downgrade attacks or SSL stripping on their first visit.",
+      "rationale": "HSTS ensures browsers always connect via HTTPS, preventing man-in-the-middle attacks that could intercept user data (emails, phone numbers, quiz answers) during form submissions. This is especially important for a site collecting PII.",
+      "category": "configuration",
+      "severity": "medium",
+      "affectedFiles": [
+        "next.config.ts"
+      ],
+      "vulnerability": "CWE-319: Cleartext Transmission of Sensitive Information",
+      "currentRisk": "First-time visitors or those typing the URL without https:// could have their connection intercepted before HTTPS redirect occurs",
+      "remediation": "Add the Strict-Transport-Security header to next.config.ts: { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' }. Start with a shorter max-age (86400) for testing, then increase. Consider submitting to the HSTS preload list at hstspreload.org for maximum protection.",
+      "references": [
+        "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security",
+        "https://hstspreload.org/",
+        "https://cwe.mitre.org/data/definitions/319.html"
+      ],
+      "compliance": [
+        "PCI-DSS",
+        "SOC2"
+      ]
+    }
+  ],
+  "metadata": {
+    "dependenciesScanned": 5,
+    "knownVulnerabilities": 0,
+    "filesAnalyzed": 50,
+    "criticalIssues": 1,
+    "highIssues": 1,
+    "mediumIssues": 2,
+    "lowIssues": 1,
+    "generatedAt": "2025-12-28T00:35:00Z",
+    "scanNotes": "npm audit could not be run due to sandbox restrictions. Manual code review performed for security patterns."
+  }
+}

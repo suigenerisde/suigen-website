@@ -1,0 +1,85 @@
+{
+  "ui_ux_improvements": [
+    {
+      "id": "uiux-001",
+      "type": "ui_ux_improvements",
+      "title": "Add aria-expanded to FAQ accordion for accessibility",
+      "description": "The FAQ component (FAQ.tsx) is missing aria-expanded attribute on accordion buttons, unlike the ServiceFAQ component which implements it correctly. This is an accessibility issue for screen reader users.",
+      "rationale": "Screen reader users need aria-expanded to understand the state of expandable content. This is a WCAG 2.1 AA requirement for accessible interactive disclosure widgets.",
+      "category": "accessibility",
+      "affected_components": ["src/components/sections/FAQ.tsx"],
+      "screenshots": [],
+      "current_state": "FAQ accordion buttons have no aria-expanded attribute. The button at line 89-91 only toggles openIndex state but doesn't communicate expansion state to assistive technologies.",
+      "proposed_change": "Add aria-expanded={openIndex === index} to the FAQ accordion button element. Also add aria-controls pointing to the content panel id, similar to the pattern in ServiceFAQ.tsx at line 57.",
+      "user_benefit": "Screen reader users will know whether each FAQ item is expanded or collapsed, improving navigation and understanding of the page structure.",
+      "status": "draft",
+      "created_at": "2025-12-28T00:25:00.000Z"
+    },
+    {
+      "id": "uiux-002",
+      "type": "ui_ux_improvements",
+      "title": "Add smooth height transition to FAQ accordion content",
+      "description": "The FAQ accordion content currently appears/disappears abruptly with no animation. Adding a smooth height transition would improve perceived quality and reduce cognitive load.",
+      "rationale": "Smooth animations help users understand state changes and reduce jarring visual shifts. The codebase already uses animations extensively (animate-fade-in, animate-slide-up) showing this pattern is expected.",
+      "category": "interaction",
+      "affected_components": ["src/components/sections/FAQ.tsx"],
+      "screenshots": [],
+      "current_state": "FAQ content at lines 110-114 uses conditional rendering with no transition: {openIndex === index && (<div>...</div>)}. Content appears/disappears instantly.",
+      "proposed_change": "Implement CSS grid animation pattern: wrap content in container with grid-template-rows: 0fr transitioning to 1fr, or use a height transition with overflow-hidden. Add animate-fade-in class to content panel for smooth entry.",
+      "user_benefit": "Smoother, more polished interaction that feels premium and helps users track visual changes without jarring jumps.",
+      "status": "draft",
+      "created_at": "2025-12-28T00:25:00.000Z"
+    },
+    {
+      "id": "uiux-003",
+      "type": "ui_ux_improvements",
+      "title": "Connect form labels to inputs with htmlFor/id attributes",
+      "description": "Form inputs in DeliveryChoice.tsx and other form components have visible labels but they are not programmatically connected to their inputs via htmlFor/id, which breaks accessibility.",
+      "rationale": "Proper label-input association is a fundamental accessibility requirement. Clicking the label should focus the input, and screen readers need this connection to announce input purposes correctly.",
+      "category": "accessibility",
+      "affected_components": ["src/components/fokus-check/DeliveryChoice.tsx", "src/components/fokus-check/EmailCapture.tsx", "src/components/fokus-check/NameCapture.tsx"],
+      "screenshots": [],
+      "current_state": "DeliveryChoice.tsx has label elements (lines 85, 103) but they use no htmlFor attribute. The inputs have no id attribute. Example: <label>E-Mail-Adresse *</label> followed by <input type='email'...>",
+      "proposed_change": "Add id attributes to inputs (e.g., id='email-input', id='phone-input') and corresponding htmlFor attributes to labels (e.g., htmlFor='email-input'). Apply same pattern to EmailCapture.tsx and NameCapture.tsx.",
+      "user_benefit": "Improved accessibility for screen reader users and better UX for all users since clicking the label will focus the corresponding input field.",
+      "status": "draft",
+      "created_at": "2025-12-28T00:25:00.000Z"
+    },
+    {
+      "id": "uiux-004",
+      "type": "ui_ux_improvements",
+      "title": "Unify Hero buttons to use Button component instead of .btn class",
+      "description": "The Hero component uses direct className .btn and .btn-primary for CTAs, while the rest of the application uses the <Button> component from ui/Button.tsx. This creates inconsistency.",
+      "rationale": "Using a single Button component ensures consistent styling, easier maintenance, and uniform focus states/accessibility features across the app. The Button component already has proper focus ring styling.",
+      "category": "visual",
+      "affected_components": ["src/components/sections/Hero.tsx", "src/components/ui/Button.tsx"],
+      "screenshots": [],
+      "current_state": "Hero.tsx at lines 29-34 uses: <Link href='/kontakt' className='btn btn-primary'>. Meanwhile Header.tsx, CTA.tsx, and FokusCheckQuiz.tsx use the <Button> component with variant prop.",
+      "proposed_change": "Replace the Link elements in Hero.tsx with <Button href='/kontakt' variant='primary' size='lg'>Erstgespräch buchen</Button> and <Button href='/fokus-audit' variant='secondary' size='lg'>Fokus-Audit entdecken</Button>.",
+      "user_benefit": "Consistent visual appearance and interaction patterns across the site, with unified focus states for keyboard navigation and a more maintainable codebase.",
+      "status": "draft",
+      "created_at": "2025-12-28T00:25:00.000Z"
+    },
+    {
+      "id": "uiux-005",
+      "type": "ui_ux_improvements",
+      "title": "Add screen reader progress context to quiz ProgressIndicator",
+      "description": "The ProgressIndicator component renders visual dots for quiz progress but provides no accessible text for screen reader users to understand their progress.",
+      "rationale": "Users relying on screen readers cannot see visual dots. They need an accessible announcement of progress like 'Question 3 of 8' to understand where they are in the quiz flow.",
+      "category": "accessibility",
+      "affected_components": ["src/components/fokus-check/ProgressIndicator.tsx"],
+      "screenshots": [],
+      "current_state": "ProgressIndicator.tsx renders only visual div elements with no text content or aria-labels. Screen readers will not announce any progress information.",
+      "proposed_change": "Add a visually hidden (sr-only) span with progress text: <span className='sr-only'>Frage {current + 1} von {total}</span>. Also add role='progressbar' with aria-valuenow, aria-valuemin, and aria-valuemax to the container.",
+      "user_benefit": "Screen reader users will hear their progress through the quiz, providing equal access to the experience and reducing uncertainty about how many questions remain.",
+      "status": "draft",
+      "created_at": "2025-12-28T00:25:00.000Z"
+    }
+  ],
+  "metadata": {
+    "generated_at": "2025-12-28T00:25:00.000Z",
+    "agent": "ui_ux_improvements_ideation_agent",
+    "analysis_method": "static_code_analysis",
+    "note": "Puppeteer browser automation not available - analysis based on component code review"
+  }
+}

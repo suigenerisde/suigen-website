@@ -1,0 +1,8 @@
+{
+  "sourceType": "ideation",
+  "ideationType": "documentation_gaps",
+  "ideaId": "doc-001",
+  "rationale": "The README is the first file developers see. A generic template provides no value for onboarding team members or understanding the Fokus-Check system. New developers must reverse-engineer the codebase to understand its purpose.",
+  "category": "documentation",
+  "priority": "high"
+}

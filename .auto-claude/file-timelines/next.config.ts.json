@@ -1,0 +1,25 @@
+{
+  "file_path": "next.config.ts",
+  "main_branch_history": [],
+  "task_views": {
+    "004-dynamic-import-react-pdf-renderer-to-reduce-client": {
+      "task_id": "004-dynamic-import-react-pdf-renderer-to-reduce-client",
+      "branch_point": {
+        "commit_hash": "8c857a61678b06a3be491f34e522781921073c74",
+        "content": "import type { NextConfig } from \"next\";\n\nconst nextConfig: NextConfig = {\n  // Bildoptimierung\n  images: {\n    formats: ['image/avif', 'image/webp'],\n    deviceSizes: [640, 750, 828, 1080, 1200, 1920],\n    imageSizes: [16, 32, 48, 64, 96, 128, 256],\n  },\n\n  // Kompression aktivieren\n  compress: true,\n\n  // Security Headers\n  async headers() {\n    return [\n      {\n        source: '/:path*',\n        headers: [\n          {\n            key: 'X-DNS-Prefetch-Control',\n            value: 'on',\n          },\n          {\n            key: 'X-Frame-Options',\n            value: 'SAMEORIGIN',\n          },\n          {\n            key: 'X-Content-Type-Options',\n            value: 'nosniff',\n          },\n          {\n            key: 'Referrer-Policy',\n            value: 'strict-origin-when-cross-origin',\n          },\n          {\n            key: 'Permissions-Policy',\n            value: 'camera=(), microphone=(), geolocation=()',\n          },\n        ],\n      },\n    ];\n  },\n};\n\nexport default nextConfig;\n",
+        "timestamp": "2025-12-28T11:56:41.574188"
+      },
+      "worktree_state": null,
+      "task_intent": {
+        "title": "004-dynamic-import-react-pdf-renderer-to-reduce-client",
+        "description": "The @react-pdf/renderer package (~400KB) is currently bundled with client-side code even though it's only used in the server-side API route. Using dynamic imports would ensure this heavy package is only loaded when needed on the server.",
+        "from_plan": true
+      },
+      "commits_behind_main": 0,
+      "status": "active",
+      "merged_at": null
+    }
+  },
+  "created_at": "2025-12-28T11:56:24.900100",
+  "last_updated": "2025-12-28T11:56:43.182187"
+}

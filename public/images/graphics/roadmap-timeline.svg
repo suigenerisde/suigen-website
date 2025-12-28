@@ -1,0 +1,88 @@
+<svg width="1200" height="400" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2e474f"/>
+      <stop offset="100%" style="stop-color:#3a5861"/>
+    </linearGradient>
+    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00b8c4;stop-opacity:0.3"/>
+      <stop offset="50%" style="stop-color:#00b8c4"/>
+      <stop offset="100%" style="stop-color:#00b8c4;stop-opacity:0.3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="400" fill="url(#bgGradient)"/>
+
+  <!-- Title -->
+  <text x="600" y="50" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="800" font-family="Inter, sans-serif" letter-spacing="0.1em">90-TAGE ROADMAP</text>
+
+  <!-- Timeline Base Line -->
+  <line x1="100" y1="200" x2="1100" y2="200" stroke="url(#lineGradient)" stroke-width="4" filter="url(#glow)"/>
+
+  <!-- Start Point -->
+  <circle cx="100" cy="200" r="8" fill="#00b8c4"/>
+  <text x="100" y="240" text-anchor="middle" fill="#a8c0c5" font-size="12" font-family="Inter, sans-serif">START</text>
+
+  <!-- Phase 1: Tag 1-30 -->
+  <g transform="translate(300, 0)">
+    <!-- Milestone Circle -->
+    <circle cx="0" cy="200" r="40" fill="#00b8c4" filter="url(#glow)"/>
+    <text x="0" y="210" text-anchor="middle" fill="#2e474f" font-size="24" font-weight="900" font-family="Inter, sans-serif">1</text>
+
+    <!-- Content Above -->
+    <text x="0" y="100" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="800" font-family="Inter, sans-serif">FUNDAMENT</text>
+    <text x="0" y="125" text-anchor="middle" fill="#00b8c4" font-size="14" font-weight="600" font-family="Inter, sans-serif">TAG 1-30</text>
+
+    <!-- Content Below -->
+    <text x="0" y="280" text-anchor="middle" fill="#a8c0c5" font-size="13" font-family="Inter, sans-serif">Quick-Wins umsetzen</text>
+    <text x="0" y="300" text-anchor="middle" fill="#a8c0c5" font-size="13" font-family="Inter, sans-serif">Gewohnheiten starten</text>
+    <text x="0" y="320" text-anchor="middle" fill="#a8c0c5" font-size="13" font-family="Inter, sans-serif">Momentum aufbauen</text>
+  </g>
+
+  <!-- Phase 2: Tag 31-60 -->
+  <g transform="translate(600, 0)">
+    <!-- Milestone Circle -->
+    <circle cx="0" cy="200" r="40" fill="#00b8c4" filter="url(#glow)"/>
+    <text x="0" y="210" text-anchor="middle" fill="#2e474f" font-size="24" font-weight="900" font-family="Inter, sans-serif">2</text>
+
+    <!-- Content Above -->
+    <text x="0" y="100" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="800" font-family="Inter, sans-serif">IMPLEMENTIERUNG</text>
+    <text x="0" y="125" text-anchor="middle" fill="#00b8c4" font-size="14" font-weight="600" font-family="Inter, sans-serif">TAG 31-60</text>
+
+    <!-- Content Below -->
+    <text x="0" y="280" text-anchor="middle" fill="#a8c0c5" font-size="13" font-family="Inter, sans-serif">Systeme etablieren</text>
+    <text x="0" y="300" text-anchor="middle" fill="#a8c0c5" font-size="13" font-family="Inter, sans-serif">Prozesse dokumentieren</text>
+    <text x="0" y="320" text-anchor="middle" fill="#a8c0c5" font-size="13" font-family="Inter, sans-serif">Team einbinden</text>
+  </g>
+
+  <!-- Phase 3: Tag 61-90 -->
+  <g transform="translate(900, 0)">
+    <!-- Milestone Circle -->
+    <circle cx="0" cy="200" r="40" fill="#00b8c4" filter="url(#glow)"/>
+    <text x="0" y="210" text-anchor="middle" fill="#2e474f" font-size="24" font-weight="900" font-family="Inter, sans-serif">3</text>
+
+    <!-- Content Above -->
+    <text x="0" y="100" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="800" font-family="Inter, sans-serif">OPTIMIERUNG</text>
+    <text x="0" y="125" text-anchor="middle" fill="#00b8c4" font-size="14" font-weight="600" font-family="Inter, sans-serif">TAG 61-90</text>
+
+    <!-- Content Below -->
+    <text x="0" y="280" text-anchor="middle" fill="#a8c0c5" font-size="13" font-family="Inter, sans-serif">Feintuning</text>
+    <text x="0" y="300" text-anchor="middle" fill="#a8c0c5" font-size="13" font-family="Inter, sans-serif">Skalierung vorbereiten</text>
+    <text x="0" y="320" text-anchor="middle" fill="#a8c0c5" font-size="13" font-family="Inter, sans-serif">Nachhaltig verankern</text>
+  </g>
+
+  <!-- End Point -->
+  <circle cx="1100" cy="200" r="8" fill="#00b8c4"/>
+  <text x="1100" y="240" text-anchor="middle" fill="#a8c0c5" font-size="12" font-family="Inter, sans-serif">ZIEL</text>
+
+  <!-- Bottom Label -->
+  <text x="600" y="375" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="14" font-family="Inter, sans-serif">Typisch: 8-12 Stunden pro Woche zurueckgewinnen</text>
+</svg>

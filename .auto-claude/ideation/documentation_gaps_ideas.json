@@ -1,0 +1,81 @@
+{
+  "documentation_gaps": [
+    {
+      "id": "doc-001",
+      "type": "documentation_gaps",
+      "title": "Replace default README with project-specific documentation",
+      "description": "The README.md is still the default Next.js template. It contains no information about SUI-GENERIS or the Fokus-Check application, missing critical project overview, business context, and project-specific setup instructions.",
+      "rationale": "The README is the first file developers see. A generic template provides no value for onboarding team members or understanding the Fokus-Check system. New developers must reverse-engineer the codebase to understand its purpose.",
+      "category": "readme",
+      "targetAudience": "contributors",
+      "affectedAreas": ["README.md"],
+      "currentDocumentation": "Default create-next-app template with generic Next.js instructions",
+      "proposedContent": "Add: 1) Project overview explaining Fokus-Check quiz for productivity assessment, 2) Tech stack overview (Next.js, TypeScript, Supabase, n8n, React-PDF), 3) Environment variable setup (.env.local with SUPABASE_URL, SUPABASE_ANON_KEY, N8N_WEBHOOK_URL), 4) Local development instructions, 5) Deployment notes, 6) Project structure overview",
+      "priority": "high",
+      "estimatedEffort": "medium"
+    },
+    {
+      "id": "doc-002",
+      "type": "documentation_gaps",
+      "title": "Add JSDoc documentation to tracking/events.ts exports",
+      "description": "The tracking module exports 12 public functions (trackEvent, trackCheckStarted, trackQuestionViewed, trackQuestionAnswered, etc., plus saveUserAndScore, triggerPdfAndWhatsApp, saveProgressAndSendLink, loadProgress, deleteProgress) but none have JSDoc documentation explaining parameters, return values, or usage.",
+      "rationale": "This is a critical module handling user tracking, Supabase persistence, and n8n webhook integration. Developers need to understand event schemas, when to call each function, and what data is expected/returned without reading the implementation.",
+      "category": "api_docs",
+      "targetAudience": "developers",
+      "affectedAreas": ["src/lib/tracking/events.ts"],
+      "currentDocumentation": "Only brief inline comments in German, no function-level documentation",
+      "proposedContent": "Add JSDoc for all exported functions including: @description explaining purpose, @param with types and descriptions, @returns explaining return values and null cases, @example showing usage patterns, @throws documenting potential errors",
+      "priority": "high",
+      "estimatedEffort": "medium"
+    },
+    {
+      "id": "doc-003",
+      "type": "documentation_gaps",
+      "title": "Document Fokus-Check scoring algorithm and question flow logic",
+      "description": "The questions-data.ts file contains quiz scoring logic (MAX_SCORE=40, 5-level categories from 'excellent' to 'critical') and getResultCategory() but lacks explanation of scoring methodology. Follow-up question triggers and dual-slider configurations are undocumented.",
+      "rationale": "Business logic around scoring and categorization is critical for understanding how user results are determined. Without documentation, modifying thresholds or adding questions risks breaking the scoring system.",
+      "category": "inline_comments",
+      "targetAudience": "developers",
+      "affectedAreas": ["src/components/fokus-check/questions-data.ts", "src/types/fokus-check.ts"],
+      "currentDocumentation": "Only scattered German comments, no algorithm documentation",
+      "proposedContent": "Add: 1) Header comment explaining 8 questions × 5 max points = 40 total scoring system, 2) Document category thresholds (85%+, 67-84%, 50-66%, 32-49%, <32%), 3) Explain follow-up trigger logic, 4) Document question types (single, slider, dual-slider) and their value ranges",
+      "priority": "medium",
+      "estimatedEffort": "low"
+    },
+    {
+      "id": "doc-004",
+      "type": "documentation_gaps",
+      "title": "Create API documentation for PDF generation endpoint",
+      "description": "The API route at /api/fokus-check/generate-pdf handles PDF generation via POST but has no documentation on request/response format, error codes, or integration with the frontend and n8n workflows.",
+      "rationale": "This endpoint is called both from the frontend and potentially from n8n workflows. External integrators and future developers need to understand the expected payload structure and possible responses without reading source code.",
+      "category": "api_docs",
+      "targetAudience": "developers",
+      "affectedAreas": ["src/app/api/fokus-check/generate-pdf/route.ts"],
+      "currentDocumentation": "Only a TypeScript interface for the request body, no endpoint documentation",
+      "proposedContent": "Add JSDoc with: @route POST /api/fokus-check/generate-pdf, @body describing GeneratePDFRequest schema (result, answers, userName?, painPoint?), @returns 200 with PDF binary, 400 for validation errors, 500 for generation failures, @example showing curl or fetch usage",
+      "priority": "medium",
+      "estimatedEffort": "low"
+    },
+    {
+      "id": "doc-005",
+      "type": "documentation_gaps",
+      "title": "Document environment variables and external service dependencies",
+      "description": "The application depends on three environment variables (NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, NEXT_PUBLIC_N8N_WEBHOOK_URL) plus hardcoded webhook URLs. No documentation exists on required Supabase tables, n8n workflow expectations, or graceful degradation behavior.",
+      "rationale": "Setting up the development environment requires knowledge of external dependencies. The code shows fallback behavior when Supabase is unconfigured, but this isn't documented. New developers waste time troubleshooting missing configuration.",
+      "category": "troubleshooting",
+      "targetAudience": "contributors",
+      "affectedAreas": ["src/lib/supabase/client.ts", "src/lib/tracking/events.ts", ".env.local.example"],
+      "currentDocumentation": "No .env.example file exists, no documentation of required Supabase schema",
+      "proposedContent": "Create .env.example with documented variables, add section to README explaining: 1) Supabase tables required (fokus_check_events, fokus_check_users, fokus_check_progress), 2) n8n webhook endpoints and expected payloads, 3) How tracking degrades gracefully when services are unavailable",
+      "priority": "medium",
+      "estimatedEffort": "medium"
+    }
+  ],
+  "metadata": {
+    "filesAnalyzed": 43,
+    "documentedFunctions": 0,
+    "undocumentedFunctions": 15,
+    "readmeLastUpdated": "unknown (default template)",
+    "generatedAt": "2025-12-27T22:27:00Z"
+  }
+}

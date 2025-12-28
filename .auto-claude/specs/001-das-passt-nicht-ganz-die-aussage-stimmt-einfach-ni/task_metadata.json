@@ -1,0 +1,27 @@
+{
+  "sourceType": "manual",
+  "model": "opus",
+  "thinkingLevel": "high",
+  "isAutoProfile": true,
+  "phaseModels": {
+    "spec": "opus",
+    "planning": "opus",
+    "coding": "opus",
+    "qa": "opus"
+  },
+  "phaseThinking": {
+    "spec": "ultrathink",
+    "planning": "high",
+    "coding": "low",
+    "qa": "low"
+  },
+  "attachedImages": [
+    {
+      "id": "img-1766869558793-ol143ry",
+      "filename": "Bildschirmfoto 2025-12-27 um 20.01.11.png",
+      "mimeType": "image/png",
+      "size": 113496,
+      "path": "attachments/Bildschirmfoto 2025-12-27 um 20.01.11.png"
+    }
+  ]
+}

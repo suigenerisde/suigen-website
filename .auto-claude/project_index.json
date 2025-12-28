@@ -1,0 +1,72 @@
+{
+  "project_root": "/Users/thilopfeil/Documents/SUI-GENERIS/suigen/website",
+  "project_type": "single",
+  "services": {
+    "main": {
+      "name": "main",
+      "path": "/Users/thilopfeil/Documents/SUI-GENERIS/suigen/website",
+      "language": "TypeScript",
+      "framework": "Next.js",
+      "type": "frontend",
+      "package_manager": "npm",
+      "default_port": 3000,
+      "styling": "Tailwind CSS",
+      "dev_command": "npm run dev",
+      "key_directories": {
+        "src": {
+          "path": "src",
+          "purpose": "Source code"
+        }
+      },
+      "dependencies": [
+        "@react-pdf/renderer",
+        "@supabase/supabase-js",
+        "next",
+        "react",
+        "react-dom"
+      ],
+      "dev_dependencies": [
+        "@tailwindcss/postcss",
+        "@types/node",
+        "@types/react",
+        "@types/react-dom",
+        "eslint",
+        "eslint-config-next",
+        "tailwindcss",
+        "typescript"
+      ],
+      "environment": {
+        "variables": {
+          "NEXT_PUBLIC_SUPABASE_URL": {
+            "value": "https://supabase-new.suimation.de",
+            "source": ".env.local",
+            "type": "url",
+            "sensitive": false,
+            "required": false
+          },
+          "NEXT_PUBLIC_SUPABASE_ANON_KEY": {
+            "value": "<REDACTED>",
+            "source": ".env.local",
+            "type": "string",
+            "sensitive": true,
+            "required": false
+          },
+          "NEXT_PUBLIC_N8N_WEBHOOK_URL": {
+            "value": "https://n8n.suimation.de/webhook/fokus-check-complete",
+            "source": ".env.local",
+            "type": "url",
+            "sensitive": false,
+            "required": false
+          }
+        },
+        "required_count": 0,
+        "optional_count": 0,
+        "detected_count": 3
+      }
+    }
+  },
+  "infrastructure": {},
+  "conventions": {
+    "typescript": true
+  }
+}

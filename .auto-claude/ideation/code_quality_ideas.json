@@ -1,0 +1,149 @@
+{
+  "code_quality": [
+    {
+      "id": "cq-001",
+      "type": "code_quality",
+      "title": "Split FokusCheckQuiz.tsx into smaller composable units",
+      "description": "The FokusCheckQuiz.tsx component at 613 lines is managing too many concerns: 20+ state variables, multiple quiz steps, persistence logic, progress tracking, exit intent handling, and modal management. This monolithic structure makes it difficult to test, maintain, and reason about.",
+      "rationale": "Components with too many responsibilities become hard to test in isolation, make debugging difficult, and increase the risk of regressions when making changes. The cognitive load of understanding 20+ state variables and their interactions is high.",
+      "category": "large_files",
+      "severity": "major",
+      "affectedFiles": [
+        "src/components/fokus-check/FokusCheckQuiz.tsx"
+      ],
+      "currentState": "Single 613-line component with 20+ useState hooks, multiple useCallback handlers, and all quiz step logic combined",
+      "proposedChange": "Extract quiz state management into a custom useQuizState hook, move step-specific logic into the step components, and create a QuizOrchestrator that coordinates between steps. Structure: useQuizState.ts (state management), useQuizNavigation.ts (step transitions), useQuizTracking.ts (analytics)",
+      "codeExample": "// Current:\nconst [step, setStep] = useState<QuizStep>('invite-code');\nconst [userName, setUserName] = useState('');\nconst [currentQuestion, setCurrentQuestion] = useState(0);\nconst [answers, setAnswers] = useState<Answer[]>([]);\n// ... 16 more state variables\n\n// Proposed:\nimport { useQuizState, useQuizNavigation, useQuizTracking } from './hooks';\n\nfunction FokusCheckQuiz() {\n  const quiz = useQuizState();\n  const navigation = useQuizNavigation(quiz);\n  useQuizTracking(quiz);\n  \n  return <QuizRenderer quiz={quiz} navigation={navigation} />;\n}",
+      "bestPractice": "Single Responsibility Principle - extract state management into custom hooks, keep components focused on rendering",
+      "metrics": {
+        "lineCount": 613,
+        "complexity": null,
+        "duplicateLines": null,
+        "testCoverage": null
+      },
+      "estimatedEffort": "large",
+      "breakingChange": false,
+      "prerequisites": [
+        "Add unit tests for current quiz logic before refactoring"
+      ]
+    },
+    {
+      "id": "cq-002",
+      "type": "code_quality",
+      "title": "Extract shared fokus-check data and templates into centralized constants",
+      "description": "The same domain data is duplicated across multiple files: 'fokusBereiche' mapping appears in both FokusReportPDF.tsx and ResultDisplay.tsx, killer/quickwin templates in FokusReportPDF.tsx have similar structures to ResultDisplay.tsx, and color schemes are defined separately in each file.",
+      "rationale": "Duplicated data leads to inconsistencies when updates are made in one place but not another. It also increases maintenance burden and makes it harder to ensure business logic consistency across the quiz, results, and PDF report.",
+      "category": "duplication",
+      "severity": "minor",
+      "affectedFiles": [
+        "src/components/fokus-check/pdf/FokusReportPDF.tsx",
+        "src/components/fokus-check/ResultDisplay.tsx"
+      ],
+      "currentState": "'fokusBereiche' defined as Record<number, string> in FokusReportPDF.tsx and as full FokusBereich[] array in ResultDisplay.tsx; color mappings defined separately in each file",
+      "proposedChange": "Create src/components/fokus-check/constants/fokus-data.ts with shared domain data: FOKUS_BEREICHE (full data), KILLER_TEMPLATES, QUICKWIN_TEMPLATES, CATEGORY_COLORS, CATEGORY_CTAS. Both components import from this single source of truth.",
+      "codeExample": "// src/components/fokus-check/constants/fokus-data.ts\nexport const FOKUS_BEREICHE = [\n  { id: 1, name: 'Projekte', shortName: 'Projekte', icon: '📁', ... },\n  // ...\n];\n\nexport const CATEGORY_COLORS = {\n  excellent: { bg: '#22c55e', text: '#22c55e', ... },\n  // ...\n};\n\n// In FokusReportPDF.tsx / ResultDisplay.tsx:\nimport { FOKUS_BEREICHE, CATEGORY_COLORS } from '../constants/fokus-data';",
+      "bestPractice": "DRY (Don't Repeat Yourself) - single source of truth for domain data ensures consistency",
+      "metrics": {
+        "lineCount": null,
+        "complexity": null,
+        "duplicateLines": 120,
+        "testCoverage": null
+      },
+      "estimatedEffort": "small",
+      "breakingChange": false,
+      "prerequisites": null
+    },
+    {
+      "id": "cq-003",
+      "type": "code_quality",
+      "title": "Extract inline SVG icons into reusable Icon components",
+      "description": "There are 45 inline SVG icons across 17 component files. Many of these are duplicates: the checkmark icon appears 10+ times, close (X) icon 5+ times, arrow icons 6+ times. Each duplicates the same path data and styling properties.",
+      "rationale": "Inline SVGs increase bundle size, make style updates tedious (must change every occurrence), and clutter component JSX. Extracting them improves maintainability, enables consistent sizing/styling, and reduces cognitive load when reading components.",
+      "category": "duplication",
+      "severity": "minor",
+      "affectedFiles": [
+        "src/components/fokus-check/FokusCheckQuiz.tsx",
+        "src/components/fokus-check/ExitIntentPopup.tsx",
+        "src/components/fokus-check/AccessRequestForm.tsx",
+        "src/components/fokus-check/DeliveryChoice.tsx",
+        "src/components/fokus-check/ContinueLaterModal.tsx",
+        "src/components/layout/Header.tsx"
+      ],
+      "currentState": "SVG elements duplicated inline with full path data, e.g., checkmark path 'd=\"M16.707 5.293...\"' repeated 10+ times",
+      "proposedChange": "Create src/components/ui/icons/ directory with reusable icon components: CheckIcon, CloseIcon, ArrowRightIcon, etc. Each accepts size, color, className props. Use throughout codebase.",
+      "codeExample": "// Current (repeated 10+ times):\n<svg className=\"w-4 h-4 text-[var(--accent)]\" fill=\"currentColor\" viewBox=\"0 0 20 20\">\n  <path fillRule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clipRule=\"evenodd\" />\n</svg>\n\n// Proposed:\nimport { CheckIcon } from '@/components/ui/icons';\n<CheckIcon className=\"w-4 h-4 text-[var(--accent)]\" />",
+      "bestPractice": "Component abstraction - extract repeated UI elements into reusable components",
+      "metrics": {
+        "lineCount": null,
+        "complexity": null,
+        "duplicateLines": 200,
+        "testCoverage": null
+      },
+      "estimatedEffort": "small",
+      "breakingChange": false,
+      "prerequisites": null
+    },
+    {
+      "id": "cq-004",
+      "type": "code_quality",
+      "title": "Add unit tests for core fokus-check business logic",
+      "description": "The project has no test files (all detected tests are in node_modules). Critical business logic including score calculation (getResultCategory), answer analysis (analyzeWeaknesses, analyzeStrengths), and tracking functions have no test coverage.",
+      "rationale": "Without tests, refactoring is risky, bugs can be introduced without detection, and the confidence to make changes is low. The fokus-check quiz is a core business feature that should have comprehensive test coverage.",
+      "category": "testing",
+      "severity": "major",
+      "affectedFiles": [
+        "src/components/fokus-check/questions-data.ts",
+        "src/components/fokus-check/ResultDisplay.tsx",
+        "src/lib/tracking/events.ts"
+      ],
+      "currentState": "Zero test files in src/; no testing framework configured",
+      "proposedChange": "1) Add Jest + React Testing Library to devDependencies. 2) Create tests for: getResultCategory (all score boundaries), analyzeWeaknesses/analyzeStrengths (edge cases), tracking event functions (mock Supabase). 3) Add npm test script.",
+      "codeExample": "// src/components/fokus-check/__tests__/questions-data.test.ts\nimport { getResultCategory, MAX_SCORE } from '../questions-data';\n\ndescribe('getResultCategory', () => {\n  it('returns excellent for scores >= 34', () => {\n    expect(getResultCategory(34).category).toBe('excellent');\n    expect(getResultCategory(40).category).toBe('excellent');\n  });\n  \n  it('returns critical for scores < 13', () => {\n    expect(getResultCategory(12).category).toBe('critical');\n    expect(getResultCategory(0).category).toBe('critical');\n  });\n  // ... test all boundaries\n});",
+      "bestPractice": "Test-driven quality - critical business logic should have comprehensive unit tests",
+      "metrics": {
+        "lineCount": null,
+        "complexity": null,
+        "duplicateLines": null,
+        "testCoverage": 0
+      },
+      "estimatedEffort": "medium",
+      "breakingChange": false,
+      "prerequisites": [
+        "Install testing dependencies (jest, @testing-library/react)"
+      ]
+    },
+    {
+      "id": "cq-005",
+      "type": "code_quality",
+      "title": "Extract PDF styles from FokusReportPDF.tsx into separate stylesheet",
+      "description": "FokusReportPDF.tsx at 707 lines has ~310 lines dedicated to StyleSheet.create() styles. This makes the component hard to navigate and the styles difficult to maintain. The styles block is larger than the actual component logic.",
+      "rationale": "Mixing large style definitions with component logic increases file size, makes code navigation difficult, and violates separation of concerns. The style definitions could be reused if extracted, and changes to styles would be isolated from component logic changes.",
+      "category": "code_smells",
+      "severity": "minor",
+      "affectedFiles": [
+        "src/components/fokus-check/pdf/FokusReportPDF.tsx"
+      ],
+      "currentState": "707-line file with 310 lines of StyleSheet.create() definitions inline, followed by template data (80 lines), then component code (300 lines)",
+      "proposedChange": "Create src/components/fokus-check/pdf/FokusReportStyles.ts containing all StyleSheet.create() styles and color constants. Create src/components/fokus-check/pdf/FokusReportTemplates.ts for killerTemplates and quickWinTemplates. Import into FokusReportPDF.tsx.",
+      "codeExample": "// src/components/fokus-check/pdf/FokusReportStyles.ts\nimport { StyleSheet } from '@react-pdf/renderer';\n\nexport const colors = {\n  bgDark: '#1a2634',\n  bgCard: '#243242',\n  // ...\n};\n\nexport const styles = StyleSheet.create({\n  page: { backgroundColor: colors.bgDark, padding: 40 },\n  // ... all styles\n});\n\n// FokusReportPDF.tsx:\nimport { styles, colors } from './FokusReportStyles';\nimport { killerTemplates, quickWinTemplates } from './FokusReportTemplates';",
+      "bestPractice": "Separation of Concerns - styles, data, and component logic in separate modules",
+      "metrics": {
+        "lineCount": 707,
+        "complexity": null,
+        "duplicateLines": null,
+        "testCoverage": null
+      },
+      "estimatedEffort": "small",
+      "breakingChange": false,
+      "prerequisites": null
+    }
+  ],
+  "metadata": {
+    "filesAnalyzed": 54,
+    "largeFilesFound": 3,
+    "duplicateBlocksFound": 4,
+    "lintingConfigured": true,
+    "testsPresent": false,
+    "generatedAt": "2025-12-28T00:25:00Z"
+  }
+}

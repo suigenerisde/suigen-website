@@ -1,0 +1,12 @@
+{
+  "sourceType": "ideation",
+  "ideationType": "code_improvements",
+  "ideaId": "ci-003",
+  "rationale": "The FAQ component has onClick handlers for toggling items but lacks keyboard support. The pattern for handling keyboard events exists in other components (e.g., form inputs). Adding keyboard navigation would improve accessibility without significant code changes.",
+  "category": "feature",
+  "estimatedEffort": "trivial",
+  "complexity": "trivial",
+  "affectedFiles": [
+    "src/components/sections/FAQ.tsx"
+  ]
+}

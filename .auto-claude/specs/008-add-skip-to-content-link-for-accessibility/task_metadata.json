@@ -1,0 +1,13 @@
+{
+  "sourceType": "ideation",
+  "ideationType": "code_improvements",
+  "ideaId": "ci-005",
+  "rationale": "The Header component has comprehensive navigation with multiple links. Keyboard users must tab through all nav items to reach main content. Skip links are a standard accessibility pattern that can be implemented with the existing Tailwind CSS utilities already used in the project.",
+  "category": "feature",
+  "estimatedEffort": "trivial",
+  "complexity": "trivial",
+  "affectedFiles": [
+    "src/components/layout/Header.tsx",
+    "src/app/layout.tsx"
+  ]
+}

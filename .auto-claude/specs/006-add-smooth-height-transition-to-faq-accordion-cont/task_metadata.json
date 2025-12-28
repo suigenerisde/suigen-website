@@ -1,0 +1,12 @@
+{
+  "sourceType": "ideation",
+  "ideationType": "ui_ux_improvements",
+  "ideaId": "uiux-002",
+  "rationale": "Smooth animations help users understand state changes and reduce jarring visual shifts. The codebase already uses animations extensively (animate-fade-in, animate-slide-up) showing this pattern is expected.",
+  "category": "ui_ux",
+  "uiuxCategory": "interaction",
+  "affectedFiles": [
+    "src/components/sections/FAQ.tsx"
+  ],
+  "problemSolved": "FAQ content at lines 110-114 uses conditional rendering with no transition: {openIndex === index && (<div>...</div>)}. Content appears/disappears instantly."
+}

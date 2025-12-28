@@ -1,0 +1,69 @@
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2e474f"/>
+      <stop offset="100%" style="stop-color:#3a5861"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="800" fill="url(#bgGradient)"/>
+
+  <!-- Grid Area -->
+  <g transform="translate(100, 80)">
+    <!-- Quadrant: Top-Left (STRATEGISCH) -->
+    <rect x="0" y="0" width="280" height="280" rx="24" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <text x="140" y="120" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="800" font-family="Inter, sans-serif">STRATEGISCH</text>
+    <text x="140" y="150" text-anchor="middle" fill="#a8c0c5" font-size="13" font-family="Inter, sans-serif">Hoher Impact</text>
+    <text x="140" y="170" text-anchor="middle" fill="#a8c0c5" font-size="13" font-family="Inter, sans-serif">Hoher Aufwand</text>
+    <text x="140" y="210" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="12" font-family="Inter, sans-serif">Langfristig planen</text>
+
+    <!-- Quadrant: Top-Right (QUICK WINS) - Highlighted -->
+    <rect x="300" y="0" width="280" height="280" rx="24" fill="rgba(0,184,196,0.2)" stroke="#00b8c4" stroke-width="2" filter="url(#glow)"/>
+    <text x="440" y="100" text-anchor="middle" fill="#00b8c4" font-size="28" font-family="Inter, sans-serif">&#9733;</text>
+    <text x="440" y="140" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="900" font-family="Inter, sans-serif">QUICK WINS</text>
+    <text x="440" y="170" text-anchor="middle" fill="#a8c0c5" font-size="13" font-family="Inter, sans-serif">Hoher Impact</text>
+    <text x="440" y="190" text-anchor="middle" fill="#a8c0c5" font-size="13" font-family="Inter, sans-serif">Niedriger Aufwand</text>
+    <text x="440" y="230" text-anchor="middle" fill="#00b8c4" font-size="14" font-weight="700" font-family="Inter, sans-serif">SOFORT UMSETZEN!</text>
+
+    <!-- Quadrant: Bottom-Left (IGNORIEREN) -->
+    <rect x="0" y="300" width="280" height="280" rx="24" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    <text x="140" y="420" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="18" font-weight="800" font-family="Inter, sans-serif">IGNORIEREN</text>
+    <text x="140" y="450" text-anchor="middle" fill="rgba(168,192,197,0.5)" font-size="13" font-family="Inter, sans-serif">Niedriger Impact</text>
+    <text x="140" y="470" text-anchor="middle" fill="rgba(168,192,197,0.5)" font-size="13" font-family="Inter, sans-serif">Niedriger Aufwand</text>
+    <text x="140" y="510" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="12" font-family="Inter, sans-serif">Nicht priorisieren</text>
+
+    <!-- Quadrant: Bottom-Right (VERMEIDEN) -->
+    <rect x="300" y="300" width="280" height="280" rx="24" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    <text x="440" y="420" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="18" font-weight="800" font-family="Inter, sans-serif">VERMEIDEN</text>
+    <text x="440" y="450" text-anchor="middle" fill="rgba(168,192,197,0.5)" font-size="13" font-family="Inter, sans-serif">Niedriger Impact</text>
+    <text x="440" y="470" text-anchor="middle" fill="rgba(168,192,197,0.5)" font-size="13" font-family="Inter, sans-serif">Hoher Aufwand</text>
+    <text x="440" y="510" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="12" font-family="Inter, sans-serif">Delegieren oder streichen</text>
+  </g>
+
+  <!-- Y-Axis (Impact) -->
+  <line x1="80" y1="660" x2="80" y2="80" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <polygon points="80,80 75,95 85,95" fill="rgba(255,255,255,0.3)"/>
+
+  <text x="40" y="400" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700" font-family="Inter, sans-serif" transform="rotate(-90, 40, 400)">IMPACT</text>
+  <text x="65" y="110" text-anchor="end" fill="#a8c0c5" font-size="11" font-family="Inter, sans-serif">Hoch</text>
+  <text x="65" y="640" text-anchor="end" fill="#a8c0c5" font-size="11" font-family="Inter, sans-serif">Niedrig</text>
+
+  <!-- X-Axis (Aufwand) -->
+  <line x1="100" y1="680" x2="680" y2="680" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <polygon points="680,680 665,675 665,685" fill="rgba(255,255,255,0.3)"/>
+
+  <text x="400" y="740" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700" font-family="Inter, sans-serif">AUFWAND</text>
+  <text x="120" y="710" text-anchor="start" fill="#a8c0c5" font-size="11" font-family="Inter, sans-serif">Niedrig</text>
+  <text x="660" y="710" text-anchor="end" fill="#a8c0c5" font-size="11" font-family="Inter, sans-serif">Hoch</text>
+
+  <!-- Title -->
+  <text x="400" y="45" text-anchor="middle" fill="#ffffff" font-size="22" font-weight="800" font-family="Inter, sans-serif" letter-spacing="0.05em">QUICK-WIN MATRIX</text>
+</svg>

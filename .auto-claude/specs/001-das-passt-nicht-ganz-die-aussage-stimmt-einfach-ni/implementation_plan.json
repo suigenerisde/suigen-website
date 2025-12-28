@@ -13,7 +13,7 @@
       "subtasks": [
         {
           "id": "subtask-1-1",
-          "description": "Remove the social proof div (lines 429-438) containing false claims about '1.247+ Unternehmer' and '+37% Produktivit\u00e4tssteigerung' from FokusCheckQuiz.tsx",
+          "description": "Remove the social proof div (lines 429-438) containing false claims about '1.247+ Unternehmer' and '+37% Produktivitätssteigerung' from FokusCheckQuiz.tsx",
           "service": "frontend",
           "status": "completed",
           "files_to_create": [],
@@ -25,7 +25,7 @@
             "type": "manual",
             "run": "Open http://localhost:3000/fokus-check and verify banner is removed and page displays correctly"
           },
-          "notes": "Already completed in commit a5e0725. Removed the social proof div containing false claims about '1.247+ Unternehmer' and '+37% Produktivit\u00e4tssteigerung' from FokusCheckQuiz.tsx.",
+          "notes": "Already completed in commit a5e0725. Removed the social proof div containing false claims about '1.247+ Unternehmer' and '+37% Produktivitätssteigerung' from FokusCheckQuiz.tsx.",
           "updated_at": "2025-12-27T21:29:26.709017+00:00"
         }
       ]
@@ -49,8 +49,8 @@
     "timestamp": "2025-12-27T21:38:10.664922+00:00",
     "ready_for_qa_revalidation": false
   },
-  "status": "human_review",
-  "planStatus": "review",
+  "status": "done",
+  "planStatus": "completed",
   "qa_iteration_history": [
     {
       "iteration": 1,
@@ -89,5 +89,6 @@
     "issues_by_type": {
       "unknown": 2
     }
-  }
+  },
+  "updated_at": "2025-12-28T11:27:42.541Z"
 }

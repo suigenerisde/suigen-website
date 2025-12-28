@@ -1,0 +1,9 @@
+{
+  "sourceType": "ideation",
+  "ideationType": "performance_optimizations",
+  "ideaId": "perf-001",
+  "rationale": "@react-pdf/renderer is one of the largest dependencies in the project but is only used in the /api/fokus-check/generate-pdf route. The current import pattern may cause Next.js to include parts of this package in client bundles, increasing initial load time.",
+  "category": "performance",
+  "performanceCategory": "bundle_size",
+  "impact": "high"
+}

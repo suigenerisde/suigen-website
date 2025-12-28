@@ -1,0 +1,8 @@
+{
+  "sourceType": "ideation",
+  "ideationType": "documentation_gaps",
+  "ideaId": "doc-004",
+  "rationale": "This endpoint is called both from the frontend and potentially from n8n workflows. External integrators and future developers need to understand the expected payload structure and possible responses without reading source code.",
+  "category": "documentation",
+  "priority": "medium"
+}

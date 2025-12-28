@@ -1,0 +1,123 @@
+{
+  "performance_optimizations": [
+    {
+      "id": "perf-001",
+      "type": "performance_optimizations",
+      "title": "Dynamic import @react-pdf/renderer to reduce client bundle",
+      "description": "The @react-pdf/renderer package (~400KB) is currently bundled with client-side code even though it's only used in the server-side API route. Using dynamic imports would ensure this heavy package is only loaded when needed on the server.",
+      "rationale": "@react-pdf/renderer is one of the largest dependencies in the project but is only used in the /api/fokus-check/generate-pdf route. The current import pattern may cause Next.js to include parts of this package in client bundles, increasing initial load time.",
+      "category": "bundle_size",
+      "impact": "high",
+      "affectedAreas": [
+        "src/app/api/fokus-check/generate-pdf/route.ts",
+        "src/components/fokus-check/pdf/FokusReportPDF.tsx"
+      ],
+      "currentMetric": "@react-pdf/renderer adds ~400KB+ to dependency tree",
+      "expectedImprovement": "~300-400KB reduction in client bundle, ~15-20% faster initial page load",
+      "implementation": "1. Use dynamic import in API route: const { renderToBuffer } = await import('@react-pdf/renderer')\n2. Move FokusReportPDF to be only server-importable\n3. Verify with bundle analyzer that package is excluded from client chunks",
+      "tradeoffs": "Slightly increased cold-start time for PDF generation API route, but this is negligible for serverless functions",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "perf-002",
+      "type": "performance_optimizations",
+      "title": "Batch tracking events to reduce Supabase API calls",
+      "description": "The tracking system fires individual Supabase insert calls for each event (trackCheckStarted, trackQuestionViewed, trackQuestionAnswered, etc.). Batching these events and sending them in bulk would reduce network requests and improve quiz responsiveness.",
+      "rationale": "During a typical quiz session, 15+ individual tracking events are fired. Each triggers a separate Supabase API call, adding network latency and potential blocking time. The 'question_viewed' event fires on every question transition, creating unnecessary network churn.",
+      "category": "network",
+      "impact": "medium",
+      "affectedAreas": [
+        "src/lib/tracking/events.ts",
+        "src/components/fokus-check/FokusCheckQuiz.tsx"
+      ],
+      "currentMetric": "~15+ individual Supabase API calls per quiz session",
+      "expectedImprovement": "Reduce to 2-3 batched calls (start, during, completion), ~80% fewer network requests, improved quiz interaction responsiveness",
+      "implementation": "1. Create event queue in tracking/events.ts\n2. Use requestIdleCallback or setTimeout to batch flush events every 5-10 seconds\n3. Flush queue on page unload (navigator.sendBeacon for reliability)\n4. Add immediate flush on trackCheckCompleted for critical events",
+      "tradeoffs": "Events have slight delay before reaching database, potential event loss on browser crash (mitigated by beforeunload flush)",
+      "estimatedEffort": "medium"
+    },
+    {
+      "id": "perf-003",
+      "type": "performance_optimizations",
+      "title": "Memoize FokusCheckQuiz child components to prevent re-renders",
+      "description": "The FokusCheckQuiz component has 15+ state variables that change frequently. Child components like QuestionCard, ProgressIndicator, and NameCapture are re-rendered on every state change even when their props haven't changed.",
+      "rationale": "React DevTools would show frequent re-renders of child components during quiz progression. While useCallback is used for handlers, the child components themselves aren't memoized, causing unnecessary React reconciliation work.",
+      "category": "rendering",
+      "impact": "medium",
+      "affectedAreas": [
+        "src/components/fokus-check/QuestionCard.tsx",
+        "src/components/fokus-check/ProgressIndicator.tsx",
+        "src/components/fokus-check/NameCapture.tsx",
+        "src/components/fokus-check/DeliveryChoice.tsx",
+        "src/components/fokus-check/ResultDisplay.tsx"
+      ],
+      "currentMetric": "Child components re-render on every parent state change",
+      "expectedImprovement": "~50% fewer component re-renders during quiz, smoother animations, better performance on low-end devices",
+      "implementation": "1. Wrap QuestionCard with React.memo()\n2. Wrap ProgressIndicator with React.memo()\n3. Wrap other child components with React.memo()\n4. Ensure prop references are stable (already using useCallback for handlers)\n5. Add React DevTools Profiler verification",
+      "tradeoffs": "Small memory overhead for memoization, negligible for this component count",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "perf-004",
+      "type": "performance_optimizations",
+      "title": "Lazy load Supabase client to reduce initial bundle",
+      "description": "The Supabase client (@supabase/supabase-js ~50KB) is initialized at module load time in lib/supabase/client.ts. This means the entire Supabase SDK is included in the initial client bundle even for visitors who never interact with tracking features.",
+      "rationale": "Most landing page visitors don't need the Supabase client immediately - it's only used when they start the Fokus-Check quiz. Lazy loading would defer this dependency until it's actually needed.",
+      "category": "bundle_size",
+      "impact": "medium",
+      "affectedAreas": [
+        "src/lib/supabase/client.ts",
+        "src/lib/tracking/events.ts"
+      ],
+      "currentMetric": "@supabase/supabase-js adds ~50KB to initial bundle",
+      "expectedImprovement": "~50KB reduction in initial JavaScript, faster Time to Interactive for landing page visitors who don't use the quiz",
+      "implementation": "1. Convert supabase client to lazy initialization: let client: SupabaseClient | null = null; export const getSupabase = async () => { if (!client) client = createClient(...); return client; }\n2. Update tracking functions to await getSupabase()\n3. Consider Next.js dynamic import for tracking module",
+      "tradeoffs": "Slight delay on first tracking call (~50ms for import), but this happens in background and doesn't block user interaction",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "perf-005",
+      "type": "performance_optimizations",
+      "title": "Use Next.js dynamic import for FokusCheckQuiz component",
+      "description": "The FokusCheckQuiz component is a large client component (~600+ lines) with many sub-components and dependencies. It's loaded on the /fokus-check page which could benefit from code splitting.",
+      "rationale": "The quiz component and all its sub-components (InviteCodeCapture, AccessRequestForm, QuestionCard, etc.) are bundled together. Using next/dynamic with loading state would improve the perceived performance of the fokus-check page.",
+      "category": "bundle_size",
+      "impact": "medium",
+      "affectedAreas": [
+        "src/app/fokus-check/page.tsx",
+        "src/components/fokus-check/FokusCheckQuiz.tsx"
+      ],
+      "currentMetric": "FokusCheckQuiz bundle includes ~10+ sub-components loaded upfront",
+      "expectedImprovement": "Separate chunk for quiz components (~100KB), faster initial render of fokus-check page shell, better Core Web Vitals (LCP)",
+      "implementation": "1. In fokus-check/page.tsx: const FokusCheckQuiz = dynamic(() => import('@/components/fokus-check/FokusCheckQuiz').then(m => m.FokusCheckQuiz), { loading: () => <QuizSkeleton />, ssr: false })\n2. Create simple skeleton component for loading state\n3. Add Suspense boundary for better UX",
+      "tradeoffs": "Slight flash of loading state before quiz appears, but with good skeleton this improves perceived performance",
+      "estimatedEffort": "small"
+    }
+  ],
+  "metadata": {
+    "totalBundleSize": "Estimated 800KB-1MB+ (includes react-pdf, supabase, next, react)",
+    "largestDependencies": [
+      "@react-pdf/renderer (~400KB)",
+      "@supabase/supabase-js (~50KB)",
+      "next (framework)",
+      "react-dom (framework)"
+    ],
+    "filesAnalyzed": 42,
+    "potentialSavings": "~400-500KB initial bundle reduction",
+    "keyFindings": [
+      "PDF library loaded in client bundle unnecessarily",
+      "Tracking events fire individually instead of batched",
+      "Quiz child components lack memoization",
+      "Supabase client initialized eagerly",
+      "Large quiz component not code-split"
+    ],
+    "performanceNotes": [
+      "Next.js image optimization already configured (AVIF, WebP)",
+      "Compression enabled in next.config.ts",
+      "CalBooker already uses lazy loading pattern",
+      "Google fonts use display: swap (good)",
+      "Analytics script uses lazyOnload strategy (good)"
+    ],
+    "generatedAt": "2025-12-27T23:05:00Z"
+  }
+}

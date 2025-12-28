@@ -1,0 +1,13 @@
+{
+  "sourceType": "ideation",
+  "ideationType": "ui_ux_improvements",
+  "ideaId": "uiux-004",
+  "rationale": "Using a single Button component ensures consistent styling, easier maintenance, and uniform focus states/accessibility features across the app. The Button component already has proper focus ring styling.",
+  "category": "ui_ux",
+  "uiuxCategory": "visual",
+  "affectedFiles": [
+    "src/components/sections/Hero.tsx",
+    "src/components/ui/Button.tsx"
+  ],
+  "problemSolved": "Hero.tsx at lines 29-34 uses: <Link href='/kontakt' className='btn btn-primary'>. Meanwhile Header.tsx, CTA.tsx, and FokusCheckQuiz.tsx use the <Button> component with variant prop."
+}

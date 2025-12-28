@@ -1,0 +1,15 @@
+{
+  "sourceType": "ideation",
+  "ideationType": "code_improvements",
+  "ideaId": "ci-002",
+  "rationale": "The Button component already has a disabled state with styling (opacity-50 cursor-not-allowed). Multiple components (DeliveryChoice, ContinueLaterModal, AccessRequestForm) implement loading states manually. The infrastructure for disabled states exists and can be extended to loading states.",
+  "category": "feature",
+  "estimatedEffort": "trivial",
+  "complexity": "trivial",
+  "affectedFiles": [
+    "src/components/ui/Button.tsx",
+    "src/components/fokus-check/DeliveryChoice.tsx",
+    "src/components/fokus-check/ContinueLaterModal.tsx",
+    "src/components/fokus-check/AccessRequestForm.tsx"
+  ]
+}

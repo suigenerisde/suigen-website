@@ -1,0 +1,195 @@
+{
+  "feature": "Create API documentation for PDF generation endpoint",
+  "description": "The API route at /api/fokus-check/generate-pdf handles PDF generation via POST but has no documentation on request/response format, error codes, or integration with the frontend and n8n workflows.",
+  "created_at": "2025-12-28T10:36:47.316Z",
+  "updated_at": "2025-12-28T12:00:00.000Z",
+  "status": "human_review",
+  "planStatus": "review",
+  "phases": [
+    {
+      "id": "phase-1",
+      "name": "Documentation Creation",
+      "description": "Create comprehensive API documentation for the generate-pdf endpoint",
+      "order": 1,
+      "status": "pending",
+      "subtasks": [
+        {
+          "id": "1.1",
+          "title": "Create API documentation file",
+          "description": "Create a new markdown file at docs/api/fokus-check-generate-pdf.md containing the complete API documentation including endpoint overview, authentication requirements, and base URL information",
+          "status": "completed",
+          "estimated_hours": 0.5,
+          "acceptance_criteria": [
+            "File created at docs/api/fokus-check-generate-pdf.md",
+            "Contains endpoint URL, HTTP method, and description",
+            "Documents that endpoint is publicly accessible (no auth required)"
+          ],
+          "notes": "Created docs/api/fokus-check-generate-pdf.md with endpoint overview, authentication requirements (no auth required), base URL information, and quick reference for request/response format. Committed as 8b7e66c.",
+          "updated_at": "2025-12-28T10:51:44.485256+00:00"
+        },
+        {
+          "id": "1.2",
+          "title": "Document request payload schema",
+          "description": "Document the complete request body schema including GeneratePDFRequest interface with result (FokusCheckResult), answers (Answer[]), userName (optional), and painPoint (optional) fields. Include field descriptions and data types with examples",
+          "status": "completed",
+          "estimated_hours": 1,
+          "acceptance_criteria": [
+            "GeneratePDFRequest interface fully documented",
+            "FokusCheckResult schema documented with all fields",
+            "Answer schema documented including followUp structure",
+            "JSON example of valid request body included"
+          ],
+          "notes": "Documented complete request body schema including GeneratePDFRequest, FokusCheckResult, Answer, and FollowUpAnswer interfaces. Added detailed field tables with types, requirements, and descriptions. Included both minimal and complete JSON examples plus TypeScript type definitions. Committed as d873e74.",
+          "updated_at": "2025-12-28T10:53:49.722872+00:00"
+        },
+        {
+          "id": "1.3",
+          "title": "Document response formats",
+          "description": "Document successful response (PDF binary with application/pdf content-type, Content-Disposition header) and error responses (400 for missing fields, 500 for generation failure)",
+          "status": "completed",
+          "estimated_hours": 0.5,
+          "acceptance_criteria": [
+            "Success response documented with content-type and headers",
+            "400 Bad Request response documented with error schema",
+            "500 Internal Server Error documented with error schema",
+            "Response examples included for each status code"
+          ],
+          "notes": "Documented complete response formats including: (1) Success 200 OK with PDF binary, Content-Type: application/pdf, and Content-Disposition header; (2) 400 Bad Request with error schema and common causes; (3) 500 Internal Server Error with error schema and possible causes. Added response summary table and TypeScript error handling best practices example. Committed as 72ac7bc.",
+          "updated_at": "2025-12-28T10:55:28.185900+00:00"
+        },
+        {
+          "id": "1.4",
+          "title": "Add integration examples",
+          "description": "Add practical code examples showing how to call the API from different contexts: cURL command, JavaScript/fetch, and n8n HTTP Request node configuration",
+          "status": "completed",
+          "estimated_hours": 1,
+          "acceptance_criteria": [
+            "cURL example with headers and body",
+            "JavaScript/fetch example with error handling",
+            "n8n HTTP Request node configuration guide",
+            "Examples show how to handle binary PDF response"
+          ],
+          "notes": "Added comprehensive integration examples to docs/api/fokus-check-generate-pdf.md: (1) cURL examples with basic/advanced usage, environment variables, and status checking; (2) JavaScript/Fetch API examples for browser, download, new tab, and Node.js; (3) TypeScript with full type safety; (4) Complete n8n HTTP Request node configuration with step-by-step setup, expressions, email workflow example, and error handling; (5) Binary PDF response handling patterns including detection, conversion to base64/ArrayBuffer; (6) React hook example for frontend integration; (7) Retry pattern with exponential backoff. Committed as 3feefcc.",
+          "updated_at": "2025-12-28T10:58:19.331507+00:00"
+        }
+      ]
+    },
+    {
+      "id": "phase-2",
+      "name": "Code Enhancement",
+      "description": "Add inline documentation and improve code discoverability",
+      "order": 2,
+      "status": "pending",
+      "subtasks": [
+        {
+          "id": "2.1",
+          "title": "Add JSDoc comments to route handler",
+          "description": "Add comprehensive JSDoc comments to the POST handler in route.ts, documenting parameters, return type, error cases, and linking to the full documentation",
+          "status": "completed",
+          "estimated_hours": 0.5,
+          "acceptance_criteria": [
+            "JSDoc block added to POST function",
+            "Documents request body structure",
+            "Documents possible response status codes",
+            "Links to full documentation file"
+          ],
+          "notes": "Added comprehensive JSDoc comments to the POST handler in route.ts: (1) Documented GeneratePDFRequest interface with description and @see link to docs; (2) Added JSDoc comments to each field of the interface; (3) Added full JSDoc block to POST function with @route, @param, @returns, @example, and @see tags; (4) Documented all response status codes (200, 400, 500); (5) Added return type annotation Promise<NextResponse>. Committed as 048886c.",
+          "updated_at": "2025-12-28T11:00:38.550063+00:00"
+        },
+        {
+          "id": "2.2",
+          "title": "Add type exports and documentation",
+          "description": "Ensure the GeneratePDFRequest interface is properly exported from a shared location and has JSDoc comments describing each field",
+          "status": "completed",
+          "estimated_hours": 0.5,
+          "acceptance_criteria": [
+            "GeneratePDFRequest interface has JSDoc comments",
+            "Interface is accessible for external integrations",
+            "All optional fields clearly marked"
+          ],
+          "notes": "Moved GeneratePDFRequest interface from route.ts to src/types/fokus-check.ts. Added comprehensive JSDoc documentation to both GeneratePDFRequest and FokusCheckResult interfaces. Each field has JSDoc comments with @optional tags for optional fields. The interface is now exportable from the shared types location for external integrations. Updated route.ts to import from the shared location. Committed as 2910d2b.",
+          "updated_at": "2025-12-28T11:03:53.882048+00:00"
+        }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "name": "Documentation Integration",
+      "description": "Integrate documentation into project structure and README",
+      "order": 3,
+      "status": "pending",
+      "subtasks": [
+        {
+          "id": "3.1",
+          "title": "Create docs index and add to README",
+          "description": "Create a docs/README.md index file listing available API documentation and add a reference in the main project README pointing to the API docs",
+          "status": "completed",
+          "estimated_hours": 0.5,
+          "acceptance_criteria": [
+            "docs/README.md created with API docs index",
+            "Main README.md updated with link to API documentation",
+            "Documentation discoverable from project root"
+          ],
+          "notes": "Created docs/README.md as an index file listing available API documentation with: (1) API endpoint table with links to documentation; (2) Quick links section highlighting key documentation content; (3) Directory structure overview; (4) Contribution guidelines for adding new docs. Updated main README.md with new Documentation section containing links to the docs folder and API reference. Committed as 252926e.",
+          "updated_at": "2025-12-28T11:05:35.717035+00:00"
+        },
+        {
+          "id": "3.2",
+          "title": "Verify documentation completeness",
+          "description": "Review documentation against actual implementation to ensure all request/response fields are accurately documented. Test example requests against the endpoint",
+          "status": "completed",
+          "estimated_hours": 0.5,
+          "acceptance_criteria": [
+            "All fields from implementation are documented",
+            "Example request payloads match expected types",
+            "Documentation reflects actual behavior"
+          ],
+          "notes": "Verified documentation completeness against actual implementation. All request/response fields are accurately documented. All TypeScript interfaces match (GeneratePDFRequest, FokusCheckResult, Answer, FollowUpAnswer). Error messages match exactly. Example requests are valid. Verification included: route.ts, fokus-check.ts types, FokusReportPDF.tsx, and events.ts. All documentation reflects actual behavior.",
+          "updated_at": "2025-12-28T11:10:40.816414+00:00"
+        }
+      ]
+    }
+  ],
+  "workflow_type": "development",
+  "services_involved": [
+    "Next.js API route",
+    "n8n workflows",
+    "Frontend integration"
+  ],
+  "final_acceptance": [
+    "Complete API documentation exists at docs/api/fokus-check-generate-pdf.md",
+    "Request/response schemas fully documented with examples",
+    "Integration examples for cURL, JavaScript, and n8n included",
+    "JSDoc comments added to route handler",
+    "Documentation linked from project README"
+  ],
+  "spec_file": "spec.md",
+  "last_updated": "2025-12-28T11:19:02.680760+00:00",
+  "qa_signoff": {
+    "status": "approved",
+    "qa_session": 0,
+    "issues_found": [
+      {
+        "description": "None - all acceptance criteria met"
+      }
+    ],
+    "tests_passed": {},
+    "timestamp": "2025-12-28T11:19:02.680750+00:00",
+    "ready_for_qa_revalidation": false
+  },
+  "qa_iteration_history": [
+    {
+      "iteration": 1,
+      "status": "approved",
+      "timestamp": "2025-12-28T11:19:23.656602+00:00",
+      "issues": [],
+      "duration_seconds": 459.53
+    }
+  ],
+  "qa_stats": {
+    "total_iterations": 1,
+    "last_iteration": 1,
+    "last_status": "approved",
+    "issues_by_type": {}
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "files": [
+    "src/components/fokus-check/pdf/FokusReportPDF.tsx",
+    "src/components/fokus-check/pdf/RadarChart.tsx",
+    "src/app/api/fokus-check/generate-pdf/route.ts",
+    "next.config.ts"
+  ],
+  "last_updated": "2025-12-28T11:56:43.212355"
+}
