@@ -426,17 +426,6 @@ export function FokusCheckQuiz() {
             8 Fragen, sofort Ergebnis.
           </p>
 
-          {/* Social Proof */}
-          <div className="bg-[var(--accent)]/5 border border-[var(--accent)]/20 rounded-2xl p-4 mb-8">
-            <p className="text-[var(--text-light)] font-bold flex items-center gap-2">
-              <span className="text-xl">🔥</span>
-              1.247+ Unternehmer haben ihren Fokus-Score bereits berechnet
-            </p>
-            <p className="text-[var(--text-muted)] text-sm mt-1">
-              Durchschnittliche Produktivitätssteigerung nach Fokus-Audit: +37%
-            </p>
-          </div>
-
           <Button onClick={handleStart} variant="primary" size="lg">
             Meinen Fokus-Score berechnen
           </Button>

@@ -326,14 +326,6 @@ export function ResultDisplay({ result, userName, answers, onCtaClick }: ResultD
         <p className="text-[var(--text-muted)] text-sm mt-4">30 Minuten • Kostenlos • Unverbindlich</p>
       </div>
 
-      {/* Social Proof */}
-      <div className="mt-6 text-[var(--text-muted)] text-sm">
-        <span className="inline-flex items-center gap-2">
-          <span className="text-[var(--accent)]">✓</span>
-          1.247+ Unternehmer haben bereits ihren Fokus transformiert
-        </span>
-      </div>
-
       {/* Alternative: Fokus-Audit */}
       <div className="mt-8 pt-8 border-t border-[var(--text-muted)]/10">
         <p className="text-[var(--text-muted)] text-sm mb-4">Oder direkt loslegen?</p>
