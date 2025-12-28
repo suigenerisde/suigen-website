@@ -8,6 +8,8 @@ import {
 import type { Answer, FokusCheckResult } from '@/types/fokus-check';
 import { questions, MAX_SCORE } from '../questions-data';
 import { RadarChart } from './RadarChart';
+import { determineFokusType } from '@/lib/fokus-check/fokus-types';
+import { calculateROI, formatCurrency, formatHours } from '@/lib/fokus-check/roi-calculator';
 
 // Farben passend zur Website
 const colors = {
@@ -329,12 +331,117 @@ const styles = StyleSheet.create({
     marginTop: 'auto',
     paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: `${colors.textMuted}30`,
+    borderTopColor: colors.textLight,
     alignItems: 'center',
   },
   footerText: {
     fontSize: 9,
     color: colors.textMuted,
+  },
+  // ROI Section
+  roiBox: {
+    backgroundColor: colors.bgCard,
+    borderRadius: 12,
+    padding: 20,
+    borderLeftWidth: 4,
+    borderLeftColor: colors.red,
+    marginBottom: 16,
+  },
+  roiHeader: {
+    marginBottom: 16,
+  },
+  roiTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: colors.textLight,
+    marginBottom: 4,
+  },
+  roiSubtitle: {
+    fontSize: 9,
+    color: colors.textMuted,
+    lineHeight: 1.4,
+  },
+  roiMainNumber: {
+    fontSize: 48,
+    fontWeight: 'bold',
+    color: colors.red,
+    marginBottom: 8,
+  },
+  roiLabel: {
+    fontSize: 10,
+    color: colors.textMuted,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginBottom: 16,
+  },
+  roiGrid: {
+    flexDirection: 'row',
+    gap: 12,
+    marginBottom: 16,
+  },
+  roiGridItem: {
+    flex: 1,
+    backgroundColor: colors.bgDark,
+    borderRadius: 8,
+    padding: 12,
+    alignItems: 'center',
+  },
+  roiGridNumber: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: colors.textLight,
+    marginBottom: 4,
+  },
+  roiGridLabel: {
+    fontSize: 8,
+    color: colors.textMuted,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  roiBreakdownCard: {
+    backgroundColor: colors.bgDark,
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  roiBreakdownLeft: {
+    flex: 1,
+  },
+  roiBreakdownLabel: {
+    fontSize: 10,
+    color: colors.textLight,
+    marginBottom: 2,
+  },
+  roiBreakdownHours: {
+    fontSize: 8,
+    color: colors.textMuted,
+  },
+  roiBreakdownRight: {
+    alignItems: 'flex-end',
+  },
+  roiBreakdownAmount: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: colors.red,
+    marginBottom: 2,
+  },
+  roiBreakdownPer: {
+    fontSize: 7,
+    color: colors.textMuted,
+  },
+  roiWarning: {
+    backgroundColor: colors.bgDark,
+    borderRadius: 8,
+    padding: 12,
+    marginTop: 8,
+  },
+  roiWarningText: {
+    fontSize: 8,
+    color: colors.textMuted,
+    lineHeight: 1.4,
   },
 });
 
@@ -485,6 +592,8 @@ export function FokusReportPDF({ result, answers, userName, painPoint, createdAt
   const categoryColor = getCategoryColor(result.category);
   const weakestAreas = getWeakestAreas(answers);
   const strongestAreas = getStrongestAreas(answers);
+  const fokusType = determineFokusType(answers);
+  const roiData = calculateROI(answers);
   const formattedDate = createdAt.toLocaleDateString('de-DE', {
     day: '2-digit',
     month: '2-digit',
@@ -495,16 +604,27 @@ export function FokusReportPDF({ result, answers, userName, painPoint, createdAt
     <Document>
       {/* ========== SEITE 1: DEIN ERGEBNIS ========== */}
       <Page size="A4" style={styles.page}>
-        {/* Header */}
+        {/* Professional Header */}
         <View style={styles.header}>
           <View style={styles.badge}>
-            <Text style={styles.badgeText}>DEIN FOKUS-REPORT</Text>
+            <Text style={styles.badgeText}>FOKUS-CHECK REPORT</Text>
           </View>
-          {userName && <Text style={styles.title}>Hallo {userName}!</Text>}
-          <Text style={styles.subtitle}>Erstellt am {formattedDate}</Text>
+          <Text style={styles.title}>Persönliche Fokus-Analyse</Text>
+          <Text style={styles.subtitle}>
+            {userName ? `für ${userName} | ` : ''}Erstellt am {formattedDate}
+          </Text>
         </View>
 
-        {/* Score Section - Horizontal Layout */}
+        {/* Einleitung */}
+        <View style={[styles.section, { marginBottom: 20 }]}>
+          <Text style={[styles.categoryDescription, { lineHeight: 1.6, textAlign: 'left' }]}>
+            Dieser Report analysiert Deine aktuelle Fokus-Situation in 8 Dimensionen. Du erhältst eine ehrliche
+            Standortbestimmung, konkrete Zahlen zu den Kosten Deiner Fokus-Probleme und einen klaren Fahrplan, wie Du
+            Deine Produktivität systematisch verbesserst. Fakten, Zahlen und umsetzbare Strategien.
+          </Text>
+        </View>
+
+        {/* Score Section - Clean & Professional */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>DEIN FOKUS-SCORE</Text>
           <View style={styles.scoreRow}>
@@ -512,53 +632,69 @@ export function FokusReportPDF({ result, answers, userName, painPoint, createdAt
               style={[
                 styles.scoreCircle,
                 {
-                  borderColor: categoryColor,
-                  backgroundColor: `${categoryColor}15`,
+                  borderColor: colors.accent,
+                  backgroundColor: `${colors.accent}15`,
                 },
               ]}
             >
-              <Text style={[styles.scoreNumber, { color: categoryColor }]}>{result.score}</Text>
+              <Text style={[styles.scoreNumber, { color: colors.accent }]}>{result.score}</Text>
               <Text style={styles.scoreMax}>von {MAX_SCORE}</Text>
             </View>
             <View style={styles.scoreInfo}>
-              <Text style={[styles.categoryTitle, { color: categoryColor }]}>{result.title}</Text>
+              <Text style={[styles.categoryTitle, { color: colors.textLight }]}>{result.title}</Text>
               <Text style={styles.categoryDescription}>{result.description}</Text>
             </View>
           </View>
         </View>
 
-        {/* Quick Summary */}
+        {/* Fokus-Typ Section - Unified Design */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>AUF EINEN BLICK</Text>
-          <View style={styles.summaryRow}>
-            <View style={[styles.summaryBox, { borderLeftWidth: 3, borderLeftColor: colors.green }]}>
-              <Text style={styles.summaryLabel}>Deine Stärken</Text>
-              {strongestAreas.map((id) => (
-                <Text key={id} style={styles.summaryItem}>• {fokusBereiche[id]}</Text>
-              ))}
-            </View>
-            <View style={[styles.summaryBox, { borderLeftWidth: 3, borderLeftColor: colors.textMuted }]}>
-              <Text style={styles.summaryLabel}>Verbesserungspotential</Text>
-              {weakestAreas.map((id) => (
-                <Text key={id} style={styles.summaryItem}>• {fokusBereiche[id]}</Text>
-              ))}
-            </View>
+          <Text style={styles.sectionTitle}>DEIN FOKUS-TYP</Text>
+          <Text style={[styles.categoryDescription, { marginBottom: 12 }]}>
+            Basierend auf Deiner Selbsteinschätzung zeigt sich ein klares Muster in Deinem Arbeits- und Fokusverhalten.
+            Du arbeitest nach folgendem Profil:
+          </Text>
+          <View style={[styles.painPointCard, { borderLeftWidth: 3, borderLeftColor: colors.accent }]}>
+            <Text style={[styles.categoryTitle, { color: colors.accent, marginBottom: 12 }]}>
+              {fokusType.name}
+            </Text>
+            <Text style={[styles.painPointText, { marginBottom: 16 }]}>
+              {fokusType.description}
+            </Text>
+            <Text style={[styles.sectionTitle, { fontSize: 9, color: colors.accent, marginBottom: 6 }]}>
+              DEINE SUPERKRAFT
+            </Text>
+            <Text style={[styles.painPointText, { marginBottom: 16 }]}>
+              {fokusType.superpower}
+            </Text>
+            <Text style={[styles.sectionTitle, { fontSize: 9, color: colors.accent, marginBottom: 6 }]}>
+              DEIN FOKUS-KILLER
+            </Text>
+            <Text style={[styles.painPointText, { marginBottom: 16 }]}>
+              {fokusType.killer}
+            </Text>
+            <Text style={[styles.sectionTitle, { fontSize: 9, color: colors.accent, marginBottom: 6 }]}>
+              WAS DU JETZT BRAUCHST
+            </Text>
+            <Text style={styles.painPointText}>
+              {fokusType.whatYouNeed}
+            </Text>
           </View>
         </View>
 
         {/* Radar Chart Section */}
-        <View style={styles.section}>
+        <View style={styles.section} wrap={false}>
           <Text style={styles.sectionTitle}>DEIN FOKUS-PROFIL</Text>
           <View style={styles.radarContainer}>
             <RadarChart
-              size={320}
+              size={280}
               color={colors.accent}
               gridColor={colors.textMuted}
               labelColor={colors.textLight}
               data={[
                 { label: 'Projekte', value: answers.find((a) => a.questionId === 1)?.value || 0, maxValue: 5 },
                 { label: 'Störungen', value: answers.find((a) => a.questionId === 2)?.value || 0, maxValue: 5 },
-                { label: 'Prioritäten', value: answers.find((a) => a.questionId === 3)?.value || 0, maxValue: 5 },
+                { label: 'Priorität', value: answers.find((a) => a.questionId === 3)?.value || 0, maxValue: 5 },
                 { label: 'Balance', value: answers.find((a) => a.questionId === 4)?.value || 0, maxValue: 5 },
                 { label: 'Umsetzung', value: answers.find((a) => a.questionId === 5)?.value || 0, maxValue: 5 },
                 { label: 'Tools', value: answers.find((a) => a.questionId === 6)?.value || 0, maxValue: 5 },
@@ -567,8 +703,142 @@ export function FokusReportPDF({ result, answers, userName, painPoint, createdAt
               ]}
             />
           </View>
+          <Text style={[styles.categoryDescription, { marginTop: 16, textAlign: 'right' }]}>
+            Das Radar-Diagramm visualisiert Deine 8 Fokus-Dimensionen. Je weiter außen ein Punkt liegt, desto stärker
+            bist Du in diesem Bereich. Die Fläche zeigt Dein aktuelles Profil – Dein Ziel ist es, diese Fläche
+            strategisch zu vergrößern, beginnend mit den Bereichen, die den größten Impact auf Dein Business haben.
+          </Text>
+        </View>
+
+        {/* Footer */}
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>SUI GENERIS | Human First | suigen.de</Text>
         </View>
       </Page>
+
+      {/* ========== SEITE 1.5: WAS DICH DEIN FOKUS-PROBLEM KOSTET ========== */}
+      {roiData.totalHoursLostPerWeek > 0 && (
+        <Page size="A4" style={styles.page}>
+          {/* Header */}
+          <View style={styles.header}>
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>DEIN ROI-KALKULATION</Text>
+            </View>
+          </View>
+
+          {/* Main ROI Box */}
+          <View style={styles.roiBox}>
+            <View style={styles.roiHeader}>
+              <Text style={styles.roiTitle}>Was Dich Dein Fokus-Problem WIRKLICH kostet</Text>
+              <Text style={styles.roiSubtitle}>
+                Basierend auf Deinen schwächsten Bereichen und einem konservativen Stundensatz von{' '}
+                {formatCurrency(roiData.hourlyRate)}/h
+              </Text>
+            </View>
+
+            {/* Total Cost per Year */}
+            <Text style={styles.roiMainNumber}>{formatCurrency(roiData.totalCostPerYear)}</Text>
+            <Text style={styles.roiLabel}>Pro Jahr verschwendet</Text>
+
+            {/* Grid: Week/Month */}
+            <View style={styles.roiGrid}>
+              <View style={styles.roiGridItem}>
+                <Text style={styles.roiGridNumber}>{formatHours(roiData.totalHoursLostPerWeek)}</Text>
+                <Text style={styles.roiGridLabel}>Stunden / Woche</Text>
+              </View>
+              <View style={styles.roiGridItem}>
+                <Text style={styles.roiGridNumber}>{formatCurrency(roiData.totalCostPerWeek)}</Text>
+                <Text style={styles.roiGridLabel}>Pro Woche</Text>
+              </View>
+              <View style={styles.roiGridItem}>
+                <Text style={styles.roiGridNumber}>{formatCurrency(roiData.totalCostPerMonth)}</Text>
+                <Text style={styles.roiGridLabel}>Pro Monat</Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Hybrid-Ansatz: Größter Hebel + Gesamtpotenzial */}
+          {roiData.breakdown.length > 0 && (
+            <View style={styles.section}>
+              {/* Größter Hebel */}
+              <View style={[styles.painPointCard, { borderLeftWidth: 3, borderLeftColor: colors.red, marginBottom: 20 }]}>
+                <Text style={[styles.sectionTitle, { fontSize: 11, color: colors.red, marginBottom: 8 }]}>
+                  IHR GRÖSSTER HEBEL: {formatCurrency(roiData.breakdown[0].costPerYear)} / Jahr
+                </Text>
+                <Text style={[styles.painPointText, { marginBottom: 12 }]}>
+                  {roiData.breakdown[0].label} optimieren
+                </Text>
+                <Text style={[styles.categoryDescription, { fontSize: 10, fontStyle: 'italic' }]}>
+                  = 1 vollständig finanzierter Senior-Mitarbeiter (inkl. Lohnnebenkosten)
+                </Text>
+              </View>
+
+              {/* Trennlinie */}
+              <View style={{ borderBottomWidth: 1, borderBottomColor: colors.textMuted, opacity: 0.3, marginBottom: 16 }} />
+
+              {/* Gesamtpotenzial */}
+              <View>
+                <Text style={[styles.categoryDescription, { marginBottom: 8 }]}>
+                  Gesamtpotenzial über alle Bereiche:
+                </Text>
+                <Text style={[styles.categoryTitle, { fontSize: 16, color: colors.accent, marginBottom: 12 }]}>
+                  {formatCurrency(roiData.totalCostPerYear)} / Jahr
+                </Text>
+
+                {/* Einfacher Balken */}
+                <View style={{ marginTop: 12 }}>
+                  <View style={{ flexDirection: 'row', height: 24, borderRadius: 4, overflow: 'hidden', marginBottom: 8 }}>
+                    <View
+                      style={{
+                        width: `${(roiData.breakdown[0].costPerYear / roiData.totalCostPerYear) * 100}%`,
+                        backgroundColor: colors.red,
+                        justifyContent: 'center',
+                        paddingLeft: 8,
+                      }}
+                    >
+                      <Text style={{ fontSize: 8, color: colors.textLight, fontWeight: 'bold' }}>
+                        {Math.round((roiData.breakdown[0].costPerYear / roiData.totalCostPerYear) * 100)}%
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flex: 1,
+                        backgroundColor: `${colors.textMuted}30`,
+                      }}
+                    />
+                  </View>
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={{ fontSize: 8, color: colors.textMuted }}>
+                      {roiData.breakdown[0].label} (Start hier)
+                    </Text>
+                    <Text style={{ fontSize: 8, color: colors.textMuted }}>
+                      {roiData.breakdown.length - 1} weitere Bereiche
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          )}
+
+          {/* ROI Summary mit ACHTUNG */}
+          <View style={[styles.section, { marginTop: 'auto', marginBottom: 0 }]}>
+            <Text style={styles.categoryDescription}>
+              Diese Zahlen zeigen Dir den finanziellen Impact Deiner aktuellen Fokus-Situation. Der größte Hebel liegt
+              bei {roiData.breakdown[0]?.label || 'Deinen Schwachstellen'} – hier verlierst Du am meisten Zeit und
+              damit Geld. Die gute Nachricht: Schon kleine Verbesserungen in diesem Bereich können einen enormen ROI
+              bringen. Eine Stunde mehr Fokus pro Tag = {formatCurrency(roiData.hourlyRate * 5 * 52)} pro Jahr.{'\n\n'}
+              ACHTUNG: Diese Kalkulation ist KONSERVATIV. Sie berücksichtigt nur direkte Zeitverluste, nicht die
+              Opportunitätskosten: Projekte, die Du nicht angehen konntest. Kunden, die Du nicht gewonnen hast. Ideen,
+              die nie umgesetzt wurden. Der ECHTE Schaden ist deutlich höher.
+            </Text>
+          </View>
+
+          {/* Footer */}
+          <View style={styles.footer}>
+            <Text style={styles.footerText}>SUI GENERIS | Human First | suigen.de</Text>
+          </View>
+        </Page>
+      )}
 
       {/* ========== SEITE 2: DEINE ANALYSE ========== */}
       <Page size="A4" style={styles.page}>
@@ -619,6 +889,31 @@ export function FokusReportPDF({ result, answers, userName, painPoint, createdAt
           </View>
         </View>
 
+        {/* Fokustechnische Analyse */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>WAS DEINE ANTWORTEN ZEIGEN</Text>
+          <View style={styles.painPointCard}>
+            <Text style={styles.painPointText}>
+              Deine Selbsteinschätzung zeigt ein klares Muster: Die größten Herausforderungen liegen in den Bereichen{' '}
+              <Text style={{ fontWeight: 'bold' }}>{fokusBereiche[weakestAreas[0]]}</Text>,{' '}
+              <Text style={{ fontWeight: 'bold' }}>{fokusBereiche[weakestAreas[1]]}</Text> und{' '}
+              <Text style={{ fontWeight: 'bold' }}>{fokusBereiche[weakestAreas[2]]}</Text>. Diese drei Bereiche sind
+              Deine primären Fokus-Killer und kosten Dich täglich wertvolle Zeit und Energie. Die gute Nachricht: Wenn
+              Du gezielt an diesen Punkten arbeitest, wirst Du die größte Verbesserung in kürzester Zeit sehen. Deine
+              stärkeren Bereiche können dabei als Hebel dienen – nutze sie strategisch, um Deine Schwachstellen
+              auszugleichen.
+            </Text>
+          </View>
+        </View>
+
+        {/* Footer */}
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>SUI GENERIS | Human First | suigen.de</Text>
+        </View>
+      </Page>
+
+      {/* ========== NEUE SEITE: TOP 3 FOKUS-KILLER ========== */}
+      <Page size="A4" style={styles.page}>
         {/* Fokus-Killer Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>DEINE TOP 3 FOKUS-KILLER</Text>
@@ -637,6 +932,31 @@ export function FokusReportPDF({ result, answers, userName, painPoint, createdAt
               </View>
             );
           })}
+        </View>
+
+        {/* Erklärung unter Fokus-Killern */}
+        <View style={styles.section}>
+          <View style={styles.painPointCard}>
+            <Text style={[styles.painPointText, { marginBottom: 12 }]}>
+              Diese drei Faktoren sind verantwortlich für den Großteil Deiner Produktivitätsverluste. Sie wirken nicht
+              isoliert – sie verstärken sich gegenseitig und schaffen einen Teufelskreis aus verschwendeter Zeit,
+              verpassten Chancen und ständigem Gefühl, nicht voranzukommen.
+            </Text>
+            <Text style={[styles.painPointText, { marginBottom: 12 }]}>
+              Die gute Nachricht: Genau hier liegt Dein größter Hebel. Verbesserungen in diesen Bereichen haben einen
+              überproportionalen Effekt auf Deine gesamte Fokus-Situation. Ein einziger Durchbruch in einem dieser
+              Bereiche kann eine Kettenreaktion auslösen und mehrere Probleme gleichzeitig lösen.
+            </Text>
+            <Text style={styles.painPointText}>
+              Die folgenden Seiten zeigen Dir konkrete Quick Wins und bewährte Strategien, wie Du diese Killer
+              systematisch ausschaltest – ohne Dein komplettes Leben umkrempeln zu müssen.
+            </Text>
+          </View>
+        </View>
+
+        {/* Footer */}
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>SUI GENERIS | Human First | suigen.de</Text>
         </View>
       </Page>
 
@@ -662,21 +982,43 @@ export function FokusReportPDF({ result, answers, userName, painPoint, createdAt
           })}
         </View>
 
-        {/* Zusätzliche Tipps */}
+        {/* Ausführlicher Profi-Tipp */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>PROFI-TIPP</Text>
+          <Text style={styles.sectionTitle}>PROFI-TIPP: SO SETZT DU DAS UM</Text>
           <View style={styles.painPointCard}>
-            <Text style={styles.killerDescription}>
+            <Text style={[styles.painPointText, { marginBottom: 12 }]}>
               Fokussiere Dich auf EINE Verbesserung pro Woche. Multitasking beim Gewohnheitsaufbau funktioniert
-              genauso wenig wie im Arbeitsalltag. Wähle den Quick-Win, der Dir am leichtesten fällt, und ziehe ihn
-              7 Tage konsequent durch.
+              genauso wenig wie im Arbeitsalltag.
+            </Text>
+            <Text style={[styles.painPointText, { marginBottom: 12 }]}>
+              <Text style={{ fontWeight: 'bold' }}>Deine Strategie:</Text> Wähle den Quick-Win, der Dir am leichtesten
+              fällt, und ziehe ihn 7 Tage konsequent durch. Erst wenn er zur Gewohnheit geworden ist, nimmst Du den
+              nächsten in Angriff.
+            </Text>
+            <Text style={[styles.painPointText, { marginBottom: 12 }]}>
+              <Text style={{ fontWeight: 'bold' }}>Warum das funktioniert:</Text> Kleine, konsistente Veränderungen
+              schlagen große, unregelmäßige Aktionen. Eine einzige neue Gewohnheit kann eine Kettenreaktion auslösen
+              und mehrere Bereiche Deines Lebens verbessern.
+            </Text>
+            <Text style={styles.painPointText}>
+              <Text style={{ fontWeight: 'bold' }}>Der häufigste Fehler:</Text> Alles gleichzeitig ändern zu wollen.
+              Das führt zu Überforderung und nach 2 Wochen ist alles beim Alten. Gehe es langsam an – nachhaltige
+              Veränderung braucht Zeit, keine Willenskraft.
             </Text>
           </View>
         </View>
 
+        {/* Footer */}
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>SUI GENERIS | Human First | suigen.de</Text>
+        </View>
+      </Page>
+
+      {/* ========== SEITE 4: BEREIT FÜR DAS NÄCHSTE LEVEL? ========== */}
+      <Page size="A4" style={styles.page}>
         {/* CTA Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>BEREIT FÜR DEN NÄCHSTEN LEVEL?</Text>
+          <Text style={styles.sectionTitle}>BEREIT FÜR DAS NÄCHSTE LEVEL?</Text>
           <View style={styles.ctaBox}>
             <Text style={styles.ctaTitle}>DIE WICHTIGSTEN 3 STUNDEN</Text>
             <Text style={styles.ctaAccent}>DEINES JAHRES.</Text>
