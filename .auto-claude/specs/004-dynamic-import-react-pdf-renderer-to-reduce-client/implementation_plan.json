@@ -2,7 +2,7 @@
   "feature": "Dynamic import @react-pdf/renderer to reduce client bundle",
   "description": "The @react-pdf/renderer package (~400KB) is currently bundled with client-side code even though it's only used in the server-side API route. Using dynamic imports would ensure this heavy package is only loaded when needed on the server.",
   "created_at": "2025-12-28T10:36:52.205Z",
-  "updated_at": "2025-12-28T11:48:52.450Z",
+  "updated_at": "2025-12-28T11:53:19.594Z",
   "status": "done",
   "planStatus": "completed",
   "workflow_type": "development",

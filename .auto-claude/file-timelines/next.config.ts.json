@@ -11,7 +11,7 @@
       },
       "worktree_state": {
         "content": "import type { NextConfig } from \"next\";\n\nconst nextConfig: NextConfig = {\n  // Treat @react-pdf/renderer as server-external to avoid bundling issues\n  // This package is only used in server-side API routes\n  serverExternalPackages: ['@react-pdf/renderer'],\n\n  // Bildoptimierung\n  images: {\n    formats: ['image/avif', 'image/webp'],\n    deviceSizes: [640, 750, 828, 1080, 1200, 1920],\n    imageSizes: [16, 32, 48, 64, 96, 128, 256],\n  },\n\n  // Kompression aktivieren\n  compress: true,\n\n  // Security Headers\n  async headers() {\n    return [\n      {\n        source: '/:path*',\n        headers: [\n          {\n            key: 'X-DNS-Prefetch-Control',\n            value: 'on',\n          },\n          {\n            key: 'X-Frame-Options',\n            value: 'SAMEORIGIN',\n          },\n          {\n            key: 'X-Content-Type-Options',\n            value: 'nosniff',\n          },\n          {\n            key: 'Referrer-Policy',\n            value: 'strict-origin-when-cross-origin',\n          },\n          {\n            key: 'Permissions-Policy',\n            value: 'camera=(), microphone=(), geolocation=()',\n          },\n        ],\n      },\n    ];\n  },\n};\n\nexport default nextConfig;\n",
-        "last_modified": "2025-12-28T12:48:50.920918"
+        "last_modified": "2025-12-28T12:53:04.847942"
       },
       "task_intent": {
         "title": "004-dynamic-import-react-pdf-renderer-to-reduce-client",

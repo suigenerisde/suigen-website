@@ -3,9 +3,9 @@
   "title": "Add Keyboard Navigation to FAQ Accordion",
   "description": "Enhance the FAQ components with full keyboard navigation support following WAI-ARIA accordion best practices. Users will be able to navigate between FAQ items using arrow keys, Home/End keys, and toggle items with Enter/Space.",
   "created_at": "2025-12-28T10:50:01.935Z",
-  "updated_at": "2025-12-28T11:48:27.505Z",
-  "status": "done",
-  "planStatus": "completed",
+  "updated_at": "2025-12-28T11:52:29.889Z",
+  "status": "human_review",
+  "planStatus": "review",
   "workflow_type": "development",
   "spec_file": "spec.md",
   "phases": [
@@ -173,5 +173,7 @@
     "last_iteration": 1,
     "last_status": "approved",
     "issues_by_type": {}
-  }
+  },
+  "stagedAt": "2025-12-28T11:52:29.889Z",
+  "stagedInMainProject": true
 }
