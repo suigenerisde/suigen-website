@@ -43,7 +43,9 @@
 - [x] **10. BlogPosting Schema-Komponente erstellen** - `src/components/blog/BlogPostingSchema.tsx` mit JSON-LD für BlogPosting, author, datePublished, etc.
   - ✅ BlogPostingSchema.tsx erstellt mit Schema.org BlogPosting JSON-LD, author/publisher info, timeRequired, wordCount, image support
 
-- [ ] **11. MDX-Components Registry erstellen** - `src/components/blog/mdx-components.tsx` die alle Blog-Komponenten für MDX verfügbar macht
+- [x] **11. MDX-Components Registry erstellen** - `src/components/blog/mdx-components.tsx` die alle Blog-Komponenten für MDX verfügbar macht
+  - ✅ mdx-components.tsx erstellt mit FAQ, FAQSchema, BlogImage, FokusCheckCTA exports
+  - ✅ mdx-content.tsx erstellt fuer Velite MDX rendering mit jsx-runtime
 
 - [ ] **12. Sitemap erweitern** - `src/app/sitemap.ts` anpassen um Blog-Posts dynamisch einzubinden
 
