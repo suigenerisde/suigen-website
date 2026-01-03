@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "dev": "NODE_OPTIONS='--max-old-space-size=4096' next dev --webpack",
+    "build": "NODE_OPTIONS='--max-old-space-size=4096' next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "dev:stable": "npm run build && npm start"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
     "@react-pdf/renderer": "^4.3.1",
     "@supabase/supabase-js": "^2.89.0",
+    "@tailwindcss/typography": "^0.5.19",
     "next": "16.0.10",
     "react": "19.2.1",
     "react-dom": "19.2.1",

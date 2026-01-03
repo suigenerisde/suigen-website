@@ -14,6 +14,10 @@ class VeliteWebpackPlugin {
 }
 
 const nextConfig: NextConfig = {
+  // Stability: Run webpack in separate worker to reduce main process memory
+  experimental: {
+    webpackBuildWorker: true,
+  },
   webpack: (config) => {
     config.plugins.push(new VeliteWebpackPlugin());
     return config;

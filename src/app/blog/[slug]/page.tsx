@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import { posts } from '#site/content'
 import { MDXContent } from '@/components/blog/mdx-content'
 import { BlogPostingSchema } from '@/components/blog/BlogPostingSchema'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
 
 interface PostPageProps {
   params: Promise<{ slug: string }>
@@ -72,6 +74,7 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <>
       <BlogPostingSchema post={post} />
+      <Header />
       <main className="min-h-screen bg-[var(--bg-dark)]">
         {/* Article Header */}
         <article className="max-w-3xl mx-auto px-4 py-20">
@@ -112,7 +115,7 @@ export default async function PostPage({ params }: PostPageProps) {
           </div>
 
           {/* Article Content */}
-          <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-p:text-gray-300 prose-a:text-[var(--accent)] prose-strong:text-white prose-code:text-[var(--accent)] prose-pre:bg-[#1a2e35] prose-blockquote:border-[var(--accent)] prose-blockquote:text-gray-300">
+          <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-3 prose-h2:border-b prose-h2:border-gray-700/50 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-h4:text-lg prose-h4:mt-6 prose-h4:mb-3 prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6 prose-a:text-[var(--accent)] prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-strong:font-semibold prose-code:text-[var(--accent)] prose-code:bg-[#1a2e35] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-[#1a2e35] prose-pre:border prose-pre:border-gray-700/50 prose-blockquote:border-[var(--accent)] prose-blockquote:border-l-4 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-300 prose-ul:my-6 prose-ul:space-y-2 prose-ol:my-6 prose-ol:space-y-2 prose-li:text-gray-300 prose-li:leading-relaxed prose-table:my-8 prose-table:w-full prose-thead:border-b prose-thead:border-gray-600 prose-th:text-left prose-th:text-white prose-th:font-semibold prose-th:py-3 prose-th:px-4 prose-td:py-3 prose-td:px-4 prose-td:text-gray-300 prose-tr:border-b prose-tr:border-gray-700/50 prose-hr:my-12 prose-hr:border-gray-700/50">
             <MDXContent code={post.body} />
           </div>
 
@@ -153,6 +156,7 @@ export default async function PostPage({ params }: PostPageProps) {
           </div>
         </article>
       </main>
+      <Footer />
     </>
   )
 }

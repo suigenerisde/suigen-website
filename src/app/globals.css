@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* SUIGEN Design System - Dark-First / aicellence-inspired */
 
@@ -258,4 +259,40 @@ h1, h2, h3, h4, h5, h6 {
 
 .bg-gradient-radial {
   background: radial-gradient(ellipse at center top, #3a5861 0%, #2e474f 70%);
+}
+
+/* Blog Prose Table Enhancements */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  background: rgba(26, 46, 53, 0.5);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.prose thead {
+  background: rgba(0, 184, 196, 0.1);
+}
+
+.prose th {
+  text-align: left;
+  padding: 1rem 1.25rem;
+  font-weight: 600;
+  color: var(--text-light);
+  border-bottom: 2px solid rgba(0, 184, 196, 0.3);
+}
+
+.prose td {
+  padding: 1rem 1.25rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.prose tr:last-child td {
+  border-bottom: none;
+}
+
+.prose tr:hover td {
+  background: rgba(0, 184, 196, 0.05);
 }
