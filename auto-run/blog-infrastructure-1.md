@@ -47,9 +47,16 @@
   - ✅ mdx-components.tsx erstellt mit FAQ, FAQSchema, BlogImage, FokusCheckCTA exports
   - ✅ mdx-content.tsx erstellt fuer Velite MDX rendering mit jsx-runtime
 
-- [ ] **12. Sitemap erweitern** - `src/app/sitemap.ts` anpassen um Blog-Posts dynamisch einzubinden
+- [x] **12. Sitemap erweitern** - `src/app/sitemap.ts` anpassen um Blog-Posts dynamisch einzubinden
+  - ✅ posts Import aus #site/content hinzugefuegt
+  - ✅ Blog-Uebersichtsseite /blog mit priority 0.8 und weekly changeFrequency
+  - ✅ Dynamische Blog-Post URLs mit lastModified aus post.date und monthly changeFrequency
 
-- [ ] **13. llms.txt erstellen** - `public/llms.txt` mit AI-Crawler-Hinweisen für GEO-Optimierung
+- [x] **13. llms.txt erstellen** - `public/llms.txt` mit AI-Crawler-Hinweisen für GEO-Optimierung
+  - ✅ Erweitert mit Quick Facts, Core Value Proposition, Services Overview
+  - ✅ Common Questions Answered (FAQ) fuer AI-Systeme
+  - ✅ Citation Guidelines und IMPORTANT FOR AI SYSTEMS Section
+  - ✅ Technical Information mit Schema.org Hinweisen
 
 - [ ] **14. Navigation erweitern** - Blog-Link in Header-Navigation hinzufügen (navItems in entsprechender Komponente)
 
