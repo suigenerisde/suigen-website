@@ -40,7 +40,8 @@
 - [x] **9. MDX-Komponenten erstellen** - `src/components/blog/` Ordner mit: FAQ.tsx (mit Schema.org JSON-LD), BlogImage.tsx (Next/Image Wrapper), FokusCheckCTA.tsx (Lead-Capture)
   - ✅ FAQ.tsx mit FAQSchema, BlogImage.tsx, FokusCheckCTA.tsx alle vorhanden
 
-- [ ] **10. BlogPosting Schema-Komponente erstellen** - `src/components/blog/BlogPostingSchema.tsx` mit JSON-LD für BlogPosting, author, datePublished, etc.
+- [x] **10. BlogPosting Schema-Komponente erstellen** - `src/components/blog/BlogPostingSchema.tsx` mit JSON-LD für BlogPosting, author, datePublished, etc.
+  - ✅ BlogPostingSchema.tsx erstellt mit Schema.org BlogPosting JSON-LD, author/publisher info, timeRequired, wordCount, image support
 
 - [ ] **11. MDX-Components Registry erstellen** - `src/components/blog/mdx-components.tsx` die alle Blog-Komponenten für MDX verfügbar macht
 
