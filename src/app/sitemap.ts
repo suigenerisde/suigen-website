@@ -1,10 +1,12 @@
 import type { MetadataRoute } from 'next';
+import { posts } from '#site/content';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://suigen.de';
   const lastModified = new Date();
 
-  return [
+  // Static pages
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified,
@@ -36,6 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/blog`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/ueber`,
       lastModified,
       changeFrequency: 'monthly',
@@ -60,4 +68,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
   ];
+
+  // Dynamic blog post pages
+  const blogPages: MetadataRoute.Sitemap = posts
+    .filter((post) => post.published)
+    .map((post) => ({
+      url: `${baseUrl}/blog/${post.slugAsParams}`,
+      lastModified: new Date(post.date),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }));
+
+  return [...staticPages, ...blogPages];
 }
