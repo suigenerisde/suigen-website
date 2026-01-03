@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { posts } from '#site/content'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -61,6 +62,18 @@ export default function BlogPage() {
                   className="group bg-[#1a2e35] rounded-2xl overflow-hidden border border-gray-700/50 hover:border-[var(--accent)]/50 transition-all duration-300"
                 >
                   <Link href={`/blog/${post.slugAsParams}`}>
+                    {/* Hero Image */}
+                    {post.image && (
+                      <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#2e474f]">
+                        <Image
+                          src={post.image}
+                          alt={post.imageAlt || post.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      </div>
+                    )}
                     {/* Card Content */}
                     <div className="p-6">
                       {/* Tags */}

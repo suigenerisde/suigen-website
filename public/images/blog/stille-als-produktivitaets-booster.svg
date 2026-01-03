@@ -1,0 +1,96 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2e474f"/>
+      <stop offset="100%" style="stop-color:#3a5861"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Main Title -->
+  <text x="600" y="70" text-anchor="middle" fill="#ffffff" font-size="42" font-weight="800" font-family="Inter, sans-serif">DIE STILLE ALS BOOSTER</text>
+  <text x="600" y="110" text-anchor="middle" fill="#a8c0c5" font-size="20" font-family="Inter, sans-serif">Digital Detox fur maximale Produktivitat</text>
+
+  <!-- Sound wave visualization - Left side (Chaos) -->
+  <g transform="translate(150, 280)">
+    <text x="100" y="-60" text-anchor="middle" fill="#a8c0c5" font-size="16" font-weight="600" font-family="Inter, sans-serif">VORHER: NOISE</text>
+
+    <!-- Chaotic sound waves -->
+    <g stroke="#a8c0c5" stroke-width="2" fill="none" opacity="0.6">
+      <path d="M 0 0 Q 20 -40, 40 0 Q 60 50, 80 -20 Q 100 -60, 120 30 Q 140 -30, 160 0 Q 180 60, 200 -40"/>
+      <path d="M 0 30 Q 25 -20, 50 40 Q 75 -50, 100 20 Q 125 70, 150 -30 Q 175 40, 200 0" opacity="0.4"/>
+    </g>
+
+    <!-- Notification icons scattered -->
+    <g fill="#a8c0c5" opacity="0.5">
+      <rect x="30" y="-80" width="20" height="20" rx="4"/>
+      <rect x="80" y="-90" width="20" height="20" rx="4"/>
+      <rect x="130" y="-75" width="20" height="20" rx="4"/>
+      <rect x="170" y="-85" width="20" height="20" rx="4"/>
+    </g>
+  </g>
+
+  <!-- Arrow transition -->
+  <g transform="translate(450, 280)">
+    <line x1="0" y1="0" x2="100" y2="0" stroke="#00b8c4" stroke-width="3" stroke-dasharray="10 5"/>
+    <path d="M 95 -10 L 110 0 L 95 10" fill="none" stroke="#00b8c4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="55" y="-20" text-anchor="middle" fill="#00b8c4" font-size="12" font-weight="600" font-family="Inter, sans-serif">KLOSTER</text>
+  </g>
+
+  <!-- Flat line visualization - Right side (Stille) -->
+  <g transform="translate(650, 280)">
+    <text x="175" y="-60" text-anchor="middle" fill="#00b8c4" font-size="16" font-weight="600" font-family="Inter, sans-serif">NACHHER: STILLE</text>
+
+    <!-- Calm flat line with subtle pulse -->
+    <line x1="0" y1="0" x2="350" y2="0" stroke="#00b8c4" stroke-width="3" filter="url(#glow)"/>
+
+    <!-- Single gentle pulse in the middle -->
+    <path d="M 150 0 Q 160 -15, 175 0 Q 190 15, 200 0" stroke="#00b8c4" stroke-width="3" fill="none" filter="url(#glow)"/>
+
+    <!-- Glow dot at the end -->
+    <circle cx="350" cy="0" r="8" fill="#00b8c4" filter="url(#glow)"/>
+  </g>
+
+  <!-- Results comparison boxes -->
+  <g transform="translate(150, 400)">
+    <rect x="0" y="0" width="400" height="120" rx="12" fill="rgba(168,192,197,0.1)" stroke="#a8c0c5" stroke-width="1"/>
+    <text x="200" y="35" text-anchor="middle" fill="#a8c0c5" font-size="18" font-weight="700" font-family="Inter, sans-serif">ALWAYS-ON MODUS</text>
+    <line x1="50" y1="55" x2="350" y2="55" stroke="#a8c0c5" stroke-width="1" opacity="0.3"/>
+    <text x="200" y="80" text-anchor="middle" fill="#a8c0c5" font-size="14" font-family="Inter, sans-serif">Standig erreichbar</text>
+    <text x="200" y="100" text-anchor="middle" fill="#a8c0c5" font-size="14" font-family="Inter, sans-serif">Fragmentierte Aufmerksamkeit</text>
+  </g>
+
+  <g transform="translate(650, 400)">
+    <rect x="0" y="0" width="400" height="120" rx="12" fill="rgba(0,184,196,0.15)" stroke="#00b8c4" stroke-width="2"/>
+    <text x="200" y="35" text-anchor="middle" fill="#00b8c4" font-size="18" font-weight="700" font-family="Inter, sans-serif">STILLE-MODUS</text>
+    <line x1="50" y1="55" x2="350" y2="55" stroke="#00b8c4" stroke-width="1" opacity="0.3"/>
+    <text x="200" y="80" text-anchor="middle" fill="#ffffff" font-size="14" font-family="Inter, sans-serif">Bewusste Nicht-Erreichbarkeit</text>
+    <text x="200" y="100" text-anchor="middle" fill="#ffffff" font-size="14" font-family="Inter, sans-serif">Deep Thinking moglich</text>
+  </g>
+
+  <!-- Bottom insight -->
+  <g transform="translate(600, 570)">
+    <text x="0" y="0" text-anchor="middle" fill="#00b8c4" font-size="24" font-weight="700" font-family="Inter, sans-serif" filter="url(#glow)">
+      72 Stunden ohne Smartphone = Kompletter Reset
+    </text>
+  </g>
+
+  <!-- Kloster icon (subtle) -->
+  <g transform="translate(600, 160)" opacity="0.15">
+    <!-- Simple church/monastery silhouette -->
+    <path d="M 0 60 L 0 20 L -30 20 L -30 60 L -50 60 L -50 40 L -70 40 L -70 60 L -80 60 L -80 0 L -60 -20 L -60 -40 L -50 -40 L -50 -20 L 0 -20 L 0 -40 L 10 -40 L 10 -20 L 60 -20 L 80 0 L 80 60 L 70 60 L 70 40 L 50 40 L 50 60 L 30 60 L 30 20 L 0 20"
+          fill="#00b8c4" stroke="none"/>
+    <!-- Cross on top -->
+    <rect x="-5" y="-60" width="10" height="30" fill="#00b8c4"/>
+    <rect x="-15" y="-50" width="30" height="10" fill="#00b8c4"/>
+  </g>
+</svg>
