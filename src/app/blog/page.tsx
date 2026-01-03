@@ -6,10 +6,10 @@ import { Footer } from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
   title: 'Blog | SUI GENERIS',
-  description: 'Insights zu Produktivitaet, Fokus und Human First - Thilo Pfeils Blog ueber effektives Arbeiten und Unternehmertum.',
+  description: 'Insights zu Produktivität, Fokus und Human First - Thilo Pfeils Blog über effektives Arbeiten und Unternehmertum.',
   openGraph: {
     title: 'Blog | SUI GENERIS',
-    description: 'Insights zu Produktivitaet, Fokus und Human First',
+    description: 'Insights zu Produktivität, Fokus und Human First',
     type: 'website',
   },
 }
@@ -40,8 +40,8 @@ export default function BlogPage() {
             Blog
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Gedanken zu Produktivitaet, Fokus und dem Human First Prinzip.
-            Praktische Insights fuer Unternehmer und Fuehrungskraefte.
+            Gedanken zu Produktivität, Fokus und dem Human First Prinzip.
+            Praktische Insights für Unternehmer und Führungskräfte.
           </p>
         </div>
       </section>
@@ -51,7 +51,7 @@ export default function BlogPage() {
         <div className="max-w-6xl mx-auto">
           {publishedPosts.length === 0 ? (
             <p className="text-center text-gray-400 text-lg">
-              Noch keine Artikel veroeffentlicht. Komm bald wieder!
+              Noch keine Artikel veröffentlicht. Komm bald wieder!
             </p>
           ) : (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

@@ -27,7 +27,7 @@ export function BlogPostingSchema({ post }: BlogPostingSchemaProps) {
     author: {
       '@type': 'Person',
       name: post.author,
-      url: `${baseUrl}/ueber-uns`,
+      url: `${baseUrl}/ueber`,
     },
     publisher: {
       '@type': 'Organization',
