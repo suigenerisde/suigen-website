@@ -10,6 +10,7 @@ const navItems = [
   { label: 'Fokus-Audit', href: '/fokus-audit' },
   { label: 'Human-First', href: '/fokus-human' },
   { label: 'System', href: '/fokus-system' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Über', href: '/ueber' },
 ];
 

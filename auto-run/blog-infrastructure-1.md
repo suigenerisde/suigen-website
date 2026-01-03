@@ -58,7 +58,8 @@
   - ✅ Citation Guidelines und IMPORTANT FOR AI SYSTEMS Section
   - ✅ Technical Information mit Schema.org Hinweisen
 
-- [ ] **14. Navigation erweitern** - Blog-Link in Header-Navigation hinzufügen (navItems in entsprechender Komponente)
+- [x] **14. Navigation erweitern** - Blog-Link in Header-Navigation hinzufügen (navItems in entsprechender Komponente)
+  - ✅ Blog-Link in Header.tsx navItems zwischen "System" und "Über" eingefügt
 
 - [ ] **15. Build testen** - `bun run build` ausführen und sicherstellen dass alles kompiliert
 
