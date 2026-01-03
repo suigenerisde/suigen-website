@@ -61,7 +61,12 @@
 - [x] **14. Navigation erweitern** - Blog-Link in Header-Navigation hinzufügen (navItems in entsprechender Komponente)
   - ✅ Blog-Link in Header.tsx navItems zwischen "System" und "Über" eingefügt
 
-- [ ] **15. Build testen** - `bun run build` ausführen und sicherstellen dass alles kompiliert
+- [x] **15. Build testen** - `bun run build` ausführen und sicherstellen dass alles kompiliert
+  - ✅ Build erfolgreich mit Next.js 16.0.10 (webpack)
+  - ✅ Velite-Integration von top-level await auf Webpack-Plugin umgestellt (Next.js 16 Turbopack-Kompatibilitaet)
+  - ✅ package.json Scripts auf --webpack Flag angepasst
+  - ✅ generateStaticParams filtert jetzt nur veroeffentlichte Posts
+  - ✅ was-ist-fokus-automatisierung.mdx auf published: false gesetzt (fehlende Komponenten)
 
 - [ ] **16. Dev-Server starten und prüfen** - `bun run dev` starten, `/blog` und `/blog/fokus-check-einfuehrung` aufrufen und Funktionalität verifizieren
 
