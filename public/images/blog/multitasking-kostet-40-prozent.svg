@@ -1,0 +1,49 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2e474f"/>
+      <stop offset="100%" style="stop-color:#3a5861"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Left: Fragmented circle (40% lost) -->
+  <g transform="translate(350, 315)">
+    <!-- Broken/fragmented ring -->
+    <path d="M 80 0 A 80 80 0 0 1 24.7 76.1" fill="none" stroke="#a8c0c5" stroke-width="12" opacity="0.4"/>
+    <path d="M -24.7 76.1 A 80 80 0 0 1 -76.1 -24.7" fill="none" stroke="#a8c0c5" stroke-width="12" opacity="0.3"/>
+    <path d="M -76.1 -24.7 A 80 80 0 0 1 0 -80" fill="none" stroke="#a8c0c5" stroke-width="12" opacity="0.35"/>
+
+    <!-- Gaps/missing pieces representing lost productivity -->
+    <!-- The circle is intentionally incomplete -->
+
+    <!-- Scattered fragments -->
+    <rect x="100" y="-30" width="15" height="15" rx="3" fill="rgba(168,192,197,0.3)" transform="rotate(15)"/>
+    <rect x="-120" y="50" width="12" height="12" rx="2" fill="rgba(168,192,197,0.25)" transform="rotate(-20)"/>
+    <rect x="60" y="100" width="10" height="10" rx="2" fill="rgba(168,192,197,0.2)"/>
+  </g>
+
+  <!-- Center: Transformation -->
+  <g transform="translate(530, 315)">
+    <line x1="0" y1="0" x2="140" y2="0" stroke="#00b8c4" stroke-width="4" opacity="0.5"/>
+    <path d="M 135 -10 L 155 0 L 135 10" fill="none" stroke="#00b8c4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Right: Complete circle (100% focus) -->
+  <g transform="translate(850, 315)">
+    <!-- Complete, solid ring -->
+    <circle cx="0" cy="0" r="90" fill="none" stroke="#00b8c4" stroke-width="6" opacity="0.3"/>
+    <circle cx="0" cy="0" r="70" fill="none" stroke="#00b8c4" stroke-width="10" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="40" fill="rgba(0,184,196,0.15)"/>
+    <circle cx="0" cy="0" r="15" fill="#00b8c4" filter="url(#glow)"/>
+  </g>
+</svg>

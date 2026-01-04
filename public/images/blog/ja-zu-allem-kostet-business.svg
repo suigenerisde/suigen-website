@@ -1,0 +1,50 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2e474f"/>
+      <stop offset="100%" style="stop-color:#3a5861"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Left: Many arrows pointing different directions (saying yes to everything) -->
+  <g transform="translate(350, 315)">
+    <!-- Central overwhelmed point -->
+    <circle cx="0" cy="0" r="30" fill="rgba(168,192,197,0.2)" stroke="#a8c0c5" stroke-width="2"/>
+
+    <!-- Arrows pointing outward in all directions -->
+    <line x1="0" y1="0" x2="-80" y2="-80" stroke="#a8c0c5" stroke-width="3" opacity="0.4"/>
+    <line x1="0" y1="0" x2="70" y2="-90" stroke="#a8c0c5" stroke-width="3" opacity="0.35"/>
+    <line x1="0" y1="0" x2="100" y2="20" stroke="#a8c0c5" stroke-width="3" opacity="0.4"/>
+    <line x1="0" y1="0" x2="60" y2="100" stroke="#a8c0c5" stroke-width="3" opacity="0.3"/>
+    <line x1="0" y1="0" x2="-90" y2="50" stroke="#a8c0c5" stroke-width="3" opacity="0.35"/>
+    <line x1="0" y1="0" x2="-50" y2="90" stroke="#a8c0c5" stroke-width="3" opacity="0.4"/>
+    <line x1="0" y1="0" x2="90" y2="-40" stroke="#a8c0c5" stroke-width="3" opacity="0.3"/>
+    <line x1="0" y1="0" x2="-100" y2="-20" stroke="#a8c0c5" stroke-width="3" opacity="0.35"/>
+  </g>
+
+  <!-- Transition arrow -->
+  <g transform="translate(550, 315)">
+    <line x1="0" y1="0" x2="100" y2="0" stroke="#00b8c4" stroke-width="4" opacity="0.5"/>
+    <path d="M 95 -10 L 115 0 L 95 10" fill="none" stroke="#00b8c4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Right: Single clear arrow (strategic no = focused yes) -->
+  <g transform="translate(850, 315)">
+    <!-- Focused point -->
+    <circle cx="0" cy="0" r="35" fill="rgba(0,184,196,0.15)" stroke="#00b8c4" stroke-width="3"/>
+
+    <!-- Single powerful arrow -->
+    <line x1="0" y1="0" x2="150" y2="0" stroke="#00b8c4" stroke-width="8" filter="url(#glow)"/>
+    <path d="M 140 -20 L 175 0 L 140 20" fill="none" stroke="#00b8c4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  </g>
+</svg>

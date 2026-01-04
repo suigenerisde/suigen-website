@@ -1,0 +1,59 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2e474f"/>
+      <stop offset="100%" style="stop-color:#3a5861"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Left: Chaotic arrows (no strategy) -->
+  <g transform="translate(300, 315)">
+    <!-- Scattered arrows going different ways -->
+    <path d="M -50 -80 L 30 -60" stroke="#a8c0c5" stroke-width="3" opacity="0.35"/>
+    <path d="M 20 -50 L -60 0" stroke="#a8c0c5" stroke-width="3" opacity="0.4"/>
+    <path d="M -40 20 L 50 80" stroke="#a8c0c5" stroke-width="3" opacity="0.3"/>
+    <path d="M 60 -30 L 0 50" stroke="#a8c0c5" stroke-width="3" opacity="0.35"/>
+    <path d="M -70 60 L 20 30" stroke="#a8c0c5" stroke-width="3" opacity="0.4"/>
+    <path d="M 40 70 L -30 -40" stroke="#a8c0c5" stroke-width="3" opacity="0.3"/>
+
+    <!-- Small dots representing team members -->
+    <circle cx="-30" cy="-50" r="8" fill="rgba(168,192,197,0.3)"/>
+    <circle cx="40" cy="20" r="8" fill="rgba(168,192,197,0.3)"/>
+    <circle cx="-20" cy="60" r="8" fill="rgba(168,192,197,0.3)"/>
+    <circle cx="50" cy="-40" r="8" fill="rgba(168,192,197,0.3)"/>
+  </g>
+
+  <!-- Center: Transformation -->
+  <g transform="translate(550, 315)">
+    <line x1="0" y1="0" x2="100" y2="0" stroke="#00b8c4" stroke-width="4" opacity="0.5"/>
+    <path d="M 95 -10 L 115 0 L 95 10" fill="none" stroke="#00b8c4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Right: Aligned arrows (clear strategy) -->
+  <g transform="translate(850, 315)">
+    <!-- Strategy target -->
+    <circle cx="150" cy="0" r="40" fill="rgba(0,184,196,0.1)" stroke="#00b8c4" stroke-width="2"/>
+    <circle cx="150" cy="0" r="20" fill="rgba(0,184,196,0.2)" stroke="#00b8c4" stroke-width="2"/>
+    <circle cx="150" cy="0" r="8" fill="#00b8c4" filter="url(#glow)"/>
+
+    <!-- Aligned arrows all pointing to target -->
+    <line x1="-50" y1="-40" x2="100" y2="0" stroke="#00b8c4" stroke-width="4" opacity="0.7"/>
+    <line x1="-50" y1="0" x2="100" y2="0" stroke="#00b8c4" stroke-width="5" filter="url(#glow)"/>
+    <line x1="-50" y1="40" x2="100" y2="0" stroke="#00b8c4" stroke-width="4" opacity="0.7"/>
+
+    <!-- Team dots aligned -->
+    <circle cx="-50" cy="-40" r="10" fill="rgba(0,184,196,0.3)" stroke="#00b8c4" stroke-width="2"/>
+    <circle cx="-50" cy="0" r="10" fill="rgba(0,184,196,0.3)" stroke="#00b8c4" stroke-width="2"/>
+    <circle cx="-50" cy="40" r="10" fill="rgba(0,184,196,0.3)" stroke="#00b8c4" stroke-width="2"/>
+  </g>
+</svg>

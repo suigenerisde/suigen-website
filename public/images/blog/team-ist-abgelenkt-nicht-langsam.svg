@@ -1,0 +1,48 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2e474f"/>
+      <stop offset="100%" style="stop-color:#3a5861"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Left: Scattered lines (distracted) -->
+  <g transform="translate(300, 315)">
+    <line x1="-80" y1="-60" x2="-20" y2="-100" stroke="#a8c0c5" stroke-width="3" opacity="0.4"/>
+    <line x1="-70" y1="0" x2="-120" y2="30" stroke="#a8c0c5" stroke-width="3" opacity="0.3"/>
+    <line x1="-60" y1="50" x2="-10" y2="120" stroke="#a8c0c5" stroke-width="3" opacity="0.35"/>
+    <line x1="-90" y1="-30" x2="-150" y2="-80" stroke="#a8c0c5" stroke-width="3" opacity="0.25"/>
+    <line x1="-50" y1="80" x2="-100" y2="100" stroke="#a8c0c5" stroke-width="3" opacity="0.3"/>
+
+    <!-- Central point (team) -->
+    <circle cx="0" cy="0" r="20" fill="rgba(168,192,197,0.3)" stroke="#a8c0c5" stroke-width="2"/>
+  </g>
+
+  <!-- Arrow transition -->
+  <g transform="translate(500, 315)">
+    <line x1="0" y1="0" x2="180" y2="0" stroke="#00b8c4" stroke-width="4" opacity="0.5"/>
+    <path d="M 175 -10 L 195 0 L 175 10" fill="none" stroke="#00b8c4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Right: Focused beam -->
+  <g transform="translate(900, 315)">
+    <!-- Multiple lines converging into one direction -->
+    <line x1="-100" y1="0" x2="100" y2="0" stroke="#00b8c4" stroke-width="6" filter="url(#glow)"/>
+
+    <!-- Central point (focused team) -->
+    <circle cx="-100" cy="0" r="25" fill="rgba(0,184,196,0.2)" stroke="#00b8c4" stroke-width="3"/>
+
+    <!-- Arrow head -->
+    <path d="M 90 -15 L 120 0 L 90 15" fill="none" stroke="#00b8c4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  </g>
+</svg>
