@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { posts } from '#site/content'
 import { MDXContent } from '@/components/blog/mdx-content'
 import { BlogPostingSchema } from '@/components/blog/BlogPostingSchema'
+import { ReadingProgressBar } from '@/components/ReadingProgressBar'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 
@@ -74,6 +75,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <>
+      <ReadingProgressBar />
       <BlogPostingSchema post={post} />
       <Header />
       <main className="min-h-screen bg-[var(--bg-dark)]">
