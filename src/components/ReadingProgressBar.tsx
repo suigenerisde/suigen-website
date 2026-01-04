@@ -91,11 +91,11 @@ export interface ReadingProgressBarProps {
  * Optimized for performance with throttling and requestAnimationFrame.
  */
 export function ReadingProgressBar({
-  height = 4,
+  height = 6,
   className = '',
   showThreshold = 0,
   showGlow = true,
-  gradientClasses = 'from-[#FB7C00] via-[#E73B50] to-[#9E009B]',
+  gradientClasses = 'from-[#00b8c4] to-[#00b8c4]',
   throttleMs = 16,
   ariaUpdateStep = 5,
 }: ReadingProgressBarProps = {}) {
