@@ -1,0 +1,60 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2e474f"/>
+      <stop offset="100%" style="stop-color:#3a5861"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Weggabelung mit klarem Fokus-Pfad -->
+  <g transform="translate(600, 500)">
+    <!-- Ausgangspunkt -->
+    <circle cx="0" cy="0" r="20" fill="rgba(0,184,196,0.3)" stroke="#00b8c4" stroke-width="3"/>
+
+    <!-- Linker Weg (verschwommen, viele Optionen) -->
+    <path d="M -20 -10 Q -150 -100 -300 -200" stroke="#ff6b6b" stroke-width="3" opacity="0.3" fill="none"/>
+    <path d="M -20 -10 Q -120 -150 -200 -300" stroke="#ff6b6b" stroke-width="2" opacity="0.2" fill="none"/>
+    <path d="M -20 -10 Q -180 -80 -350 -150" stroke="#ff6b6b" stroke-width="2" opacity="0.2" fill="none"/>
+    <!-- Fragezeichen am Ende -->
+    <g transform="translate(-320, -220)" opacity="0.4">
+      <text fill="#ff6b6b" font-family="Arial, sans-serif" font-size="40">?</text>
+    </g>
+
+    <!-- Rechter Weg (klar, fokussiert) -->
+    <path d="M 20 -10 Q 150 -150 250 -350" stroke="#00b8c4" stroke-width="5" fill="none" filter="url(#glow)"/>
+    <!-- Pfeilspitze -->
+    <path d="M 235 -325 L 250 -350 L 265 -330" fill="none" stroke="#00b8c4" stroke-width="4" filter="url(#glow)"/>
+
+    <!-- Ziel am Ende des Fokus-Wegs -->
+    <g transform="translate(260, -400)">
+      <circle cx="0" cy="0" r="40" fill="rgba(0,184,196,0.25)" stroke="#00b8c4" stroke-width="3" filter="url(#glow)"/>
+      <!-- Stern im Ziel -->
+      <path d="M 0 -20 L 5 -5 L 20 -5 L 8 5 L 12 20 L 0 12 L -12 20 L -8 5 L -20 -5 L -5 -5 Z" fill="#00b8c4" opacity="0.6" filter="url(#glow)"/>
+    </g>
+
+    <!-- Wegweiser am Ausgangspunkt -->
+    <g transform="translate(0, -60)">
+      <rect x="-5" y="0" width="10" height="60" fill="#00b8c4" opacity="0.5"/>
+      <!-- Pfeil nach rechts (Fokus) -->
+      <g transform="translate(15, 0)">
+        <rect x="0" y="-10" width="80" height="25" fill="rgba(0,184,196,0.3)" stroke="#00b8c4" stroke-width="2" rx="4"/>
+        <path d="M 85 2 L 100 2" stroke="#00b8c4" stroke-width="2"/>
+        <path d="M 95 -5 L 105 2 L 95 9" fill="none" stroke="#00b8c4" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Label -->
+  <text x="850" y="150" fill="#00b8c4" font-family="Arial, sans-serif" font-size="20" filter="url(#glow)">FOKUS</text>
+  <text x="200" y="350" fill="#ff6b6b" font-family="Arial, sans-serif" font-size="16" opacity="0.5">Optionen</text>
+</svg>

@@ -1,0 +1,69 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2e474f"/>
+      <stop offset="100%" style="stop-color:#3a5861"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- 3-Schritte Treppe -->
+
+  <!-- Schritt 1: Ausmisten -->
+  <g transform="translate(150, 400)">
+    <rect x="0" y="0" width="250" height="130" fill="rgba(0,184,196,0.15)" stroke="#00b8c4" stroke-width="2"/>
+    <text x="125" y="-20" fill="#00b8c4" font-family="Arial, sans-serif" font-size="22" text-anchor="middle">1. Ausmisten</text>
+    <!-- Mülleimer-Symbol -->
+    <g transform="translate(125, 65)">
+      <rect x="-25" y="-30" width="50" height="60" fill="none" stroke="#00b8c4" stroke-width="2" rx="5"/>
+      <rect x="-30" y="-40" width="60" height="12" fill="none" stroke="#00b8c4" stroke-width="2" rx="3"/>
+      <line x1="-10" y1="-15" x2="-10" y2="15" stroke="#00b8c4" stroke-width="2"/>
+      <line x1="10" y1="-15" x2="10" y2="15" stroke="#00b8c4" stroke-width="2"/>
+    </g>
+  </g>
+
+  <!-- Schritt 2: Fokussieren -->
+  <g transform="translate(450, 280)">
+    <rect x="0" y="0" width="250" height="250" fill="rgba(0,184,196,0.2)" stroke="#00b8c4" stroke-width="2"/>
+    <text x="125" y="-20" fill="#00b8c4" font-family="Arial, sans-serif" font-size="22" text-anchor="middle">2. Fokussieren</text>
+    <!-- Zielscheibe -->
+    <g transform="translate(125, 125)">
+      <circle cx="0" cy="0" r="60" fill="none" stroke="#00b8c4" stroke-width="2" opacity="0.5"/>
+      <circle cx="0" cy="0" r="40" fill="none" stroke="#00b8c4" stroke-width="2" opacity="0.7"/>
+      <circle cx="0" cy="0" r="20" fill="rgba(0,184,196,0.3)" stroke="#00b8c4" stroke-width="3" filter="url(#glow)"/>
+      <circle cx="0" cy="0" r="5" fill="#00b8c4" filter="url(#glow)"/>
+    </g>
+  </g>
+
+  <!-- Schritt 3: Durchziehen -->
+  <g transform="translate(750, 150)">
+    <rect x="0" y="0" width="250" height="380" fill="rgba(0,184,196,0.25)" stroke="#00b8c4" stroke-width="3" filter="url(#glow)"/>
+    <text x="125" y="-20" fill="#00b8c4" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" filter="url(#glow)">3. Durchziehen</text>
+    <!-- Rakete -->
+    <g transform="translate(125, 190)">
+      <path d="M 0 -80 L 30 20 L 20 20 L 20 60 L -20 60 L -20 20 L -30 20 Z" fill="rgba(0,184,196,0.3)" stroke="#00b8c4" stroke-width="3" filter="url(#glow)"/>
+      <!-- Flamme -->
+      <path d="M -15 60 L 0 100 L 15 60" fill="#00b8c4" opacity="0.5" filter="url(#glow)"/>
+      <!-- Fenster -->
+      <circle cx="0" cy="-20" r="15" fill="rgba(0,184,196,0.4)" stroke="#00b8c4" stroke-width="2"/>
+    </g>
+  </g>
+
+  <!-- Verbindungspfeile -->
+  <g stroke="#00b8c4" stroke-width="3" opacity="0.5">
+    <path d="M 400 400 L 440 350" fill="none"/>
+    <path d="M 700 350 L 740 280" fill="none"/>
+  </g>
+
+  <!-- Baseline -->
+  <line x1="100" y1="530" x2="1050" y2="530" stroke="#00b8c4" stroke-width="2" opacity="0.3"/>
+</svg>

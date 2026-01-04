@@ -1,0 +1,74 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2e474f"/>
+      <stop offset="100%" style="stop-color:#3a5861"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Stoppuhr -->
+  <g transform="translate(350, 315)">
+    <!-- Uhr-Körper -->
+    <circle cx="0" cy="0" r="180" fill="rgba(0,184,196,0.1)" stroke="#00b8c4" stroke-width="4" filter="url(#glow)"/>
+
+    <!-- Knopf oben -->
+    <rect x="-15" y="-200" width="30" height="30" fill="rgba(0,184,196,0.3)" stroke="#00b8c4" stroke-width="2" rx="5"/>
+
+    <!-- 2:00 Anzeige -->
+    <text x="0" y="20" fill="#00b8c4" font-family="Arial, sans-serif" font-size="72" font-weight="bold" text-anchor="middle" filter="url(#glow)">2:00</text>
+    <text x="0" y="60" fill="#00b8c4" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" opacity="0.7">MIN</text>
+
+    <!-- Fortschritts-Ring -->
+    <circle cx="0" cy="0" r="150" fill="none" stroke="rgba(0,184,196,0.2)" stroke-width="12"/>
+    <circle cx="0" cy="0" r="150" fill="none" stroke="#00b8c4" stroke-width="12" stroke-dasharray="942" stroke-dashoffset="235" transform="rotate(-90)" filter="url(#glow)"/>
+  </g>
+
+  <!-- 5 Checkboxen rechts -->
+  <g transform="translate(650, 150)">
+    <!-- Checkbox 1 -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="40" height="40" fill="rgba(0,184,196,0.2)" stroke="#00b8c4" stroke-width="3" rx="8" filter="url(#glow)"/>
+      <path d="M 10 20 L 17 28 L 32 12" fill="none" stroke="#00b8c4" stroke-width="4" filter="url(#glow)"/>
+      <rect x="60" y="8" width="200" height="24" fill="rgba(0,184,196,0.15)" rx="4"/>
+    </g>
+
+    <!-- Checkbox 2 -->
+    <g transform="translate(0, 70)">
+      <rect x="0" y="0" width="40" height="40" fill="rgba(0,184,196,0.2)" stroke="#00b8c4" stroke-width="3" rx="8" filter="url(#glow)"/>
+      <path d="M 10 20 L 17 28 L 32 12" fill="none" stroke="#00b8c4" stroke-width="4" filter="url(#glow)"/>
+      <rect x="60" y="8" width="180" height="24" fill="rgba(0,184,196,0.15)" rx="4"/>
+    </g>
+
+    <!-- Checkbox 3 -->
+    <g transform="translate(0, 140)">
+      <rect x="0" y="0" width="40" height="40" fill="rgba(0,184,196,0.2)" stroke="#00b8c4" stroke-width="3" rx="8" filter="url(#glow)"/>
+      <path d="M 10 20 L 17 28 L 32 12" fill="none" stroke="#00b8c4" stroke-width="4" filter="url(#glow)"/>
+      <rect x="60" y="8" width="220" height="24" fill="rgba(0,184,196,0.15)" rx="4"/>
+    </g>
+
+    <!-- Checkbox 4 -->
+    <g transform="translate(0, 210)">
+      <rect x="0" y="0" width="40" height="40" fill="rgba(0,184,196,0.15)" stroke="#00b8c4" stroke-width="2" rx="8"/>
+      <rect x="60" y="8" width="160" height="24" fill="rgba(0,184,196,0.1)" rx="4"/>
+    </g>
+
+    <!-- Checkbox 5 -->
+    <g transform="translate(0, 280)">
+      <rect x="0" y="0" width="40" height="40" fill="rgba(0,184,196,0.15)" stroke="#00b8c4" stroke-width="2" rx="8"/>
+      <rect x="60" y="8" width="190" height="24" fill="rgba(0,184,196,0.1)" rx="4"/>
+    </g>
+
+    <!-- Label -->
+    <text x="130" y="380" fill="#00b8c4" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" opacity="0.7">5 Fragen</text>
+  </g>
+</svg>

@@ -1,0 +1,76 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2e474f"/>
+      <stop offset="100%" style="stop-color:#3a5861"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Kalender mit ersten 5 Tagen markiert -->
+  <g transform="translate(350, 100)">
+    <!-- Kalender Rahmen -->
+    <rect x="0" y="0" width="500" height="420" fill="rgba(0,184,196,0.08)" stroke="#00b8c4" stroke-width="3" rx="12" filter="url(#glow)"/>
+
+    <!-- Kalender Header -->
+    <rect x="0" y="0" width="500" height="60" fill="rgba(0,184,196,0.2)" rx="12"/>
+    <text x="250" y="42" fill="#00b8c4" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" filter="url(#glow)">JANUAR 2026</text>
+
+    <!-- Wochentage -->
+    <g fill="#00b8c4" font-family="Arial, sans-serif" font-size="16" opacity="0.7" text-anchor="middle">
+      <text x="70" y="95">Mo</text>
+      <text x="140" y="95">Di</text>
+      <text x="210" y="95">Mi</text>
+      <text x="280" y="95">Do</text>
+      <text x="350" y="95">Fr</text>
+      <text x="420" y="95">Sa</text>
+    </g>
+
+    <!-- Erste Woche - Tage 1-5 hervorgehoben -->
+    <g font-family="Arial, sans-serif" font-size="24" text-anchor="middle">
+      <!-- Tag 1 -->
+      <circle cx="210" cy="150" r="28" fill="rgba(0,184,196,0.4)" stroke="#00b8c4" stroke-width="3" filter="url(#glow)"/>
+      <text x="210" y="158" fill="#00b8c4" font-weight="bold">1</text>
+
+      <!-- Tag 2 -->
+      <circle cx="280" cy="150" r="28" fill="rgba(0,184,196,0.35)" stroke="#00b8c4" stroke-width="2" filter="url(#glow)"/>
+      <text x="280" y="158" fill="#00b8c4" font-weight="bold">2</text>
+
+      <!-- Tag 3 -->
+      <circle cx="350" cy="150" r="28" fill="rgba(0,184,196,0.3)" stroke="#00b8c4" stroke-width="2" filter="url(#glow)"/>
+      <text x="350" y="158" fill="#00b8c4" font-weight="bold">3</text>
+
+      <!-- Tag 4 -->
+      <circle cx="420" cy="150" r="28" fill="rgba(0,184,196,0.25)" stroke="#00b8c4" stroke-width="2"/>
+      <text x="420" y="158" fill="#00b8c4" font-weight="bold">4</text>
+
+      <!-- Tag 5 -->
+      <circle cx="70" cy="220" r="28" fill="rgba(0,184,196,0.2)" stroke="#00b8c4" stroke-width="2"/>
+      <text x="70" y="228" fill="#00b8c4" font-weight="bold">5</text>
+
+      <!-- Restliche Tage (blass) -->
+      <g fill="#00b8c4" opacity="0.3">
+        <text x="140" y="228">6</text>
+        <text x="210" y="228">7</text>
+        <text x="280" y="228">8</text>
+        <text x="350" y="228">9</text>
+        <text x="420" y="228">10</text>
+        <text x="70" y="298">12</text>
+        <text x="140" y="298">13</text>
+        <text x="210" y="298">14</text>
+      </g>
+    </g>
+
+    <!-- Pfeil zeigt auf erste 5 Tage -->
+    <path d="M 50 150 Q 30 150 30 180 L 30 220 Q 30 250 50 250" fill="none" stroke="#00b8c4" stroke-width="3" filter="url(#glow)"/>
+  </g>
+</svg>
