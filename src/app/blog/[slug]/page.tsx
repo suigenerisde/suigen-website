@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import Image from 'next/image'
 import { posts } from '#site/content'
 import { MDXContent } from '@/components/blog/mdx-content'
 import { BlogPostingSchema } from '@/components/blog/BlogPostingSchema'
@@ -105,7 +106,7 @@ export default async function PostPage({ params }: PostPageProps) {
             )}
 
             {/* Author & Date */}
-            <div className="flex items-center gap-4 text-sm text-gray-400 border-b border-gray-700/50 pb-8">
+            <div className="flex items-center gap-4 text-sm text-gray-400 pb-8">
               <span className="font-medium text-white">{post.author}</span>
               <span>|</span>
               <span>{formatDate(post.date)}</span>
@@ -113,6 +114,20 @@ export default async function PostPage({ params }: PostPageProps) {
               <span>{post.readingTime} Min. Lesezeit</span>
             </div>
           </div>
+
+          {/* Hero Image */}
+          {post.image && (
+            <div className="relative w-full aspect-[16/9] mb-12 rounded-xl overflow-hidden">
+              <Image
+                src={post.image}
+                alt={post.imageAlt || post.title}
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 768px) 100vw, 768px"
+              />
+            </div>
+          )}
 
           {/* Article Content */}
           <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-3 prose-h2:border-b prose-h2:border-gray-700/50 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-h4:text-lg prose-h4:mt-6 prose-h4:mb-3 prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6 prose-a:text-[var(--accent)] prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-strong:font-semibold prose-code:text-[var(--accent)] prose-code:bg-[#1a2e35] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-[#1a2e35] prose-pre:border prose-pre:border-gray-700/50 prose-blockquote:border-[var(--accent)] prose-blockquote:border-l-4 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-300 prose-ul:my-6 prose-ul:space-y-2 prose-ol:my-6 prose-ol:space-y-2 prose-li:text-gray-300 prose-li:leading-relaxed prose-table:my-8 prose-table:w-full prose-thead:border-b prose-thead:border-gray-600 prose-th:text-left prose-th:text-white prose-th:font-semibold prose-th:py-3 prose-th:px-4 prose-td:py-3 prose-td:px-4 prose-td:text-gray-300 prose-tr:border-b prose-tr:border-gray-700/50 prose-hr:my-12 prose-hr:border-gray-700/50">
